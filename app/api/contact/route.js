@@ -9,6 +9,10 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_ADDRESS,
     pass: process.env.GMAIL_PASSKEY, 
   },
+  connectionTimeout: 5000,
+  greetingTimeout: 5000,
+  socketTimeout: 10000,
+
 });
 
 // Plantilla del correo HTML
@@ -28,28 +32,6 @@ const generateEmailTemplate = (name, email, userMessage) => `
 `;
 
 // Función de ayuda para enviar un correo usando Nodemailer
-async function sendEmail(payload) {
-  const { name, email, message: userMessage } = payload;
-  
-  const mailOptions = {
-    from: 'Portfolio',
-    to: process.env.EMAIL_ADDRESS,
-    subject: `Nuevo mensaje de ${name}`,
-    text: `Nuevo mensaje de ${name}\n\nEmail: ${email}\n\nMensaje:\n\n${userMessage}`,
-    html: generateEmailTemplate(name, email, userMessage),
-    replyTo: email,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    return true;
-  } catch (error) {
-    console.error('Error al enviar el correo:', error.message);
-    return false;
-  }
-}
-
-// Manejador de la solicitud POST
 export async function POST(req) {
   try {
     const payload = await req.json();
@@ -58,32 +40,62 @@ export async function POST(req) {
     // Validar que las credenciales del correo estén presentes
     if (!process.env.EMAIL_ADDRESS || !process.env.GMAIL_PASSKEY) {
       return new Response(
-        JSON.stringify({ success: false, message: 'Las credenciales del correo no están configuradas correctamente.' }),
-        { status: 400 }
+        JSON.stringify({ 
+          success: false, 
+          message: 'Las credenciales del correo no están configuradas correctamente.' 
+        }),
+        { 
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
     }
-
-    const message = `Nuevo mensaje de ${name}\n\nEmail: ${email}\n\nMensaje:\n\n${userMessage}\n\n`;
 
     // Enviar el correo
     const emailSuccess = await sendEmail(payload);
 
     if (emailSuccess) {
       return new Response(
-        JSON.stringify({ success: true, message: '¡Mensaje y correo enviados exitosamente!' }),
-        { status: 200 }
+        JSON.stringify({ 
+          success: true, 
+          message: '¡Mensaje enviado exitosamente!' 
+        }),
+        { 
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
     }
 
     return new Response(
-      JSON.stringify({ success: false, message: 'Falló el envío del mensaje o correo.' }),
-      { status: 500 }
+      JSON.stringify({ 
+        success: false, 
+        message: 'Falló el envío del mensaje.' 
+      }),
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   } catch (error) {
-    console.error('Error en la API:', error.message);
+    console.error('Error en la API:', error);
     return new Response(
-      JSON.stringify({ success: false, message: 'Ocurrió un error en el servidor.' }),
-      { status: 500 }
+      JSON.stringify({ 
+        success: false, 
+        message: 'Ocurrió un error en el servidor.' 
+      }),
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 }
