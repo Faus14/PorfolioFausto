@@ -6,8 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCode, FaDumbbell, FaTwitter, FaPlane, FaStore } from "react-icons/fa"; 
 import { FiExternalLink, FiGithub } from "react-icons/fi";
-import GlowCard from "../../helper/glow-card"; 
 import { useEffect, useState } from "react";  
+import dynamic from 'next/dynamic';
+
+// Importación dinámica
+const GlowCard = dynamic(() => import("../../helper/glow-card"), { 
+  ssr: false 
+});
+
 
 function Blog() {   
   const [isClient, setIsClient] = useState(false);
