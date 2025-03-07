@@ -13,7 +13,6 @@ function ContactForm() {
     email: "",
     message: "",
   });
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const checkRequired = () => {
     if (userInput.email && userInput.message && userInput.name) {
@@ -36,7 +35,7 @@ function ContactForm() {
     setIsLoading(true);
 
     try {
-      // Construir los datos para el envío del formulario
+      // Preparar los datos para Netlify Forms
       const formData = new FormData();
       formData.append("form-name", "contact");
       formData.append("name", userInput.name);
@@ -44,18 +43,22 @@ function ContactForm() {
       formData.append("message", userInput.message);
 
       // Enviar el formulario a Netlify
-      await fetch("/", {
+      const response = await fetch("/", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
       });
 
-      toast.success("Message sent successfully!");
-      setFormSubmitted(true);
-      setUserInput({
-        name: "",
-        email: "",
-        message: "",
-      });
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        setUserInput({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
     } catch (error) {
       console.error("Error:", error);
       toast.error("There was a problem sending your message. Please try again.");
@@ -70,14 +73,14 @@ function ContactForm() {
       <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
         <p className="text-sm text-[#d3d8e8]">{"If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests."}</p>
         
-        {/* Formulario oculto para Netlify Forms */}
-        <form name="contact" data-netlify="true" hidden>
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <textarea name="message"></textarea>
-        </form>
-        
-        <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+        {/* Forma estándar para Netlify Forms */}
+        <form 
+          name="contact" 
+          method="POST" 
+          data-netlify="true"
+          onSubmit={handleSubmit}
+          className="mt-6 flex flex-col gap-4"
+        >
           <input type="hidden" name="form-name" value="contact" />
           
           <div className="flex flex-col gap-2">
