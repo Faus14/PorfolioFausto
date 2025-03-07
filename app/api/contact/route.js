@@ -12,7 +12,6 @@ const transporter = nodemailer.createTransport({
   connectionTimeout: 5000,
   greetingTimeout: 5000,
   socketTimeout: 10000,
-
 });
 
 // Plantilla del correo HTML
@@ -32,6 +31,27 @@ const generateEmailTemplate = (name, email, userMessage) => `
 `;
 
 // Función de ayuda para enviar un correo usando Nodemailer
+async function sendEmail(payload) {
+  const { name, email, message: userMessage } = payload;
+  
+  const mailOptions = {
+    from: 'Portfolio',
+    to: process.env.EMAIL_ADDRESS,
+    subject: `Nuevo mensaje de ${name}`,
+    text: `Nuevo mensaje de ${name}\n\nEmail: ${email}\n\nMensaje:\n\n${userMessage}`,
+    html: generateEmailTemplate(name, email, userMessage),
+    replyTo: email,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return true;
+  } catch (error) {
+    console.error('Error al enviar el correo:', error.message);
+    return false;
+  }
+}
+
 export async function POST(req) {
   try {
     const payload = await req.json();
