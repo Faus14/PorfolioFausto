@@ -1,5 +1,10 @@
 "use client";
+import HeroSection from "./components/homepage/hero-section";
 
 export default function ClientPage() {
-  return <div>Prueba simple</div>;
+  return (
+    <div>
+      <HeroSection />
+    </div>
+  );
 }
