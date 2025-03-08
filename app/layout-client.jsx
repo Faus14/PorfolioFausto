@@ -14,7 +14,7 @@ const ScrollToTop = dynamic(
   { ssr: false }
 );
 
-export default function ClientComponents() {
+export default function LayoutClient() {
   return (
     <>
       <ToastContainer />
