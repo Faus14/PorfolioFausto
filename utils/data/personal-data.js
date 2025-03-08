@@ -7,11 +7,6 @@ export const personalData = {
   phone: '+54 3364357444',
   address: 'Buenos Aires, Argentina',
   github: 'https://github.com/Faus14',
-  facebook: '',
   linkedIn: 'https://www.linkedin.com/in/faustosaludas',
-  twitter: '',
-  stackOverflow: '',
-  leetcode: "",
-  devUsername: "",
   resume: "https://drive.google.com/drive/folders/1AhO03Ema3gSYZwXdhBHk3J8pZbBE5EPZ"
 }
