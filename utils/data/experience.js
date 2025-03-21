@@ -8,7 +8,14 @@ export const experiences = [
   },
   {
     id: 2,
-    title: "IT analyst",
+    title: 'Full Stack Developer',
+    company: "Chatealo",
+    duration: "(Dec 2023 - Jun 2024)",
+    description: "Developed and maintained web applications using JavaScript, TypeScript, and Node.js. Designed RESTful APIs and integrated third-party services to enhance functionality. Implemented database solutions with PostgreSQL, ensuring efficient data storage and retrieval. Optimized application performance and collaborated closely with UI/UX designers to improve user experience."
+  },
+  {
+    id: 3,
+    title: "IT Analyst",
     company: "LB Finanzas",
     duration: "(Jun 2024 - Present)",
     description: "Maintain detailed incident logs and solution documentation for knowledge management. Perform in-depth log analysis to identify and resolve system issues. Utilize Grafana for monitoring and data visualization to ensure optimal system performance. Experienced in using Jira for ticket management, workflow organization, and project tracking."
