@@ -17,13 +17,13 @@ function Education() {
       </div>
 
       {/* Sección Educación Formal */}
-      <SectionTitle title="Educación Formal" />
+      <SectionTitle title="formal education" />
       <EducationList educations={formalEducation} />
 
       {/* Sección Cursos */}
       {courses.length > 0 && (
         <>
-          <SectionTitle title="Cursos" />
+          <SectionTitle title="Courses" />
           <EducationList educations={courses} />
         </>
       )}
