@@ -11,7 +11,7 @@ export const experiences = [
     id: 2,
     title: 'Sysadmin',
     company: "Chatealo",
-    duration: "(Dec 2023 - Jun 2024)",
+    duration: "(jul 2023 - Jun 2024)",
     description: "Implemented Docker containers to enhance system management and scalability. Created comprehensive project documentation, efficiently resolved technical issues, and collaborated effectively with cross-functional teams. Managed system and application configurations to maintain optimal performance and reliability."
   },
 
