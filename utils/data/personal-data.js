@@ -2,7 +2,7 @@ export const personalData = {
   name: "Fausto Saludas",
   profile: '/profile.jpeg',
   designation: "Systems Engineer",
-  description: "My name is Fausto Saludas. I'm a Systems Engineer with experience in software development. I'm passionate about the entire technology field, from programming to infrastructure. My knowledge comes from both academic training and real-world work experience. I enjoy facing complex challenges and continuously growing my technical skills through hands-on projects and innovative solutions.",
+  description: "I'm Fausto Saludas, a Systems Engineer specializing in system administration and software development. I manage servers, networks, and cloud environments while building software solutions for real-world problems. My expertise spans from infrastructure to development, combining technical skills with practical experience. I'm passionate about technology and continuously seek new challenges to drive innovation and growth.",
   email: 'fausaludas14@gmail.com',
   phone: '+54 3364357444',
   address: 'Buenos Aires, Argentina',

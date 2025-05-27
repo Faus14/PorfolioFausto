@@ -4,7 +4,7 @@ export const educations = [
     title: "Information Systems Engineering",
     duration: "March 2019 - 2025",
     institution: "National Technological University Rosario",
-    description: "I have just finished my course, with only 1 subject left to graduate. Training in software development, databases, networks and systems administration."
+    description: "I am a Systems Engineer, having recently completed my degree. I have training and experience in software development, databases, networks, and systems administration."
   },
   {
     id: 2,

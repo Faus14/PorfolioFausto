@@ -147,12 +147,6 @@ function Blog() {
                       <FiGithub className="mr-1" size={12} /> Code
                     </button>
 
-                    <button
-                      onClick={() => window.open(post.demoUrl, '_blank')}
-                      className="text-xs bg-pink-600 hover:bg-pink-700 transition-colors py-1 px-2 rounded-md inline-flex items-center relative z-20"
-                    >
-                      <FiExternalLink className="mr-1" size={12} /> Demo
-                    </button>
                   </div>
                 </div>
               </div>

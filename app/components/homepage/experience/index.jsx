@@ -3,7 +3,7 @@
 
 import { experiences } from "@/utils/data/experience";
 import Image from "next/image";
-import { BsPersonWorkspace, BsBuildingsFill } from "react-icons/bs";
+import { BsPersonWorkspace, BsBuildingsFill, BsTools } from "react-icons/bs";
 import experience from '../../../assets/lottie/code.json';
 import dynamic from 'next/dynamic';
 
@@ -83,6 +83,29 @@ function Experience() {
                               {experience.description}
                             </p>
                           </div>
+                          
+                          {/* Sección de herramientas */}
+                          {experience.tools && experience.tools.length > 0 && (
+                            <div className="mt-4">
+                              <div className="flex items-center mb-2">
+                                <BsTools className="text-[#16f2b3] mr-2" size={14} />
+                                <span className="text-white font-medium text-sm">Tools & Technologies:</span>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {experience.tools.map((tool, index) => (
+                                  <span
+                                    key={index}
+                                    className="px-2 py-1 text-xs bg-gradient-to-r from-violet-600/20 to-pink-600/20 
+                                             border border-violet-500/30 rounded-full text-violet-200 
+                                             hover:from-violet-600/30 hover:to-pink-600/30 
+                                             transition-all duration-300 hover:scale-105"
+                                  >
+                                    {tool}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
