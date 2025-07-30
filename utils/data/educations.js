@@ -19,5 +19,12 @@ export const educations = [
     duration: "2022 - 52 Hours",
     institution: "National Technological University",
     description: "Training in Python programming, covering fundamentals, data structures, object-oriented programming, and application development."
+  },
+  {
+    id: 4,
+    title: "Full Stack Developer",
+    duration: "2025 - 60 Hours",
+    institution: "TheLab Technology",
+    description: "Full Stack development training with modern technologies including TypeScript, Node.js, and Angular. Building end-to-end web applications with best practices."
   }
 ]

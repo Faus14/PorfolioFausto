@@ -5,6 +5,7 @@ import { BiLogoLinkedin } from "react-icons/bi";
 import { CiLocationOn } from "react-icons/ci";
 import { IoLogoGithub, IoMdCall } from "react-icons/io";
 import { MdAlternateEmail } from "react-icons/md";
+import { BsCalendar2Event } from "react-icons/bs";
 import ContactForm from './contact-form';
 
 function ContactSection() {
@@ -46,6 +47,31 @@ function ContactSection() {
               </span>
             </p>
           </div>
+          
+          {/* Sección de Agendar Reunión */}
+          <div className="mt-8 lg:mt-12 p-6 bg-gradient-to-r from-[#1a1443] to-[#16213e] rounded-xl border border-[#16f2b3]/20 hover:border-[#16f2b3]/40 transition-all duration-300">
+            <div className="flex items-center gap-3 mb-4">
+              <BsCalendar2Event
+                className="text-[#16f2b3]"
+                size={24}
+              />
+              <h3 className="text-lg md:text-xl font-semibold text-white">
+                Looking for a developer for your project?
+              </h3>
+            </div>
+            <p className="text-sm md:text-base text-gray-300 mb-6">
+              Schedule a free 30-minute consultation to discuss job opportunities, freelance projects, or professional collaborations.
+            </p>
+            <Link 
+              target="_blank" 
+              href="https://calendly.com/fausaludas14/30min"
+              className="inline-flex items-center gap-3 bg-[#16f2b3] hover:bg-[#0dd999] text-gray-900 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#16f2b3]/25"
+            >
+              <BsCalendar2Event size={20} />
+              <span>Schedule Consultation</span>
+            </Link>
+          </div>
+
           <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
             <Link target="_blank" href={personalData.github}>
               <IoLogoGithub
