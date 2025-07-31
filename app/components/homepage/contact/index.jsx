@@ -1,4 +1,5 @@
 // @flow strict
+"use client";
 import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link';
 import { BiLogoLinkedin } from "react-icons/bi";
@@ -6,14 +7,17 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoLogoGithub, IoMdCall } from "react-icons/io";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsCalendar2Event } from "react-icons/bs";
+import { useTranslation } from '@/hooks/useTranslation';
 import ContactForm from './contact-form';
 
 function ContactSection() {
+  const { t } = useTranslation();
+  
   return (
     <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
       <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
         <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
-          CONTACT
+          {t('contactTitle')}
         </span>
         <span className="h-36 w-[2px] bg-[#1a1443]"></span>
       </div>
@@ -56,11 +60,11 @@ function ContactSection() {
                 size={24}
               />
               <h3 className="text-lg md:text-xl font-semibold text-white">
-                Looking for a developer for your project?
+                {t('lookingForDeveloper')}
               </h3>
             </div>
             <p className="text-sm md:text-base text-gray-300 mb-6">
-              Schedule a free 30-minute consultation to discuss job opportunities, freelance projects, or professional collaborations.
+              {t('scheduleConsultation')}
             </p>
             <Link 
               target="_blank" 
@@ -68,7 +72,7 @@ function ContactSection() {
               className="inline-flex items-center gap-3 bg-[#16f2b3] hover:bg-[#0dd999] text-gray-900 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#16f2b3]/25"
             >
               <BsCalendar2Event size={20} />
-              <span>Schedule Consultation</span>
+              <span>{t('scheduleButton')}</span>
             </Link>
           </div>
 

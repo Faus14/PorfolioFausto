@@ -2,6 +2,7 @@
 "use client"; 
 
 import { experiences } from "@/utils/data/experience";
+import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
 import { BsPersonWorkspace, BsBuildingsFill, BsTools } from "react-icons/bs";
 import experience from '../../../assets/lottie/code.json';
@@ -17,6 +18,8 @@ const AnimationLottie = dynamic(() => import("../../helper/animation-lottie"), {
 });
 
 function Experience() {
+  const { t, language } = useTranslation();
+
   return (
     <div id="experience" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
       <Image
@@ -31,7 +34,7 @@ function Experience() {
         <div className="flex  items-center">
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
           <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Experiences
+            {t('experienceTitle')}
           </span>
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
         </div>
@@ -60,7 +63,7 @@ function Experience() {
                       />
                       <div className="flex justify-center">
                         <p className="text-xs sm:text-sm text-[#16f2b3]">
-                          {experience.duration}
+                          {typeof experience.duration === 'object' ? experience.duration[language] : experience.duration}
                         </p>
                       </div>
                       <div className="flex items-start gap-x-6 px-3 py-5">
@@ -70,17 +73,17 @@ function Experience() {
                         <div className="w-full">
                           <div className="mb-3">
                             <p className="text-base sm:text-xl font-medium uppercase bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
-                              {experience.title}
+                              {typeof experience.title === 'object' ? experience.title[language] : experience.title}
                             </p>
                             <div className="flex items-center text-sm sm:text-base mt-1">
                               <BsBuildingsFill className="text-[#16f2b3] mr-2" size={14} />
-                              <span className="text-white font-medium">Company:</span>
+                              <span className="text-white font-medium">{language === 'es' ? 'Empresa:' : 'Company:'}</span>
                               <span className="ml-2 text-[#16f2b3]">{experience.company}</span>
                             </div>
                           </div>
                           <div className="mt-3 bg-gradient-to-r from-violet-900/40 to-transparent p-3 rounded-lg border-l-2 border-violet-500">
                             <p className="text-sm text-violet-200 leading-relaxed font-light tracking-wide">
-                              {experience.description}
+                              {typeof experience.description === 'object' ? experience.description[language] : experience.description}
                             </p>
                           </div>
                           
@@ -89,7 +92,9 @@ function Experience() {
                             <div className="mt-4">
                               <div className="flex items-center mb-2">
                                 <BsTools className="text-[#16f2b3] mr-2" size={14} />
-                                <span className="text-white font-medium text-sm">Tools & Technologies:</span>
+                                <span className="text-white font-medium text-sm">
+                                  {language === 'es' ? 'Herramientas y Tecnologías:' : 'Tools & Technologies:'}
+                                </span>
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 {experience.tools.map((tool, index) => (

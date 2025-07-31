@@ -1,9 +1,13 @@
 // @flow strict
+"use client";
 import { educations } from "@/utils/data/educations";
+import { useTranslation } from "@/hooks/useTranslation";
 import { FaGraduationCap } from "react-icons/fa";
 import { BsBuildingsFill } from "react-icons/bs";
 
 function Education() {
+  const { t, language } = useTranslation();
+  
   // Filtrar educación formal y cursos
   const formalEducation = educations.filter(edu => edu.id === 1);
   const courses = educations.filter(edu => edu.id > 1);
@@ -17,14 +21,14 @@ function Education() {
       </div>
 
       {/* Sección Educación Formal */}
-      <SectionTitle title="formal education" />
-      <EducationList educations={formalEducation} />
+      <SectionTitle title={language === 'es' ? 'Educación Formal' : 'Formal Education'} />
+      <EducationList educations={formalEducation} language={language} />
 
       {/* Sección Cursos */}
       {courses.length > 0 && (
         <>
-          <SectionTitle title="Courses" />
-          <EducationList educations={courses} />
+          <SectionTitle title={language === 'es' ? 'Cursos' : 'Courses'} />
+          <EducationList educations={courses} language={language} />
         </>
       )}
     </div>
@@ -43,7 +47,7 @@ const SectionTitle = ({ title }) => (
 );
 
 // Componente para mostrar la lista de educación/cursos
-const EducationList = ({ educations }) => (
+const EducationList = ({ educations, language }) => (
   <div className="py-6 max-w-3xl mx-auto">
     <div className="relative border-l-2 border-violet-500 ml-6 pl-8 pb-6">
       {educations.map((education) => (
@@ -57,21 +61,25 @@ const EducationList = ({ educations }) => (
           <div className="bg-[#1a1443]/50 p-6 rounded-lg border-l-2 border-violet-500 shadow-lg">
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-xl sm:text-2xl font-medium bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
-                {education.title}
+                {typeof education.title === 'object' ? education.title[language] : education.title}
               </h3>
               <span className="text-sm bg-violet-900/70 px-3 py-1 rounded-full text-[#16f2b3]">
-                {education.duration}
+                {typeof education.duration === 'object' ? education.duration[language] : education.duration}
               </span>
             </div>
 
             <div className="flex items-center text-base mb-3">
               <BsBuildingsFill className="text-[#16f2b3] mr-2" size={16} />
-              <span className="text-white font-medium">Institution:</span>
-              <span className="ml-2 text-[#16f2b3]">{education.institution}</span>
+              <span className="text-white font-medium">{language === 'es' ? 'Institución:' : 'Institution:'}</span>
+              <span className="ml-2 text-[#16f2b3]">
+                {typeof education.institution === 'object' ? education.institution[language] : education.institution}
+              </span>
             </div>
 
             {education.description && (
-              <p className="text-sm text-violet-200 leading-relaxed">{education.description}</p>
+              <p className="text-sm text-violet-200 leading-relaxed">
+                {typeof education.description === 'object' ? education.description[language] : education.description}
+              </p>
             )}
           </div>
         </div>
