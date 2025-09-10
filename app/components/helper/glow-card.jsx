@@ -7,7 +7,7 @@ const GlowCard = ({ children, identifier }) => {
 
   // Usamos un useEffect para establecer que estamos en el cliente
   useEffect(() => {
-    setIsClient(true);  // Cambia el estado a 'true' solo cuando el componente se renderiza en el cliente
+    setIsClient(true);
   }, []);
 
   useEffect(() => {
@@ -15,6 +15,9 @@ const GlowCard = ({ children, identifier }) => {
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
+
+    // Verificar que los elementos existan
+    if (!CONTAINER || !CARDS || CARDS.length === 0) return;
 
     const CONFIG = {
       proximity: 40,
@@ -77,9 +80,7 @@ const GlowCard = ({ children, identifier }) => {
     };
   }, [identifier, isClient]);  // Dependemos de isClient para asegurar que solo se ejecute en el cliente
 
-  // Si no estamos en el cliente, no renderizamos nada
-  if (!isClient) return null;
-
+  // Es importante: Siempre renderizamos el componente, independientemente de isClient
   return (
     <div className={`glow-container-${identifier} glow-container`}>
       <article className={`glow-card glow-card-${identifier} h-fit cursor-pointer border border-[#2a2e5a] transition-all duration-300 relative bg-[#101123] text-gray-200 rounded-xl hover:border-transparent w-full`}>

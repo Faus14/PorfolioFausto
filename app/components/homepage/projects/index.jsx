@@ -2,14 +2,22 @@
 'use client';
 
 import { projectsPost } from "@/utils/data/projectsPost"; 
+import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image"; 
 import Link from "next/link";
 import { FaCode, FaDumbbell, FaTwitter, FaPlane, FaStore } from "react-icons/fa"; 
 import { FiExternalLink, FiGithub } from "react-icons/fi";
-import GlowCard from "../../helper/glow-card"; 
 import { useEffect, useState } from "react";  
+import dynamic from 'next/dynamic';
+
+// Importación dinámica
+const GlowCard = dynamic(() => import("../../helper/glow-card"), { 
+  ssr: false 
+});
+
 
 function Blog() {   
+  const { t, language } = useTranslation();
   const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
@@ -37,7 +45,7 @@ function Blog() {
             <div className="flex items-center">
               <span className="w-24 h-[2px] bg-[#1a1443]"></span>
               <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-                Projects
+                {t('projectsTitle')}
               </span>
               <span className="w-24 h-[2px] bg-[#1a1443]"></span>
             </div>
@@ -71,7 +79,7 @@ function Blog() {
         <div className="flex items-center">           
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>           
           <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">             
-            Projects           
+            {t('projectsTitle')}           
           </span>           
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>         
         </div>       
@@ -91,7 +99,7 @@ function Blog() {
                 />
                 <div className="flex justify-center">
                   <p className="text-xs text-[#16f2b3]">
-                    {post.date}
+                    {typeof post.date === 'object' ? post.date[language] : post.date}
                   </p>
                 </div>
                 
@@ -109,12 +117,14 @@ function Blog() {
                       {getProjectIcon(post.id)}
                     </div>
                     <p className="text-base font-medium">
-                      {post.title}
+                      {typeof post.title === 'object' ? post.title[language] : post.title}
                     </p>
                   </div>
                   
                   <div className="h-16 overflow-y-auto mb-3">
-                    <p className="text-xs text-gray-300">{post.excerpt}</p>
+                    <p className="text-xs text-gray-300">
+                      {typeof post.excerpt === 'object' ? post.excerpt[language] : post.excerpt}
+                    </p>
                   </div>
                   
                   <div className="flex flex-wrap gap-1 mb-3">
@@ -138,15 +148,9 @@ function Blog() {
                       }}
                       className="text-xs bg-violet-600 hover:bg-violet-700 transition-colors py-1 px-2 rounded-md inline-flex items-center relative z-20"
                     >
-                      <FiGithub className="mr-1" size={12} /> Code
+                      <FiGithub className="mr-1" size={12} /> {language === 'es' ? 'Código' : 'Code'}
                     </button>
 
-                    <button
-                      onClick={() => window.open(post.demoUrl, '_blank')}
-                      className="text-xs bg-pink-600 hover:bg-pink-700 transition-colors py-1 px-2 rounded-md inline-flex items-center relative z-20"
-                    >
-                      <FiExternalLink className="mr-1" size={12} /> Demo
-                    </button>
                   </div>
                 </div>
               </div>

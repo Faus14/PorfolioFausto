@@ -1,67 +1,115 @@
-// @flow strict
 export const projectsPost = [
   {
     id: 1,
-    title: "UTN Professor Consultations",
+    title: {
+      en: "UTN Professor Consultations",
+      es: "Consultas de Profesores UTN"
+    },
     urlGithub: "https://github.com/Faus14/EntornosGraficos_TpFinal",
     link: "/projects/utn-professor-consultations",
-    date: "March 2022",
-    excerpt: "Web application programmed in PHP to manage faculty consultations. Implemented an intuitive interface for scheduling and tracking appointments between students and professors.",
-    content: "The UTN Professor Consultations system was developed to streamline the process of scheduling and managing consultations between students and professors at the Universidad Tecnológica Nacional. The application was built using PHP for the backend, MySQL for the database, and a combination of JavaScript, HTML, and CSS for the frontend. Key features include real-time availability checking, automated email notifications, consultation history tracking, and a reporting system for academic departments. The project focused on improving the accessibility of educational resources and reducing administrative overhead for both students and faculty members.",
+    date: {
+      en: "March 2022",
+      es: "Marzo 2022"
+    },
+    excerpt: {
+      en: "Web app in PHP for managing faculty consultations with an intuitive interface for scheduling appointments between students and professors.",
+      es: "Aplicación web en PHP para gestionar consultas facultativas con una interfaz intuitiva para programar citas entre estudiantes y profesores."
+    },
     technologies: ["PHP", "MySQL", "HTML", "CSS", "Bootstrap"],
     demoUrl: "#"
   },
   {
     id: 2,
-    title: "Todo Gym",
+    title: {
+      en: "Todo Gym",
+      es: "Todo Gym"
+    },
     urlGithub: "https://github.com/Faus14/TodoGYM_Curso_HTML_CSS",
     link: "/projects/todo-gym",
-    date: "December 2021",
-    excerpt: "Website created with HTML and CSS providing comprehensive information about gym services, workout plans, and nutrition advice for fitness enthusiasts of all levels.",
-    content: "Todo Gym is a responsive website designed to provide users with detailed information about gym facilities, membership options, and fitness resources. The site features sections for workout programs tailored to different fitness goals, nutrition guidance, trainer profiles, and a class schedule system. The project was built using semantic HTML5 and CSS3 with a focus on accessibility and mobile-first design principles. Special attention was given to performance optimization and creating an engaging user experience with smooth animations and intuitive navigation. The website serves as a comprehensive resource for both new gym members and experienced fitness enthusiasts.",
+    date: {
+      en: "December 2021",
+      es: "Diciembre 2021"
+    },
+    excerpt: {
+      en: "Responsive website with HTML and CSS providing information about gym services, workout plans, and nutrition advice for fitness enthusiasts.",
+      es: "Sitio web responsive con HTML y CSS que proporciona información sobre servicios de gimnasio, planes de entrenamiento y consejos nutricionales para entusiastas del fitness."
+    },
     technologies: ["HTML5", "CSS3", "JavaScript"],
     demoUrl: "#"
   },
   {
     id: 3,
-    title: "Twitter Clone",
+    title: {
+      en: "Twitter Clone",
+      es: "Clon de Twitter"
+    },
     urlGithub: "https://github.com/Faus14/ProyectoFinal_Curso_Python",
     link: "/projects/twitter-clone",
-    date: "August 2022",
-    excerpt: "Full-featured social media application created with Python and Django replicating the core functionality of Twitter, including posting, following, and real-time notifications.",
-    content: "This Twitter clone project implements the core features of the popular social media platform using Python with the Django framework. The application includes user authentication, profile customization, tweet creation with media uploads, likes, retweets, comments, and a following system. The project also features real-time notifications, direct messaging, and hashtag functionality with trending topics. The backend was developed using Django with PostgreSQL, while the frontend utilizes Django templates with JavaScript for interactive elements. The implementation demonstrates proficiency in building complex web applications with user-generated content and social networking features.",
+    date: {
+      en: "August 2022",
+      es: "Agosto 2022"
+    },
+    excerpt: {
+      en: "Social media app built with Python and Django replicating Twitter's core features including posting, following, and real-time notifications.",
+      es: "Aplicación de redes sociales construida con Python y Django que replica las características principales de Twitter incluyendo publicaciones, seguimiento y notificaciones en tiempo real."
+    },
     technologies: ["Python", "Django", "PostgreSQL", "JavaScript"],
     demoUrl: "#"
   },
   {
     id: 4,
-    title: "Flight Management",
+    title: {
+      en: "Flight Management",
+      es: "Gestión de Vuelos"
+    },
     urlGithub: "https://github.com/Faus14/Trabajo-Practico-Java",
     link: "/projects/flight-management",
-    date: "December 2023",
-    excerpt: "Enterprise web application programmed in Java to manage flight schedules, bookings, crew assignments, and maintenance operations for a regional airline.",
-    content: "The Flight Management System was developed to address the complex operational needs of regional airlines. Built with Java using the Spring Boot framework, this enterprise-grade application manages every aspect of flight operations. Key modules include flight scheduling with conflict detection, passenger booking and management, crew assignment with certification validation, aircraft maintenance tracking, and comprehensive reporting tools. The system features role-based access control, audit logging, and integration with external services for weather data and regulatory compliance. The application was designed with scalability in mind, using microservices architecture and containerization for deployment flexibility.",
+    date: {
+      en: "December 2023",
+      es: "Diciembre 2023"
+    },
+    excerpt: {
+      en: "Java enterprise app for managing flight schedules, bookings, crew assignments, and maintenance operations for a regional airline.",
+      es: "Aplicación empresarial en Java para gestionar horarios de vuelos, reservas, asignaciones de tripulación y operaciones de mantenimiento para una aerolínea regional."
+    },
     technologies: ["Java", "MySQL", "Docker"],
     demoUrl: "#"
   },
   {
     id: 5,
-    title: "Supermarket-crm",
+    title: {
+      en: "Supermarket-CRM",
+      es: "CRM-Supermercado"
+    },
     urlGithub: "https://github.com/BrunoMollo/super",
     link: "/projects/supermarket-crm",
-    date: "February 2025",
-    excerpt: "Advanced customer relationship management system developed with Svelte and TypeScript for supermarkets, featuring loyalty program management",
-    content: "The Supermarket CRM is a sophisticated customer relationship management tool built specifically for retail grocery operations. Developed using Svelte and TypeScript, this modern application helps supermarkets build stronger relationships with their customers through data-driven insights. The system features comprehensive customer profile management, a configurable loyalty program with points and rewards, targeted marketing campaign tools, purchase history analysis, and detailed sales reporting. The application leverages TypeScript for type safety and maintainability, while Svelte provides exceptional performance with minimal bundle size. The project also incorporates responsive design principles for use on both management dashboards and in-store kiosks.",
+    date: {
+      en: "February 2025",
+      es: "Febrero 2025"
+    },
+    excerpt: {
+      en: "CRM system with Svelte and TypeScript for supermarkets with loyalty program management and AFIP invoicing integration.",
+      es: "Sistema CRM con Svelte y TypeScript para supermercados con gestión de programas de fidelidad e integración de facturación AFIP."
+    },
     technologies: ["Svelte", "TypeScript", "Node.js", "Express"],
     demoUrl: "#"
   },
   {
     id: 6,
-    title: "Crypto dashboard",
+    title: {
+      en: "Crypto Dashboard",
+      es: "Dashboard Crypto"
+    },
     urlGithub: "https://github.com/Faus14/DashboardCrypto",
     link: "/projects/crypto-dashboard",
-    date: "December 2024",
-    excerpt: "Cryptocurrency dashboard created with Svelte and TypeScript to track real-time market data, portfolio performance, and price alerts for digital assets.",
+    date: {
+      en: "December 2024",
+      es: "Diciembre 2024"
+    },
+    excerpt: {
+      en: "Dashboard built with Angular to track crypto portfolio performance and convert digital asset values to Argentine pesos.",
+      es: "Dashboard construido con Angular para rastrear el rendimiento del portafolio crypto y convertir valores de activos digitales a pesos argentinos."
+    },
     technologies: ["Angular", "TypeScript", "Node.js", "Postgres", "REST API"],
     demoUrl: "#"
   }
