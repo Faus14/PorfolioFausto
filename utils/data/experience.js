@@ -1,74 +1,65 @@
-// Tu archivo @/utils/data/experience.js actualizado
+// @flow strict
+// @/utils/data/experience.js
 
 export const experiences = [
   {
-    id: 1,
-    title: {
-      en: 'Full Stack Developer',
-      es: 'Desarrollador Full Stack'
-    },
-    company: "Freelancer",
-    duration: {
-      en: "(Jan 2023 - Mar 2024)",
-      es: "(Ene 2023 - Mar 2024)"
-    },
+    id: 5,
+    title: { en: "Blockchain DevOps Engineer", es: "DevOps Engineer Blockchain" },
+    company: "SEED",
+    duration: { en: "(Aug 2025 - Present)", es: "(Ago 2025 - Presente)" },
+    startDate: "2025-08-01",
+    // endDate ausente => actual
     description: {
-      en: "Developed and maintained web applications using JavaScript, TypeScript, and Node.js. Designed RESTful APIs and integrated third-party services to enhance functionality. Implemented database solutions with PostgreSQL, ensuring efficient data storage and retrieval. Optimized application performance and collaborated closely with UI/UX designers to improve user experience.",
-      es: "Desarrollé y mantuve aplicaciones web utilizando JavaScript, TypeScript y Node.js. Diseñé APIs RESTful e integré servicios de terceros para mejorar la funcionalidad. Implementé soluciones de base de datos con PostgreSQL, asegurando almacenamiento y recuperación eficiente de datos. Optimicé el rendimiento de aplicaciones y colaboré estrechamente con diseñadores UI/UX para mejorar la experiencia del usuario."
+      en: "Operate and automate Ethereum infrastructure: spin up and maintain full/archival nodes, validator operations, and L2 sequencer components. Build bots and automation for monitoring, alerting, and on-call tasks. Optimize performance and reliability on Linux, containerize services, and harden networking and security.",
+      es: "Operación y automatización de infraestructura Ethereum: despliegue y mantenimiento de nodos full/archival, operaciones de validadores y componentes de sequencer en L2. Desarrollo de bots y automatizaciones para monitoreo, alertas y tareas de on-call. Optimización de rendimiento y confiabilidad en Linux, conteinerización de servicios y endurecimiento de red y seguridad."
     },
     tools: [
-      "TypeScript", 
-      "Node.js",
-      "Express.js",
+      "Linux",
+      "Docker",
+      "Kubernetes",
+      "Nginx",
+      "Python",
+      "Bash",
+      "Prometheus",
+      "Grafana",
+      "Ethereum",
+      "Validator Operations",
+      "Sequencer",
+      "Bots",
+      "Automation"
+    ]
+  },
+  {
+    id: 4,
+    title: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
+    company: "Kainet",
+    duration: { en: "(Aug 2025 - Present)", es: "(Ago 2025 - Presente)" },
+    startDate: "2025-08-01",
+    description: {
+      en: "Design and build full-stack web apps with Angular (SPA) and Laravel (REST APIs).",
+      es: "Diseño y desarrollo de aplicaciones web full-stack con Angular (SPA) y Laravel (APIs REST)."
+    },
+    tools: [
+      "Angular",
+      "Laravel",
+      "PHP",
+      "TypeScript",
+      "MySQL",
       "PostgreSQL",
-      "angular",
-      "react",
       "Git",
-      "React",
       "Postman"
     ]
   },
   {
-    id: 2,
-    title: {
-      en: 'Sysadmin',
-      es: 'Administrador de Sistemas'
-    },
-    company: "Chatealo",
-    duration: {
-      en: "(Jul 2023 - Jun 2024)",
-      es: "(Jul 2023 - Jun 2024)"
-    },
-    description: {
-      en: "Implemented Docker containers to enhance system management and scalability. Created comprehensive project documentation, efficiently resolved technical issues, and collaborated effectively with cross-functional teams. Managed system and application configurations to maintain optimal performance and reliability.",
-      es: "Implementé contenedores Docker para mejorar la gestión de sistemas y escalabilidad. Creé documentación integral de proyectos, resolví eficientemente problemas técnicos y colaboré efectivamente con equipos multifuncionales. Gestioné configuraciones de sistemas y aplicaciones para mantener rendimiento y confiabilidad óptimos."
-    },
-    tools: [
-      "Docker",
-      "Kubernetes",
-      "Linux",
-      "Aws",
-      "System Administration",
-      "Shell Scripting",
-      "Network Configuration",
-      "Server Management",
-      "Monitoring Tools",
-    ]
-  },
-  {
     id: 3,
-    title: {
-      en: "IT Analyst",
-      es: "Analista de TI"
-    },
+    title: { en: "IT Analyst", es: "Analista de TI" },
     company: "LB Finanzas",
-    duration: {
-      en: "(Jun 2024 - Present)",
-      es: "(Jun 2024 - Presente)"
-    },
+    duration: { en: "(Jun 2024 - Jul 2025)", es: "(Jun 2024 - Jul 2025)" },
+    startDate: "2024-06-01",
+    endDate: "2025-07-31",
     description: {
-      en: "Maintain detailed incident logs and solution documentation for knowledge management. Perform in-depth log analysis to identify and resolve system issues. Utilize Grafana for monitoring and data visualization to ensure optimal system performance. Experienced in using Jira for ticket management, workflow organization, and project tracking.",
-      es: "Mantengo registros detallados de incidentes y documentación de soluciones para gestión del conocimiento. Realizo análisis profundo de logs para identificar y resolver problemas del sistema. Utilizo Grafana para monitoreo y visualización de datos para asegurar rendimiento óptimo del sistema. Experiencia usando Jira para gestión de tickets, organización de flujos de trabajo y seguimiento de proyectos."
+      en: "Maintain detailed incident logs and solution documentation. Perform in-depth log analysis to identify and resolve system issues. Use Grafana for monitoring and data visualization. Experience with Jira for ticketing, workflow organization, and project tracking.",
+      es: "Mantenimiento de registros de incidentes y documentación de soluciones. Análisis profundo de logs para identificar y resolver problemas. Uso de Grafana para monitoreo y visualización. Experiencia con Jira para tickets, organización de flujos y seguimiento de proyectos."
     },
     tools: [
       "Grafana",
@@ -81,6 +72,51 @@ export const experiences = [
       "Ticket Management",
       "Knowledge Management",
       "Performance Optimization"
+    ]
+  },
+  {
+    id: 2,
+    title: { en: "Sysadmin", es: "Administrador de Sistemas" },
+    company: "Chatealo",
+    duration: { en: "(Jul 2023 - Jun 2024)", es: "(Jul 2023 - Jun 2024)" },
+    startDate: "2023-07-01",
+    endDate: "2024-06-30",
+    description: {
+      en: "Implemented Docker containers to improve system management and scalability. Authored project documentation, resolved technical issues, and collaborated with cross-functional teams. Managed system and application configurations for performance and reliability.",
+      es: "Implementación de contenedores Docker para mejorar la gestión y la escalabilidad. Documentación de proyectos, resolución de incidencias y colaboración con equipos multifuncionales. Gestión de configuraciones de sistemas y aplicaciones para maximizar rendimiento y confiabilidad."
+    },
+    tools: [
+      "Docker",
+      "Kubernetes",
+      "Linux",
+      "Aws",
+      "System Administration",
+      "Shell Scripting",
+      "Network Configuration",
+      "Server Management",
+      "Monitoring Tools"
+    ]
+  },
+  {
+    id: 1,
+    title: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
+    company: "Freelancer",
+    duration: { en: "(Jan 2023 - Mar 2024)", es: "(Ene 2023 - Mar 2024)" },
+    startDate: "2023-01-01",
+    endDate: "2024-03-31",
+    description: {
+      en: "Developed and maintained web apps with JavaScript, TypeScript, and Node.js. Designed RESTful APIs and integrated third-party services. Implemented PostgreSQL solutions for efficient storage and retrieval. Optimized performance and collaborated with UI/UX to improve user experience.",
+      es: "Desarrollé y mantuve apps web con JavaScript, TypeScript y Node.js. Diseñé APIs REST e integré servicios de terceros. Implementé soluciones con PostgreSQL para almacenamiento y consulta eficientes. Optimicé el rendimiento y colaboré con UI/UX para mejorar la experiencia."
+    },
+    tools: [
+      "TypeScript",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Angular",
+      "React",
+      "Git",
+      "Postman"
     ]
   }
 ];

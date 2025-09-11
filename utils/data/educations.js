@@ -6,7 +6,7 @@ export const educations = [
       es: "Ingeniería en Sistemas de Información"
     },
     duration: {
-      en: "March 2019 - 2025",
+      en: "March 2019 - March 2025",
       es: "Marzo 2019 - 2025"
     },
     institution: {

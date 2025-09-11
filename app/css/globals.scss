@@ -17,6 +17,70 @@ body {
   background-color: #0d1224;
 }
 
+/* ========================================
+   Z-INDEX HIERARCHY GLOBAL RULES
+========================================= */
+
+/* Navbar siempre arriba de todo */
+nav {
+  z-index: 9999 !important;
+}
+
+/* Logo y botones del navbar con máxima prioridad */
+nav .navbar-logo,
+nav .mobile-menu-button {
+  z-index: 10000 !important;
+}
+
+/* Menu móvil */
+nav .mobile-menu {
+  z-index: 9998 !important;
+}
+
+/* Todos los sections y main content */
+section,
+main,
+.hero-section,
+.about-section,
+.experience-section,
+.skills-section,
+.education-section,
+.projects-section,
+.contact-section,
+footer {
+  z-index: 10 !important;
+}
+
+/* Elementos decorativos y overlays */
+.decorative-element,
+.background-element,
+.floating-element {
+  z-index: 5 !important;
+}
+
+/* Fondos y elementos que deben estar atrás */
+.background-pattern,
+.hero-background,
+.section-background {
+  z-index: -10 !important;
+}
+
+/* Modals y popups (si los tienes) */
+.modal,
+.popup,
+.toast {
+  z-index: 9997 !important;
+}
+
+/* Tooltips */
+.tooltip {
+  z-index: 9996 !important;
+}
+
+/* ========================================
+   STICKY CARDS CONFIGURATION
+========================================= */
+
 #sticky-card-1 {
   --index: 1;
 }
@@ -34,6 +98,88 @@ body {
 }
 
 .sticky-card {
-  // padding-top: calc(var(--index) * 2.5rem);
+  /* padding-top: calc(var(--index) * 2.5rem); */
   top: calc(var(--index) * 4rem);
+  z-index: calc(10 - var(--index)) !important; /* Cards más bajas tienen z-index menor */
 }
+
+/* ========================================
+   UTILITY CLASSES FOR Z-INDEX
+========================================= */
+
+/* Clases utilitarias para usar en componentes */
+.z-navbar { z-index: 9999 !important; }
+.z-modal { z-index: 9997 !important; }
+.z-content { z-index: 10 !important; }
+.z-decorative { z-index: 5 !important; }
+.z-background { z-index: -10 !important; }
+
+/* ========================================
+   RESPONSIVE Z-INDEX FIXES
+========================================= */
+
+@media (max-width: 1024px) {
+  /* Asegurar que en mobile el navbar esté siempre visible */
+  nav {
+    z-index: 10000 !important;
+  }
+  
+  .mobile-menu {
+    z-index: 9999 !important;
+  }
+}
+
+/* ========================================
+   SPECIFIC COMPONENT OVERRIDES
+========================================= */
+
+/* Hero section específicos */
+.hero-section .background-svg {
+  z-index: -5 !important;
+}
+
+.hero-section .floating-elements {
+  z-index: -1 !important;
+}
+
+/* About section específicos */
+.about-section .decorative-sidebar {
+  z-index: 5 !important;
+}
+
+/* Cards y elementos interactivos */
+.card,
+.project-card,
+.skill-card {
+  z-index: 8 !important;
+}
+
+.card:hover,
+.project-card:hover,
+.skill-card:hover {
+  z-index: 9 !important;
+}
+
+/* ========================================
+   DEBUGGING (Opcional - remover en producción)
+========================================= */
+
+/* 
+Descomenta estas líneas para debuggear z-index visualmente
+.debug-z-index * {
+  outline: 1px solid red;
+  position: relative;
+}
+
+.debug-z-index *:before {
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 10px;
+  color: red;
+  background: rgba(255,255,255,0.8);
+  padding: 2px;
+  z-index: 99999;
+}
+*/

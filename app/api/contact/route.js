@@ -1,23 +1,29 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
+
+// Garantiza runtime Node (no Edge) para usar sockets SMTP
+export const runtime = "nodejs";
+// Evita cachear la ruta en producción
+export const dynamic = "force-dynamic";
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,          // STARTTLS
+  secure: false,      // true si usás 465
   auth: {
     user: process.env.EMAIL_ADDRESS,
-    pass: process.env.GMAIL_PASSKEY, 
+    pass: process.env.GMAIL_PASSKEY, // App Password de Gmail (16 chars)
   },
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000,
 });
 
-// Plantilla del correo HTML
+// Plantilla HTML
 const generateEmailTemplate = (name, email, userMessage) => `
   <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f4f4f4;">
-    <div style="max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+    <div style="max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
       <h2 style="color: #007BFF;">Nuevo mensaje recibido</h2>
       <p><strong>Nombre:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
@@ -30,92 +36,80 @@ const generateEmailTemplate = (name, email, userMessage) => `
   </div>
 `;
 
-// Función de ayuda para enviar un correo usando Nodemailer
-async function sendEmail(payload) {
-  const { name, email, message: userMessage } = payload;
-  
+function sanitize(str, max = 1000) {
+  if (typeof str !== "string") return "";
+  return str.replace(/<[^>]*>?/gm, "").slice(0, max);
+}
+
+async function sendEmail({ name, email, message }) {
+  const safeName = sanitize(name, 120);
+  const safeEmail = sanitize(email, 200);
+  const safeMessage = sanitize(message, 5000);
+
   const mailOptions = {
-    from: 'Portfolio',
+    from: `Portfolio <${process.env.EMAIL_ADDRESS}>`,
     to: process.env.EMAIL_ADDRESS,
-    subject: `Nuevo mensaje de ${name}`,
-    text: `Nuevo mensaje de ${name}\n\nEmail: ${email}\n\nMensaje:\n\n${userMessage}`,
-    html: generateEmailTemplate(name, email, userMessage),
-    replyTo: email,
+    subject: `Nuevo mensaje de ${safeName}`,
+    text: `Nuevo mensaje de ${safeName}\n\nEmail: ${safeEmail}\n\nMensaje:\n\n${safeMessage}`,
+    html: generateEmailTemplate(safeName, safeEmail, safeMessage),
+    replyTo: safeEmail,
   };
 
-  try {
-    await transporter.sendMail(mailOptions);
-    return true;
-  } catch (error) {
-    console.error('Error al enviar el correo:', error.message);
-    return false;
-  }
+  await transporter.sendMail(mailOptions);
 }
 
 export async function POST(req) {
   try {
-    const payload = await req.json();
-    const { name, email, message: userMessage } = payload;
-
-    // Validar que las credenciales del correo estén presentes
     if (!process.env.EMAIL_ADDRESS || !process.env.GMAIL_PASSKEY) {
-      return new Response(
-        JSON.stringify({ 
-          success: false, 
-          message: 'Las credenciales del correo no están configuradas correctamente.' 
-        }),
-        { 
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+      return NextResponse.json(
+        { success: false, message: "Credenciales de correo no configuradas." },
+        { status: 400 }
       );
     }
 
-    // Enviar el correo
-    const emailSuccess = await sendEmail(payload);
-
-    if (emailSuccess) {
-      return new Response(
-        JSON.stringify({ 
-          success: true, 
-          message: '¡Mensaje enviado exitosamente!' 
-        }),
-        { 
-          status: 200,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+    const contentType = req.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      return NextResponse.json(
+        { success: false, message: "Content-Type inválido." },
+        { status: 415 }
       );
     }
 
-    return new Response(
-      JSON.stringify({ 
-        success: false, 
-        message: 'Falló el envío del mensaje.' 
-      }),
-      { 
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+    const payload = await req.json();
+    const { name, email, message } = payload || {};
+
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { success: false, message: "Faltan campos requeridos." },
+        { status: 400 }
+      );
+    }
+
+    // Validación básica de email (server-side)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(String(email))) {
+      return NextResponse.json(
+        { success: false, message: "Email inválido." },
+        { status: 400 }
+      );
+    }
+
+    await sendEmail({ name, email, message });
+
+    return NextResponse.json(
+      { success: true, message: "¡Mensaje enviado exitosamente!" },
+      { status: 200 }
     );
-  } catch (error) {
-    console.error('Error en la API:', error);
-    return new Response(
-      JSON.stringify({ 
-        success: false, 
-        message: 'Ocurrió un error en el servidor.' 
-      }),
-      { 
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+  } catch (err) {
+    console.error("Contact API error:", err);
+    return NextResponse.json(
+      { success: false, message: "Ocurrió un error en el servidor." },
+      { status: 500 }
     );
   }
+}
+
+// Opcional: bloquear otros métodos
+export async function GET() {
+  return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 }
