@@ -17,6 +17,16 @@ body {
   background-color: #0d1224;
 }
 
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
 /* ========================================
    Z-INDEX HIERARCHY GLOBAL RULES
 ========================================= */
@@ -183,3 +193,59 @@ Descomenta estas líneas para debuggear z-index visualmente
   z-index: 99999;
 }
 */
+
+/* ========================================
+   ✅ OPTIMIZACIÓN: Experience Cards
+========================================= */
+
+/* Mejora de performance en transiciones */
+.experience-card {
+  /* GPU acceleration para transiciones suaves */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.experience-card-content {
+  /* Asegurar que las transiciones sean hardware-accelerated */
+  will-change: auto;
+}
+
+/* Transición suave en hover - solo con CSS */
+.experience-card:hover .experience-card-content {
+  transform: translateY(-2px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Optimización de animaciones de fade */
+@media (prefers-reduced-motion: no-preference) {
+  .experience-card {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+  
+  .experience-card:nth-child(1) { animation-delay: 0.1s; }
+  .experience-card:nth-child(2) { animation-delay: 0.2s; }
+  .experience-card:nth-child(3) { animation-delay: 0.3s; }
+  .experience-card:nth-child(4) { animation-delay: 0.4s; }
+  .experience-card:nth-child(5) { animation-delay: 0.5s; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disable animations for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .experience-card,
+  .experience-card * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

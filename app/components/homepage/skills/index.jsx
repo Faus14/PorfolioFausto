@@ -60,6 +60,8 @@ function SkillCard({ label }) {
               height={44}
               className="h-full w-auto rounded-lg"
               loading="lazy"
+              quality={85}
+              decoding="async"
             />
           </div>
           <p className="text-white text-sm sm:text-base md:text-lg font-medium tracking-tight">
@@ -103,11 +105,9 @@ function LoadingSkeleton() {
 
 export default function Skills() {
   const { t, language } = useTranslation();
-  const [isClient, setIsClient] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mq.matches);
     const handler = (e) => setReducedMotion(e.matches);
@@ -115,7 +115,7 @@ export default function Skills() {
     return () => mq.removeEventListener?.("change", handler);
   }, []);
 
-  if (!isClient) return <LoadingSkeleton />;
+  // ✅ OPTIMIZADO: Sin skeleton loading, renderiza inmediatamente
 
   const devTitle = language === "es" ? "Developer" : "Developer";
   const opsTitle = language === "es" ? "DevOps & Infra" : "DevOps & Infra";
@@ -123,20 +123,8 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative z-50 border-t my-10 md:my-16 lg:my-24 border-[#25213b] overflow-hidden"
+      className="relative z-50 border-t my-10 md:my-16 lg:my-24 border-[#25213b]"
     >
-      {/* Fondos suaves (ocultos en mobile) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="hidden sm:block absolute top-6 left-1/2 -translate-x-1/2 w-64 h-64 bg-violet-200 rounded-full blur-3xl opacity-10" />
-        <div className="hidden sm:block absolute bottom-10 right-10 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-10" />
-      </div>
-
-      {/* Línea decorativa */}
-      <div className="flex justify-center -translate-y-[1px]">
-        <div className="w-11/12 sm:w-4/5 max-w-3xl">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full opacity-70" />
-        </div>
-      </div>
 
       {/* Título */}
       <div className="flex justify-center my-6 md:my-8 lg:py-8">
@@ -225,9 +213,6 @@ export default function Skills() {
           </span>
         </div>
       </div>
-
-      {/* Fade inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-[#0d1224] to-transparent pointer-events-none" />
     </section>
   );
 }

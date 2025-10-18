@@ -123,28 +123,9 @@ function Blog() {
     <section 
       id="blog" 
       ref={sectionRef}
-      className="relative z-10 border-t my-12 lg:my-20 border-[#25213b]/30 overflow-hidden"
+      className="relative z-10 border-t my-12 lg:my-20 border-[#25213b]/30"
       aria-labelledby="projects-heading"
-    >       
-      {/* Background Image - Responsive */}
-      <div className="absolute inset-0 -z-10 w-full h-full">
-        <Image         
-          src="/section.svg"         
-          alt=""         
-          fill
-          className="object-cover object-center opacity-30 sm:opacity-40 lg:opacity-60"       
-          sizes="100vw"
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0d1224]/20 to-[#0d1224]/40"></div>
-      </div>
-
-      {/* Decorative gradient line */}
-      <div className="flex justify-center -translate-y-[1px]">         
-        <div className="w-3/4 sm:w-1/2 lg:w-1/3">           
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full" />         
-        </div>       
-      </div>        
+    >        
       
       {/* Section Header */}
       <div className="flex justify-center my-8 lg:my-12 px-4">         
@@ -160,9 +141,101 @@ function Blog() {
         </div>       
       </div>        
       
-      {/* Projects Grid */}
-      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+      {/* Projects Grid - ✅ Horizontal en móvil, Grid en desktop */}
+      <div className="container mx-auto py-8 px-0 sm:px-6 lg:px-8">         
+        {/* Móvil: Scroll horizontal */}
+        <div className="md:hidden flex gap-4 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-hide">
+          {displayedProjects.map((post, index) => (
+            <div
+              key={post.id}
+              data-project-id={post.id}
+              className="min-w-[280px] w-[280px] snap-center"
+            >
+              <GlowCard identifier={`blog-mobile-${post.id}`}>
+                <article className="group relative text-white h-full flex flex-col bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl overflow-hidden border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#16f2b3]/10">
+                  
+                  {/* Header with date */}
+                  <div className="relative z-10 flex justify-between items-center p-4 pb-2">
+                    <span className="text-xs text-[#16f2b3] font-medium px-2 py-1 bg-[#16f2b3]/10 rounded-full">
+                      {typeof post.date === 'object' ? post.date[language] : post.date}
+                    </span>
+                    <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-violet-900/50 to-pink-900/50 rounded-lg">
+                      {getProjectIcon(post.id)}
+                    </div>
+                  </div>
+                  
+                  {/* Project Icon/Image Area */}
+                  <div className="relative w-full h-32 mb-4 mx-4 rounded-xl bg-gradient-to-br from-violet-900/30 to-pink-900/30 border border-[#464c6a]/20 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {getProjectIcon(post.id)}
+                    </div>
+                  </div>
+                  
+                  {/* Content Area */}
+                  <div className="relative z-10 px-4 pb-4 flex flex-col flex-grow">
+                    {/* Title */}
+                    <h3 className="text-base font-semibold mb-2 text-white line-clamp-2">
+                      {typeof post.title === 'object' ? post.title[language] : post.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <div className="flex-grow mb-3">
+                      <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+                        {typeof post.excerpt === 'object' ? post.excerpt[language] : post.excerpt}
+                      </p>
+                    </div>
+                    
+                    {/* Technologies */}
+                    {post.technologies && post.technologies.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {post.technologies.slice(0, 3).map((tech, i) => (
+                          <span 
+                            key={i}
+                            className="text-[10px] px-2 py-1 bg-gradient-to-r from-violet-900/60 to-pink-900/60 rounded-full text-violet-200 border border-violet-700/50"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {post.technologies.length > 3 && (
+                          <span className="text-[10px] px-2 py-1 bg-gray-700/50 rounded-full text-gray-400">
+                            +{post.technologies.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Links */}
+                    <div className="flex gap-2 mt-auto">
+                      {post.demoUrl && post.demoUrl !== '#' && (
+                        <Link
+                          href={post.demoUrl}
+                          target="_blank"
+                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-violet-600 to-pink-600 rounded-lg text-xs font-medium transition-all duration-300 hover:from-pink-600 hover:to-violet-600"
+                        >
+                          <FiEye size={14} />
+                          {t('liveDemo')}
+                        </Link>
+                      )}
+                      {post.urlGithub && (
+                        <Link
+                          href={post.urlGithub}
+                          target="_blank"
+                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-[#464c6a]/30 hover:bg-[#464c6a]/50 rounded-lg text-xs font-medium transition-all duration-300"
+                        >
+                          <FiGithub size={14} />
+                          {t('sourceCode')}
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </GlowCard>
+            </div>
+          ))}
+        </div>
+        
+        {/* Desktop y Tablet: Grid normal */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
           {displayedProjects.map((post, index) => (
             <div
               key={post.id}
@@ -175,18 +248,7 @@ function Blog() {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <GlowCard identifier={`blog-${post.id}`}>
-                <article className="group relative text-white h-full flex flex-col bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl overflow-hidden border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-500 hover:shadow-2xl hover:shadow-[#16f2b3]/10">
-                  
-                  {/* Background blur effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <Image
-                      src="/blur-23.svg"
-                      alt=""
-                      width={1080}
-                      height={200}
-                      className="absolute bottom-0 w-full h-full object-cover opacity-20"
-                    />
-                  </div>
+                <article className="group relative text-white h-full flex flex-col bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl overflow-hidden border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#16f2b3]/10">
                   
                   {/* Header with date */}
                   <div className="relative z-10 flex justify-between items-center p-4 pb-2">
@@ -260,25 +322,25 @@ function Blog() {
                         <button
                           onClick={() => window.open(post.urlGithub, '_blank')}
                           className="flex-1 text-xs sm:text-sm bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 py-2 px-3 rounded-lg inline-flex items-center justify-center font-medium hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
-                          aria-label={`View ${post.title} source code on GitHub`}
+                          aria-label={`View ${typeof post.title === 'object' ? post.title[language] : post.title} source code on GitHub`}
                         >
                           <FiGithub className="mr-1.5" size={14} /> 
-                          {language === 'es' ? 'Código' : 'Code'}
+                          {t('sourceCode')}
                         </button>
                       )}
                       
-                      {post.urlDemo && (
+                      {post.demoUrl && post.demoUrl !== '#' && (
                         <button
-                          onClick={() => window.open(post.urlDemo, '_blank')}
+                          onClick={() => window.open(post.demoUrl, '_blank')}
                           className="flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] hover:from-[#00d4aa] hover:to-[#16f2b3] transition-all duration-300 py-2 px-3 rounded-lg inline-flex items-center justify-center font-medium text-[#0d1224] hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#16f2b3]/50"
-                          aria-label={`View ${post.title} live demo`}
+                          aria-label={`View ${typeof post.title === 'object' ? post.title[language] : post.title} live demo`}
                         >
                           <FiExternalLink className="mr-1.5" size={14} /> 
-                          {language === 'es' ? 'Demo' : 'Live'}
+                          {t('liveDemo')}
                         </button>
                       )}
 
-                      {!post.urlGithub && !post.urlDemo && (
+                      {!post.urlGithub && (!post.demoUrl || post.demoUrl === '#') && (
                         <button
                           disabled
                           className="flex-1 text-xs sm:text-sm bg-gray-600/50 cursor-not-allowed py-2 px-3 rounded-lg inline-flex items-center justify-center font-medium text-gray-400"
@@ -319,12 +381,6 @@ function Blog() {
             }
           </span>
         </div>
-      </div>
-
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-5">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 bg-violet-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-[#16f2b3]/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       {/* Custom styles */}

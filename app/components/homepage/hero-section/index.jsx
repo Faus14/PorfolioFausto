@@ -3,7 +3,6 @@
 
 import { personalData } from "@/utils/data/personal-data";
 import { useTranslation } from "@/hooks/useTranslation";
-import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { MdDownload } from "react-icons/md";
@@ -19,32 +18,12 @@ function HeroSection() {
 
   return (
     <section 
-      className="relative flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-20 min-h-screen overflow-hidden"
+      className="relative flex flex-col items-center justify-start sm:justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-4 sm:py-16 lg:py-20 sm:min-h-screen overflow-hidden bg-[#0d1224]"
       aria-labelledby="hero-heading"
     >
-      {/* Background Hero Image - Responsive */}
-      <div className="absolute inset-0 -z-10 w-full h-full">
-        <Image
-          src="/hero.svg"
-          alt=""
-          fill
-          className="object-cover object-center opacity-40 sm:opacity-60 lg:opacity-80"
-          priority
-          sizes="100vw"
-        />
-        {/* Gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0d1224]/20 to-[#0d1224]/80"></div>
-      </div>
 
-      {/* Floating background elements */}
-      <div className="absolute inset-0 -z-5 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-72 sm:h-72 lg:w-[28rem] lg:h-[28rem] bg-violet-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-3/4 left-1/2 w-24 h-24 sm:w-48 sm:h-48 lg:w-72 lg:h-72 bg-[#16f2b3]/10 rounded-full blur-2xl animate-pulse delay-2000"></div>
-      </div>
-
-      <div className="relative z-10 w-full flex flex-col items-center justify-center max-w-7xl mx-auto">
-        <div className="max-w-5xl flex flex-col items-center justify-center text-center space-y-8 sm:space-y-12 lg:space-y-16">
+      <div className="relative z-10 w-full flex flex-col items-center justify-start sm:justify-center max-w-7xl mx-auto">
+        <div className="max-w-5xl flex flex-col items-center justify-center text-center space-y-6 sm:space-y-12 lg:space-y-16">
           
           {/* Main Heading */}
           <div className="space-y-4 sm:space-y-6">

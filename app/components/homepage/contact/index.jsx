@@ -33,21 +33,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative z-50 border-t my-10 md:my-16 lg:my-24 border-[#25213b] overflow-hidden text-white">
-      {/* Fondos suaves (ocultos en mobile) */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="hidden sm:block absolute top-10 left-1/2 -translate-x-1/2 w-64 md:w-80 h-64 md:h-80 bg-violet-500/10 rounded-full blur-3xl opacity-40" />
-        <div className="hidden sm:block absolute bottom-10 right-10 w-72 md:w-96 h-72 md:h-96 bg-cyan-400/10 rounded-full blur-3xl opacity-40" />
-      </div>
-
-      {/* Línea decorativa superior */}
-      <div className="flex justify-center -translate-y-[1px] mb-6">
-        <div className="w-11/12 sm:w-4/5 max-w-3xl relative">
-          <div className="h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full opacity-60" />
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent w-full -mt-[1px] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent h-[1px] animate-pulse motion-reduce:animate-none" />
-        </div>
-      </div>
+    <section id="contact" className="relative z-50 border-t my-10 md:my-16 lg:my-24 border-[#25213b] text-white">
 
       {/* Título flotante lateral en desktop */}
       <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">

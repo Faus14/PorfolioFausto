@@ -11,7 +11,7 @@ function AboutSection() {
   return (
     <section 
       id="about" 
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       aria-labelledby="about-heading"
     >
       {/* Decorative element - hidden on mobile for cleaner look */}
@@ -75,23 +75,10 @@ function AboutSection() {
                   priority
                   sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                 />
-                
-                {/* Overlay effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1443]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-
-              {/* Floating decorative elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-[#16f2b3] rounded-full opacity-70 animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-[#1a1443] rounded-full opacity-50"></div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#16f2b3]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#1a1443]/10 rounded-full blur-3xl"></div>
       </div>
     </section>
   );

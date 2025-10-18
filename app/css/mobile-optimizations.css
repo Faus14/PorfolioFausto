@@ -1,0 +1,118 @@
+/* ✅ Optimizaciones para móvil - Balance entre performance y estética */
+
+/* Scroll suave y optimizado */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Animaciones suaves para acordeones */
+@keyframes accordionSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes accordionSlideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* Optimizaciones para dispositivos móviles y tablets */
+@media (max-width: 1024px) {
+  /* Quitar highlight azul en tap */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Desactivar SOLO transforms complejos en hover (no los normales) */
+  .group:hover .group-hover\:scale-125,
+  .group:hover .group-hover\:rotate-12 {
+    transform: none !important;
+  }
+  
+  /* Mantener scales pequeños pero más rápidos */
+  .group:hover .group-hover\:scale-110,
+  .group:hover .group-hover\:scale-105,
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover {
+    transition-duration: 200ms !important;
+  }
+  
+  /* Simplificar blur effects (pesados) */
+  .blur-2xl,
+  .blur-3xl {
+    filter: none !important;
+  }
+  
+  /* Optimizar transiciones: más rápidas pero visibles */
+  .transition-all {
+    transition-duration: 250ms !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  .transition-opacity,
+  .transition-colors {
+    transition-duration: 200ms !important;
+  }
+  
+  /* ✅ CRÍTICO: Forzar hardware acceleration para acordeones */
+  .grid[class*="transition-"] {
+    transform: translateZ(0);
+    will-change: grid-template-rows;
+  }
+  
+  /* Cuando el acordeón está cerrado, remover will-change */
+  .grid[class*="grid-rows-[0fr]"] {
+    will-change: auto;
+  }
+}
+
+/* Reducir motion para usuarios que lo prefieren */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Optimización específica para touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Dispositivos táctiles: remover todos los efectos hover */
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover,
+  .group:hover .group-hover\:scale-110,
+  .group:hover .group-hover\:scale-125 {
+    transform: none !important;
+  }
+  
+  .hover\:bg-white\/10:hover,
+  .group:hover .group-hover\:bg-white\/10 {
+    background-color: transparent !important;
+  }
+  
+  /* Eliminar sombras en hover (pesadas GPU) */
+  .hover\:shadow-lg:hover,
+  .hover\:shadow-2xl:hover {
+    box-shadow: none !important;
+  }
+}
