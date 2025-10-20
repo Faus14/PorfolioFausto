@@ -94,22 +94,49 @@ function Navbar() {
     { href: "/#skills", label: t("skills"), id: "skills" },
     { href: "/#education", label: t("education"), id: "education" },
     { href: "/#blog", label: t("projects"), id: "blog" },
-    { href: "/#contact", label: t("contact"), id: "contact" }, // <- ya estaba, lo dejamos igual
   ];
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-[#0d1224]/95 backdrop-blur-md shadow-lg border-b border-[#464c6a]/30"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#0d1224] shadow-lg border-b border-[#464c6a]/30"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4 lg:py-6">
-            {/* Logo */}
-            <div className="flex flex-shrink-0 items-center z-50">
+            {/* Mobile menu button - Left side on mobile */}
+            <div className="lg:hidden z-50 order-1">
+              <button
+                onClick={toggleMenu}
+                className={`relative p-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#16f2b3]/50 ${
+                  isMenuOpen
+                    ? "text-[#16f2b3] bg-[#16f2b3]/10"
+                    : "text-white hover:text-[#16f2b3] hover:bg-white/5"
+                }`}
+                aria-label="Toggle mobile menu"
+                aria-expanded={isMenuOpen}
+              >
+                <div className="w-6 h-6 relative">
+                  <span
+                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
+                      isMenuOpen ? "rotate-45 top-3" : "top-1"
+                    }`}
+                  />
+                  <span
+                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 top-3 ${
+                      isMenuOpen ? "opacity-0" : "opacity-100"
+                    }`}
+                  />
+                  <span
+                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
+                      isMenuOpen ? "-rotate-45 top-3" : "top-5"
+                    }`}
+                  />
+                </div>
+              </button>
+            </div>
+
+            {/* Logo - Center on mobile, left on desktop */}
+            <div className="flex flex-shrink-0 items-center z-50 order-2 lg:order-1 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
               <Link href="/" className="group relative" aria-label="Navigate to home page">
                 <span className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#16f2b3] via-[#00d4aa] to-[#16f2b3] bg-clip-text text-transparent bg-size-200 animate-gradient-x group-hover:animate-pulse transition-all duration-300">
                   Fausto Saludas
@@ -117,6 +144,9 @@ function Navbar() {
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] group-hover:w-full transition-all duration-300" />
               </Link>
             </div>
+
+            {/* Spacer for mobile to balance layout */}
+            <div className="lg:hidden w-10 order-3"></div>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex">
@@ -151,38 +181,6 @@ function Navbar() {
                 ))}
               </ul>
             </div>
-
-            {/* Mobile menu button */}
-            <div className="lg:hidden z-50">
-              <button
-                onClick={toggleMenu}
-                className={`relative p-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#16f2b3]/50 ${
-                  isMenuOpen
-                    ? "text-[#16f2b3] bg-[#16f2b3]/10"
-                    : "text-white hover:text-[#16f2b3] hover:bg-white/5"
-                }`}
-                aria-label="Toggle mobile menu"
-                aria-expanded={isMenuOpen}
-              >
-                <div className="w-6 h-6 relative">
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      isMenuOpen ? "rotate-45 top-3" : "top-1"
-                    }`}
-                  />
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 top-3 ${
-                      isMenuOpen ? "opacity-0" : "opacity-100"
-                    }`}
-                  />
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      isMenuOpen ? "-rotate-45 top-3" : "top-5"
-                    }`}
-                  />
-                </div>
-              </button>
-            </div>
           </div>
         </div>
 
@@ -194,15 +192,15 @@ function Navbar() {
         >
           {/* Overlay */}
           <div
-            className={`absolute inset-0 bg-[#0d1224]/90 backdrop-blur-md transition-opacity duration-300 ${
+            className={`absolute inset-0 bg-[#0d1224]/30 backdrop-blur-sm transition-opacity duration-300 ${
               isMenuOpen ? "opacity-100" : "opacity-0"
             }`}
             onClick={closeMenu}
           />
-          {/* Menu Content */}
+          {/* Menu Content - Slides from LEFT */}
           <div
-            className={`absolute top-0 right-0 h-full w-full max-w-sm bg-[#0d1224]/95 backdrop-blur-lg border-l border-[#464c6a]/30 shadow-2xl transform transition-transform duration-300 ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
+            className={`absolute top-0 left-0 h-full w-full max-w-sm bg-[#0d1224] border-r border-[#464c6a]/30 shadow-2xl transform transition-transform duration-300 ${
+              isMenuOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
             <div className="flex flex-col h-full pt-24 pb-8 px-6">

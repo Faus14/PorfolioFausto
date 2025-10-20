@@ -14,7 +14,8 @@ import {
   FaMobile,
   FaDesktop,
   FaDatabase,
-  FaCloud
+  FaCloud,
+  FaShieldAlt
 } from "react-icons/fa"; 
 import { FiExternalLink, FiGithub, FiEye } from "react-icons/fi";
 import { useState } from "react";
@@ -32,10 +33,11 @@ function Blog() {
       4: <FaPlane size={28} className="text-green-400" />,
       5: <FaStore size={28} className="text-purple-400" />,
       6: <FaRocket size={28} className="text-red-400" />,
-      7: <FaMobile size={28} className="text-pink-400" />,
-      8: <FaDesktop size={28} className="text-indigo-400" />,
-      9: <FaDatabase size={28} className="text-yellow-400" />,
-      10: <FaCloud size={28} className="text-teal-400" />
+      7: <FaShieldAlt size={28} className="text-blue-500" />,
+      8: <FaMobile size={28} className="text-pink-400" />,
+      9: <FaDesktop size={28} className="text-indigo-400" />,
+      10: <FaDatabase size={28} className="text-yellow-400" />,
+      11: <FaCloud size={28} className="text-teal-400" />
     };
     return iconMap[id] || <FaCode size={28} className="text-gray-400" />;
   };
@@ -56,6 +58,7 @@ function Blog() {
     });
   };
 
+  // Ya están ordenados del más nuevo al más viejo en projectsPost
   const displayedProjects = projectsPost.slice(0, visibleItems);
   
   return (     
@@ -78,7 +81,7 @@ function Blog() {
       
       {/* Projects Grid - Cards uniformes */}
       <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scroll-smooth">
           {displayedProjects.map((post) => {
             const isExpanded = expandedIds.has(post.id);
             const title = typeof post.title === 'object' ? post.title[language] : post.title;
@@ -88,7 +91,7 @@ function Blog() {
             return (
               <article
                 key={post.id}
-                className="group relative bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-300 hover:shadow-xl hover:shadow-[#16f2b3]/10 hover:-translate-y-1 overflow-hidden flex flex-col"
+                className="flex-shrink-0 w-[320px] sm:w-[360px] md:w-auto snap-center group relative bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-300 hover:shadow-xl hover:shadow-[#16f2b3]/10 hover:-translate-y-1 overflow-hidden flex flex-col"
               >
                 {/* Header con fecha e icono */}
                 <div className="flex justify-between items-center p-4 pb-2">
@@ -229,6 +232,27 @@ function Blog() {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        /* Custom scrollbar for mobile horizontal scroll */
+        @media (max-width: 768px) {
+          .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
+          }
+
+          .overflow-x-auto::-webkit-scrollbar-track {
+            background: #1a1443;
+            border-radius: 10px;
+          }
+
+          .overflow-x-auto::-webkit-scrollbar-thumb {
+            background: linear-gradient(to right, #16f2b3, #1a1443);
+            border-radius: 10px;
+          }
+
+          .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to right, #16f2b3, #16f2b3);
+          }
         }
       `}</style>
     </section>   
