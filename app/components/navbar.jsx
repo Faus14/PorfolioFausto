@@ -103,7 +103,7 @@ function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4 lg:py-6">
-            {/* Mobile menu button - Left side on mobile */}
+            {/* Mobile menu button - Left side on mobile, hidden on desktop */}
             <div className="lg:hidden z-50 order-1">
               <button
                 onClick={toggleMenu}
@@ -135,8 +135,8 @@ function Navbar() {
               </button>
             </div>
 
-            {/* Logo - Center on mobile, left on desktop */}
-            <div className="flex flex-shrink-0 items-center z-50 order-2 lg:order-1 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
+            {/* Logo - Center on mobile, LEFT on desktop */}
+            <div className="flex flex-shrink-0 items-center z-50 order-2 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:order-1">
               <Link href="/" className="group relative" aria-label="Navigate to home page">
                 <span className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#16f2b3] via-[#00d4aa] to-[#16f2b3] bg-clip-text text-transparent bg-size-200 animate-gradient-x group-hover:animate-pulse transition-all duration-300">
                   Fausto Saludas
@@ -148,8 +148,8 @@ function Navbar() {
             {/* Spacer for mobile to balance layout */}
             <div className="lg:hidden w-10 order-3"></div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex">
+            {/* Desktop Navigation - RIGHT side */}
+            <div className="hidden lg:flex lg:order-2">
               <ul className="flex items-center space-x-2">
                 {navItems.map((item) => (
                   <li key={item.id}>
