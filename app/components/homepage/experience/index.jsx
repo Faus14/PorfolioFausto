@@ -14,6 +14,7 @@ import {
 
 export default function Experience() {
   const { t, language } = useTranslation();
+  const [expandedIds, setExpandedIds] = useState(new Set());
 
   const items = useMemo(() => {
     return [...experiences].sort((a, b) => {
@@ -22,6 +23,18 @@ export default function Experience() {
       return dateB.getTime() - dateA.getTime();
     });
   }, []);
+
+  const toggleExpanded = (id) => {
+    setExpandedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
 
   const getExperienceIcon = (type) => {
     switch (type) {
@@ -97,7 +110,7 @@ export default function Experience() {
               const title = typeof exp.title === "object" ? exp.title[language] : exp.title;
               const description = typeof exp.description === "object" ? exp.description[language] : exp.description;
               const company = exp.company;
-              const [isExpanded, setIsExpanded] = useState(false);
+              const isExpanded = expandedIds.has(exp.id);
 
               return (
                 <div key={exp.id} className="relative flex-shrink-0 w-[320px] sm:w-[380px] pt-20 snap-center">
@@ -155,7 +168,7 @@ export default function Experience() {
 
                     {/* Description - Expandible */}
                     <div 
-                      onClick={() => setIsExpanded(!isExpanded)}
+                      onClick={() => toggleExpanded(exp.id)}
                       className="cursor-pointer mb-3"
                     >
                       <p className={`text-xs text-violet-100/80 leading-relaxed ${!isExpanded ? 'line-clamp-3' : ''}`}>
