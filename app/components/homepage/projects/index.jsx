@@ -80,7 +80,14 @@ function Blog() {
       </div>        
       
       {/* Projects Grid - Cards uniformes */}
-      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">         
+      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        {/* Hint para móvil */}
+        <div className="md:hidden flex items-center justify-center gap-2 mb-4 text-sm text-gray-400">
+          <span>👉</span>
+          <span>{language === 'es' ? 'Desliza para ver más proyectos' : 'Swipe to see more projects'}</span>
+          <span>👈</span>
+        </div>
+        
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scroll-smooth">
           {displayedProjects.map((post) => {
             const isExpanded = expandedIds.has(post.id);
