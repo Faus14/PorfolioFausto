@@ -97,26 +97,4 @@ export const experiences = [
       "Monitoring Tools"
     ]
   },
-  {
-    id: 1,
-    title: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
-    company: "Freelancer",
-    duration: { en: "(Jan 2023 - Mar 2024)", es: "(Ene 2023 - Mar 2024)" },
-    startDate: "2023-01-01",
-    endDate: "2024-03-31",
-    description: {
-      en: "Developed and maintained web apps with JavaScript, TypeScript, and Node.js. Designed RESTful APIs and integrated third-party services. Implemented PostgreSQL solutions for efficient storage and retrieval. Optimized performance and collaborated with UI/UX to improve user experience.",
-      es: "Desarrollé y mantuve apps web con JavaScript, TypeScript y Node.js. Diseñé APIs REST e integré servicios de terceros. Implementé soluciones con PostgreSQL para almacenamiento y consulta eficientes. Optimicé el rendimiento y colaboré con UI/UX para mejorar la experiencia."
-    },
-    tools: [
-      "TypeScript",
-      "Node.js",
-      "Express.js",
-      "PostgreSQL",
-      "Angular",
-      "React",
-      "Git",
-      "Postman"
-    ]
-  }
 ];
