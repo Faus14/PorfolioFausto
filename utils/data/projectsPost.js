@@ -1,5 +1,43 @@
 export const projectsPost = [
   {
+    id: 9,
+    title: {
+      en: "On-chain DAO Ops",
+      es: "Operaciones DAO On-chain"
+    },
+    urlGithub: "",
+    link: "/projects/dao-ops",
+    date: {
+      en: "November 2025",
+      es: "Noviembre 2025"
+    },
+    excerpt: {
+      en: "Orchestrate your DAOs, proposals and tasks on top of Arkiv. Every decision, task and role is recorded with TTL, advanced queries and real-time events.",
+      es: "Orquesta tus DAOs, propuestas y tareas sobre Arkiv. Cada decisión, tarea y rol se registra con TTL, consultas avanzadas y eventos en tiempo real."
+    },
+    technologies: ["Arkiv", "Blockchain", "DAO", "Smart Contracts"],
+    demoUrl: "https://roxium-dao-ops-front-production.up.railway.app/"
+  },
+  {
+    id: 8,
+    title: {
+      en: "BuildMe",
+      es: "BuildMe"
+    },
+    urlGithub: "",
+    link: "/projects/buildme",
+    date: {
+      en: "November 2025",
+      es: "Noviembre 2025"
+    },
+    excerpt: {
+      en: "Create your professional portfolio in minutes. Upload your CV and let AI generate your personal website with Google Auth, custom URLs, and public gallery.",
+      es: "Crea tu portafolio profesional en minutos. Sube tu CV y deja que la IA genere tu sitio web personal con autenticación de Google, URLs personalizadas y galería pública."
+    },
+    technologies: ["Next.js", "OpenAI GPT-4o", "Supabase", "Upstash Redis", "AWS S3", "TailwindCSS", "Netlify"],
+    demoUrl: "https://mybuildme.com"
+  },
+  {
     id: 7,
     title: {
       en: "Faro Bot - Ethereum Validator Monitoring",
