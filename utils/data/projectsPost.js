@@ -1,5 +1,24 @@
 export const projectsPost = [
   {
+    id: 10,
+    title: {
+      en: "Travel Cost Calculator",
+      es: "Calculadora de Viajes"
+    },
+    urlGithub: "",
+    link: "/projects/travel-calculator",
+    date: {
+      en: "November 2025",
+      es: "Noviembre 2025"
+    },
+    excerpt: {
+      en: "Calculate fuel cost for trips across Argentina. Select origin and destination (major cities or any location), set vehicle consumption, station price, and passengers to get per-person cost. Uses Google Maps APIs for routes and distance.",
+      es: "Calcula el costo de combustible para viajes en Argentina. Selecciona origen y destino (ciudades principales o cualquier ubicación), configura consumo del vehículo, precio de estación y pasajeros para obtener el costo por persona. Utiliza APIs de Google Maps para rutas y distancia."
+    },
+    technologies: ["Next.js", "Google Maps API", "Vercel", "TailwindCSS"],
+    demoUrl: "https://travelcalculator-sand.vercel.app/"
+  },
+  {
     id: 9,
     title: {
       en: "On-chain DAO Ops",
