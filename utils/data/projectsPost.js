@@ -1,44 +1,44 @@
 export const projectsPost = [
   {
-    id: 10,
+    id: 1,
     title: {
-      en: "Travel Cost Calculator",
-      es: "Calculadora de Viajes"
+      en: "VetGestiona",
+      es: "VetGestiona"
     },
     urlGithub: "",
-    link: "/projects/travel-calculator",
+    link: "/projects/vet-gestiona",
     date: {
-      en: "November 2025",
-      es: "Noviembre 2025"
+      en: "January 2026",
+      es: "Enero 2026"
     },
     excerpt: {
-      en: "Calculate fuel cost for trips across Argentina. Select origin and destination (major cities or any location), set vehicle consumption, station price, and passengers to get per-person cost. Uses Google Maps APIs for routes and distance.",
-      es: "Calcula el costo de combustible para viajes en Argentina. Selecciona origen y destino (ciudades principales o cualquier ubicación), configura consumo del vehículo, precio de estación y pasajeros para obtener el costo por persona. Utiliza APIs de Google Maps para rutas y distancia."
+      en: "Complete veterinary clinic management system. Manage patients, schedule appointments, generate invoices, control inventory and automate reminders. All in one simple and professional platform. Used by over 25+ veterinary clinics across Argentina.",
+      es: "Sistema completo de gestión para clínicas veterinarias. Gestiona pacientes, agenda turnos, genera facturas, controla inventario y automatiza recordatorios. Todo en una plataforma simple y profesional. Utilizado por más de 25+ clínicas veterinarias en toda Argentina."
     },
-    technologies: ["Next.js", "Google Maps API", "Vercel", "TailwindCSS"],
-    demoUrl: "https://travelcalculator-sand.vercel.app/"
+    technologies: ["Web App", "Patient Management", "Billing", "Inventory", "Scheduling"],
+    demoUrl: "https://vetgestiona.com/"
   },
   {
-    id: 9,
+    id: 2,
     title: {
-      en: "On-chain DAO Ops",
-      es: "Operaciones DAO On-chain"
+      en: "Nostromo Guardian - Qubic Token Analytics",
+      es: "Nostromo Guardian - Análisis de Tokens Qubic"
     },
-    urlGithub: "",
-    link: "/projects/dao-ops",
+    urlGithub: "https://github.com/Faus14/NostromoGuardian",
+    link: "/projects/nostromo-guardian",
     date: {
-      en: "November 2025",
-      es: "Noviembre 2025"
+      en: "December 2025",
+      es: "Diciembre 2025"
     },
     excerpt: {
-      en: "Orchestrate your DAOs, proposals and tasks on top of Arkiv. Every decision, task and role is recorded with TTL, advanced queries and real-time events.",
-      es: "Orquesta tus DAOs, propuestas y tareas sobre Arkiv. Cada decisión, tarea y rol se registra con TTL, consultas avanzadas y eventos en tiempo real."
+      en: "Real-time analytics and leaderboard platform for the Qubic blockchain, tracking top traders, whales, and token metrics to empower communities and gamify on-chain participation. Production-ready with indexes real trades and holders from QX, calculates risk and growth metrics, and provides smart alerts, webhooks, and gamification features. EasyConnect integration enables seamless automation with Make.com, Zapier, n8n, Discord, Telegram and more. Powered by GPT-4 for AI trading insights.",
+      es: "Plataforma de análisis y clasificaciones en tiempo real para el blockchain Qubic, rastreando comerciantes principales, ballenas y métricas de tokens para empoderar comunidades y gamificar la participación en cadena. Listo para producción con indexación de transacciones reales y tenedores de QX, calcula métricas de riesgo y crecimiento, y proporciona alertas inteligentes, webhooks y funciones de gamificación. La integración EasyConnect permite automatización fluida con Make.com, Zapier, n8n, Discord, Telegram y más. Potenciado por GPT-4 para análisis de trading con IA."
     },
-    technologies: ["Arkiv", "Blockchain", "DAO", "Smart Contracts"],
-    demoUrl: "https://roxium-dao-ops-front-production.up.railway.app/"
+    technologies: ["Node.js", "TypeScript", "Qubic Blockchain", "GPT-4", "Make.com", "Discord API", "Docker", "Analytics", "Leaderboard"],
+    demoUrl: "https://dijon-clear-64681396.figma.site"
   },
   {
-    id: 8,
+    id: 4,
     title: {
       en: "BuildMe",
       es: "BuildMe"
@@ -57,7 +57,26 @@ export const projectsPost = [
     demoUrl: "https://mybuildme.com"
   },
   {
-    id: 7,
+    id: 5,
+    title: {
+      en: "Roxium DAO Ops - IPFS Service",
+      es: "Roxium DAO Ops - Servicio IPFS"
+    },
+    urlGithub: "https://github.com/Faus14/roxium-dao-ops-IPFS",
+    link: "/projects/roxium-ipfs",
+    date: {
+      en: "November 2025",
+      es: "Noviembre 2025"
+    },
+    excerpt: {
+      en: "Node/TypeScript service for uploading files to IPFS using Helia and registering events on Arkiv. Acts as a decentralized blob store for DAO operations. Supports PDF and image uploads with IPFS CID generation, Storacha pinning integration for stable public URLs, and on-chain event recording.",
+      es: "Servicio Node/TypeScript para subir archivos a IPFS usando Helia y registrar eventos en Arkiv. Actúa como almacenamiento de blobs descentralizado para operaciones DAO. Soporta carga de PDFs e imágenes con generación de CID IPFS, integración de fijación Storacha para URLs públicas estables y registro de eventos en cadena."
+    },
+    technologies: ["Node.js", "TypeScript", "IPFS", "Helia", "Arkiv", "Storacha", "Blockchain"],
+    demoUrl: "https://upbeat-port-70496397.figma.site/dashboard"
+  },
+  {
+    id: 6,
     title: {
       en: "Faro Bot - Ethereum Validator Monitoring",
       es: "Faro Bot - Monitoreo de Validadores Ethereum"
@@ -76,7 +95,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 5,
+    id: 7,
     title: {
       en: "Supermarket-CRM",
       es: "CRM-Supermercado"
@@ -95,7 +114,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 6,
+    id: 8,
     title: {
       en: "Crypto Dashboard",
       es: "Dashboard Crypto"
@@ -114,7 +133,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 4,
+    id: 9,
     title: {
       en: "Flight Management",
       es: "Gestión de Vuelos"
@@ -133,7 +152,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 3,
+    id: 10,
     title: {
       en: "Twitter Clone",
       es: "Clon de Twitter"
@@ -152,7 +171,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 1,
+    id: 11,
     title: {
       en: "UTN Professor Consultations",
       es: "Consultas de Profesores UTN"
@@ -171,7 +190,7 @@ export const projectsPost = [
     demoUrl: "#"
   },
   {
-    id: 2,
+    id: 12,
     title: {
       en: "Todo Gym",
       es: "Todo Gym"
