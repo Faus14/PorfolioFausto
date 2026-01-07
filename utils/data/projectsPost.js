@@ -91,7 +91,7 @@ export const projectsPost = [
       en: "Comprehensive Telegram bot for monitoring Ethereum validator nodes with automatic alerts and support for multiple clients (Geth, Nethermind, Besu, Lighthouse, Prysm, Teku, Nimbus).",
       es: "Bot de Telegram completo para monitorear nodos validadores de Ethereum, con alertas automáticas y soporte para múltiples clientes (Geth, Nethermind, Besu, Lighthouse, Prysm, Teku, Nimbus)."
     },
-    technologies: ["Python", "Telegram Bot API", "Docker", "Ethereum", "Blockchain"],
+    technologies: ["Python ", "Telegram Bot API", "Docker", "Ethereum", "Blockchain"],
     demoUrl: "#"
   },
   {
