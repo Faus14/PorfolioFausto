@@ -5,6 +5,7 @@ export const projectsPost = [
       en: "VetGestiona",
       es: "VetGestiona"
     },
+    image: "/proyectos/vetgestiona.png",
     urlGithub: "",
     link: "/projects/vet-gestiona",
     date: {
@@ -24,6 +25,7 @@ export const projectsPost = [
       en: "Nostromo Guardian - Qubic Token Analytics",
       es: "Nostromo Guardian - Análisis de Tokens Qubic"
     },
+    image: "/proyectos/Nostromo.png",
     urlGithub: "https://github.com/Faus14/NostromoGuardian",
     link: "/projects/nostromo-guardian",
     date: {
@@ -43,6 +45,7 @@ export const projectsPost = [
       en: "BuildMe",
       es: "BuildMe"
     },
+    image: "/proyectos/mibuildme.png",
     urlGithub: "",
     link: "/projects/buildme",
     date: {
@@ -62,6 +65,7 @@ export const projectsPost = [
       en: "Roxium DAO Ops - IPFS Service",
       es: "Roxium DAO Ops - Servicio IPFS"
     },
+    image: "/proyectos/RoxDao.png",
     urlGithub: "https://github.com/Faus14/roxium-dao-ops-IPFS",
     link: "/projects/roxium-ipfs",
     date: {
@@ -100,6 +104,7 @@ export const projectsPost = [
       en: "Supermarket-CRM",
       es: "CRM-Supermercado"
     },
+    image: "/proyectos/Super.png",
     urlGithub: "https://github.com/BrunoMollo/super",
     link: "/projects/supermarket-crm",
     date: {
@@ -119,6 +124,7 @@ export const projectsPost = [
       en: "Crypto Dashboard",
       es: "Dashboard Crypto"
     },
+    image: "/proyectos/cripto.png",
     urlGithub: "https://github.com/Faus14/DashboardCrypto",
     link: "/projects/crypto-dashboard",
     date: {
@@ -157,6 +163,7 @@ export const projectsPost = [
       en: "Twitter Clone",
       es: "Clon de Twitter"
     },
+    image: "/proyectos/twitter.png",
     urlGithub: "https://github.com/Faus14/ProyectoFinal_Curso_Python",
     link: "/projects/twitter-clone",
     date: {

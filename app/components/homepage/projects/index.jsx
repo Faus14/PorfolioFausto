@@ -100,22 +100,27 @@ function Blog() {
                 key={post.id}
                 className="flex-shrink-0 w-[320px] sm:w-[360px] md:w-auto snap-center group relative bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-300 hover:shadow-xl hover:shadow-[#16f2b3]/10 hover:-translate-y-1 overflow-hidden flex flex-col"
               >
-                {/* Header con fecha e icono */}
+                {/* Header con fecha */}
                 <div className="flex justify-between items-center p-4 pb-2">
                   <span className="text-xs text-[#16f2b3] font-medium px-2.5 py-1 bg-[#16f2b3]/10 rounded-full">
                     {date}
                   </span>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-violet-900/50 to-pink-900/50 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                    {getProjectIcon(post.id)}
-                  </div>
                 </div>
                 
-                {/* Icono grande central */}
-                <div className="relative w-full h-36 mb-4 px-4">
-                  <div className="w-full h-full rounded-xl bg-gradient-to-br from-violet-900/30 to-pink-900/30 border border-[#464c6a]/20 group-hover:border-[#16f2b3]/30 transition-all duration-500 flex items-center justify-center overflow-hidden">
-                    <div className="transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
-                      {getProjectIcon(post.id)}
-                    </div>
+                {/* Imagen o Icono grande central - Mejorado */}
+                <div className="relative w-full h-48 mb-4 px-4">
+                  <div className="w-full h-full rounded-lg bg-gradient-to-br from-violet-900/30 to-pink-900/30 border border-[#464c6a]/20 group-hover:border-[#16f2b3]/30 transition-all duration-500 flex items-center justify-center overflow-hidden">
+                    {post.image ? (
+                      <img 
+                        src={post.image} 
+                        alt={title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                        {getProjectIcon(post.id)}
+                      </div>
+                    )}
                   </div>
                 </div>
                 
