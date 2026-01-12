@@ -3,98 +3,95 @@
 
 export const experiences = [
   {
-    id: 5,
-    title: { en: "Blockchain DevOps Engineer", es: "DevOps Engineer Blockchain" },
-    company: "SEED",
-    duration: { en: "(Aug 2025 - Present)", es: "(Ago 2025 - Presente)" },
-    startDate: "2025-08-01",
-    // endDate ausente => actual
-    description: {
-      en: "Operate and automate Ethereum infrastructure: spin up and maintain full/archival nodes, validator operations, and L2 sequencer components. Build bots and automation for monitoring, alerting, and on-call tasks. Optimize performance and reliability on Linux, containerize services, and harden networking and security.",
-      es: "Operación y automatización de infraestructura Ethereum: despliegue y mantenimiento de nodos full/archival, operaciones de validadores y componentes de sequencer en L2. Desarrollo de bots y automatizaciones para monitoreo, alertas y tareas de on-call. Optimización de rendimiento y confiabilidad en Linux, conteinerización de servicios y endurecimiento de red y seguridad."
-    },
-    tools: [
-      "Linux",
-      "Docker",
-      "Kubernetes",
-      "Nginx",
-      "Python",
-      "Bash",
-      "Prometheus",
-      "Grafana",
-      "Ethereum",
-      "Validator Operations",
-      "Sequencer",
-      "Bots",
-      "Automation"
-    ]
-  },
-  {
-    id: 4,
+    id: 1,
     title: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
     company: "Kainet",
     duration: { en: "(Aug 2025 - Present)", es: "(Ago 2025 - Presente)" },
     startDate: "2025-08-01",
     description: {
-      en: "Design and build full-stack web apps with Angular (SPA) and Laravel (REST APIs).",
-      es: "Diseño y desarrollo de aplicaciones web full-stack con Angular (SPA) y Laravel (APIs REST)."
+      en: "Development and maintenance of web applications using Laravel and Angular. Integration of external APIs for data synchronization and process automation. Use of Git for version control and best practices in teamwork.",
+      es: "Desarrollo y mantenimiento de aplicaciones web usando Laravel y Angular. Integración de APIs externas para sincronización de datos y automatización de procesos. Uso de Git para control de versiones y buenas prácticas de trabajo en equipo."
     },
     tools: [
-      "Angular",
       "Laravel",
+      "Angular",
       "PHP",
       "TypeScript",
-      "MySQL",
-      "PostgreSQL",
       "Git",
-      "Postman"
-    ]
-  },
-  {
-    id: 3,
-    title: { en: "IT Analyst", es: "Analista de TI" },
-    company: "LB Finanzas",
-    duration: { en: "(Jun 2024 - Jul 2025)", es: "(Jun 2024 - Jul 2025)" },
-    startDate: "2024-06-01",
-    endDate: "2025-07-31",
-    description: {
-      en: "Maintain detailed incident logs and solution documentation. Perform in-depth log analysis to identify and resolve system issues. Use Grafana for monitoring and data visualization. Experience with Jira for ticketing, workflow organization, and project tracking.",
-      es: "Mantenimiento de registros de incidentes y documentación de soluciones. Análisis profundo de logs para identificar y resolver problemas. Uso de Grafana para monitoreo y visualización. Experiencia con Jira para tickets, organización de flujos y seguimiento de proyectos."
-    },
-    tools: [
-      "Grafana",
-      "Jira",
-      "Log Analysis",
-      "Data Visualization",
-      "Incident Management",
-      "Documentation",
-      "System Monitoring",
-      "Ticket Management",
-      "Knowledge Management",
-      "Performance Optimization"
+      "APIs",
+      "MySQL",
+      "PostgreSQL"
     ]
   },
   {
     id: 2,
-    title: { en: "Sysadmin", es: "Administrador de Sistemas" },
+    title: { en: "DevOps Blockchain Engineer", es: "DevOps Engineer Blockchain" },
+    company: "SEED Latam",
+    duration: { en: "(Aug 2025 - Present)", es: "(Ago 2025 - Presente)" },
+    startDate: "2025-08-01",
+    description: {
+      en: "Operation of validator nodes and blockchain networks (Ethereum, Aztec testnet). Migration and configuration of VPS servers from scratch via SSH, VPN and encrypted tunnels. Implementation of monitoring with Prometheus + Grafana. Automation of alerts with Python bots for Discord/Telegram.",
+      es: "Operación de nodos validadores y redes blockchain (Ethereum, Aztec testnet). Migración y configuración desde cero de servidores VPS mediante SSH, VPN y túneles cifrados. Implementación de monitoreo en Prometheus + Grafana. Automatización de alertas con bots en Python para Discord/Telegram."
+    },
+    tools: [
+      "Ethereum",
+      "Blockchain",
+      "SSH",
+      "VPN",
+      "Prometheus",
+      "Grafana",
+      "Python",
+      "Docker",
+      "Linux",
+      "Validator Operations"
+    ]
+  },
+  {
+    id: 3,
+    title: { en: "DevOps Support Analyst", es: "Analista DevOps Support" },
+    company: "LB Finanzas",
+    duration: { en: "(Jun 2024 - Aug 2025)", es: "(Jun 2024 - Ago 2025)" },
+    startDate: "2024-06-01",
+    endDate: "2025-08-31",
+    description: {
+      en: "Analysis of logs and resolution of production incidents. Development of internal tools and JavaScript endpoints. Implementation of monitoring and alerting systems. System integration and process automation. Creation of dashboards in Grafana for business areas. Process improvements and Jira boards for ticket tracking.",
+      es: "Análisis de logs y resolución de incidentes en producción. Desarrollo de herramientas internas y endpoints en JavaScript. Implementación de sistemas de monitoreo y alertas. Integración de sistemas y automatización de flujos. Creación de dashboards en Grafana para áreas de negocio. Mejora de procesos y tableros en Jira para seguimiento de tickets."
+    },
+    tools: [
+      "JavaScript",
+      "Grafana",
+      "Jira",
+      "Log Analysis",
+      "Monitoring",
+      "Alerting",
+      "System Integration",
+      "Automation",
+      "Linux",
+      "Docker"
+    ]
+  },
+  {
+    id: 4,
+    title: { en: "DevOps Engineer", es: "DevOps Engineer" },
     company: "Chatealo",
     duration: { en: "(Jul 2023 - Jun 2024)", es: "(Jul 2023 - Jun 2024)" },
     startDate: "2023-07-01",
     endDate: "2024-06-30",
     description: {
-      en: "Implemented Docker containers to improve system management and scalability. Authored project documentation, resolved technical issues, and collaborated with cross-functional teams. Managed system and application configurations for performance and reliability.",
-      es: "Implementación de contenedores Docker para mejorar la gestión y la escalabilidad. Documentación de proyectos, resolución de incidencias y colaboración con equipos multifuncionales. Gestión de configuraciones de sistemas y aplicaciones para maximizar rendimiento y confiabilidad."
+      en: "Use of AWS for storage services and application deployment. Administration of Linux servers on Hetzner, backend and frontend deployment. Containerization with Docker and orchestration with Kubernetes. Database administration, backups and monitoring. Network configuration, ports, and firewalls. Monitoring with Grafana and infrastructure incident resolution.",
+      es: "Uso de AWS para servicios de almacenamiento y despliegue de aplicaciones. Administración de servidores Linux en Hetzner, despliegue de backend y frontend. Conteinerización con Docker y orquestación con Kubernetes. Administración de bases de datos, backups y monitoreo. Configuración de redes, puertos, firewalls. Monitoreo con Grafana y resolución de incidentes de infraestructura."
     },
     tools: [
+      "AWS",
+      "Linux",
       "Docker",
       "Kubernetes",
-      "Linux",
-      "Aws",
-      "System Administration",
-      "Shell Scripting",
-      "Network Configuration",
-      "Server Management",
-      "Monitoring Tools"
+      "Hetzner",
+      "Grafana",
+      "MySQL",
+      "PostgreSQL",
+      "Networking",
+      "System Administration"
     ]
-  },
+  }
 ];
