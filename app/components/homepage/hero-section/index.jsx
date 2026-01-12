@@ -27,7 +27,7 @@ function HeroSection() {
           
           {/* Main Heading */}
           <div className="space-y-4 sm:space-y-6">
-            <div className="inline-block animate-fadeInUp">
+            <div className="inline-block">
               <span className="inline-block bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent font-semibold text-sm sm:text-base lg:text-lg tracking-wider uppercase opacity-90">
                 {language === 'es' ? 'Bienvenido a mi portafolio' : 'Welcome to my portfolio'}
               </span>
@@ -35,7 +35,7 @@ function HeroSection() {
             
             <h1 
               id="hero-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight sm:leading-tight md:leading-tight lg:leading-tight text-white animate-fadeInUp animation-delay-300"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight sm:leading-tight md:leading-tight lg:leading-tight text-white"
             >
               {language === 'es' ? 'Hola, soy' : t('greeting')} {' '}
               <span className="inline-block bg-gradient-to-r from-pink-500 via-pink-400 to-pink-600 bg-clip-text text-transparent animate-gradient-x">
@@ -50,7 +50,7 @@ function HeroSection() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed animate-fadeInUp animation-delay-600">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               <span className="inline-block bg-gradient-to-r from-[#16f2b3] via-[#00d4aa] to-[#16f2b3] bg-clip-text text-transparent font-medium">
                 {language === 'es' 
                   ? 'Apasionado por la infraestructura de TI y el desarrollo de software'
@@ -61,7 +61,7 @@ function HeroSection() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-6 sm:gap-8 justify-center animate-fadeInUp animation-delay-900">
+          <div className="flex items-center gap-6 sm:gap-8 justify-center">
             <Link
               href={personalData.github}
               target='_blank'
@@ -88,7 +88,7 @@ function HeroSection() {
           </div>
 
           {/* Call-to-Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center w-full max-w-md sm:max-w-none animate-fadeInUp animation-delay-1200">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center w-full max-w-md sm:max-w-none">
             <Link 
               href="#contact" 
               className="group relative w-full sm:w-auto"

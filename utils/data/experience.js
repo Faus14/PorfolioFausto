@@ -54,12 +54,16 @@ export const experiences = [
     startDate: "2024-06-01",
     endDate: "2025-08-31",
     description: {
-      en: "Analysis of logs and resolution of production incidents. Development of internal tools and JavaScript endpoints. Implementation of monitoring and alerting systems. System integration and process automation. Creation of dashboards in Grafana for business areas. Process improvements and Jira boards for ticket tracking.",
-      es: "Análisis de logs y resolución de incidentes en producción. Desarrollo de herramientas internas y endpoints en JavaScript. Implementación de sistemas de monitoreo y alertas. Integración de sistemas y automatización de flujos. Creación de dashboards en Grafana para áreas de negocio. Mejora de procesos y tableros en Jira para seguimiento de tickets."
+      en: "Analysis of logs and resolution of production incidents. Development of internal tools and JavaScript endpoints. Implementation of monitoring and alerting systems. System integration and process automation. Creation of dashboards in Grafana and Metabase for business areas. BigData processing with Apache Airflow, DAG orchestration and workflow automation. Process improvements and Jira boards for ticket tracking.",
+      es: "Análisis de logs y resolución de incidentes en producción. Desarrollo de herramientas internas y endpoints en JavaScript. Implementación de sistemas de monitoreo y alertas. Integración de sistemas y automatización de flujos. Creación de dashboards en Grafana y Metabase para áreas de negocio. Procesamiento de BigData con Apache Airflow, orquestación de DAGs y automatización de workflows. Mejora de procesos y tableros en Jira para seguimiento de tickets."
     },
     tools: [
       "JavaScript",
       "Grafana",
+      "Metabase",
+      "Apache Airflow",
+      "DAGs",
+      "BigData",
       "Jira",
       "Log Analysis",
       "Monitoring",
