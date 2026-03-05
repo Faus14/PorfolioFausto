@@ -1,10 +1,32 @@
 export const projectsPost = [
   {
+    id: 0,
+    title: {
+      en: "MatchPointGo",
+      es: "MatchPointGo"
+    },
+    category: "products",
+    image: "/proyectos/Matchpoint.png",
+    urlGithub: "",
+    link: "/projects/matchpoint-go",
+    date: {
+      en: "March 2026",
+      es: "Marzo 2026"
+    },
+    excerpt: {
+      en: "Real-time sports management SaaS. Find available courts, book in seconds, and play—no calls, no waiting. Manage bookings 24/7 with automated confirmations and easy cancellations from any device.",
+      es: "Plataforma SaaS para gestión de canchas con disponibilidad en tiempo real. Encontrá una cancha libre, reservá en segundos y aparecé a jugar. Sin llamar a nadie, sin esperas. Gestión de turnos 24/7 con confirmación al instante."
+    },
+    technologies: ["Next.js", "Supabase", "TailwindCSS", "Mercado Pago", "SaaS", "Real-time"],
+    demoUrl: "https://matchpointgo.com"
+  },
+  {
     id: 1,
     title: {
       en: "VetGestiona",
       es: "VetGestiona"
     },
+    category: "products",
     image: "/proyectos/vetgestiona.png",
     urlGithub: "",
     link: "/projects/vet-gestiona",
@@ -25,6 +47,7 @@ export const projectsPost = [
       en: "Nostromo Guardian - Qubic Token Analytics",
       es: "Nostromo Guardian - Análisis de Tokens Qubic"
     },
+    category: "blockchain",
     image: "/proyectos/Nostromo.png",
     urlGithub: "https://github.com/Faus14/NostromoGuardian",
     link: "/projects/nostromo-guardian",
@@ -45,6 +68,7 @@ export const projectsPost = [
       en: "BuildMe",
       es: "BuildMe"
     },
+    category: "products",
     image: "/proyectos/mibuildme.png",
     urlGithub: "",
     link: "/projects/buildme",
@@ -65,6 +89,7 @@ export const projectsPost = [
       en: "Roxium DAO Ops - IPFS Service",
       es: "Roxium DAO Ops - Servicio IPFS"
     },
+    category: "blockchain",
     image: "/proyectos/RoxDao.png",
     urlGithub: "https://github.com/Faus14/roxium-dao-ops-IPFS",
     link: "/projects/roxium-ipfs",
@@ -85,6 +110,7 @@ export const projectsPost = [
       en: "Faro Bot - Ethereum Validator Monitoring",
       es: "Faro Bot - Monitoreo de Validadores Ethereum"
     },
+    category: "blockchain",
     urlGithub: "https://github.com/Faus14/faro-bot",
     link: "/projects/faro-bot",
     date: {
@@ -104,6 +130,7 @@ export const projectsPost = [
       en: "Supermarket-CRM",
       es: "CRM-Supermercado"
     },
+    category: "academic",
     image: "/proyectos/Super.png",
     urlGithub: "https://github.com/BrunoMollo/super",
     link: "/projects/supermarket-crm",
@@ -124,6 +151,7 @@ export const projectsPost = [
       en: "Crypto Dashboard",
       es: "Dashboard Crypto"
     },
+    category: "academic",
     image: "/proyectos/cripto.png",
     urlGithub: "https://github.com/Faus14/DashboardCrypto",
     link: "/projects/crypto-dashboard",
@@ -144,6 +172,7 @@ export const projectsPost = [
       en: "Flight Management",
       es: "Gestión de Vuelos"
     },
+    category: "academic",
     urlGithub: "https://github.com/Faus14/Trabajo-Practico-Java",
     link: "/projects/flight-management",
     date: {
@@ -163,6 +192,7 @@ export const projectsPost = [
       en: "Twitter Clone",
       es: "Clon de Twitter"
     },
+    category: "academic",
     image: "/proyectos/twitter.png",
     urlGithub: "https://github.com/Faus14/ProyectoFinal_Curso_Python",
     link: "/projects/twitter-clone",
@@ -183,6 +213,7 @@ export const projectsPost = [
       en: "UTN Professor Consultations",
       es: "Consultas de Profesores UTN"
     },
+    category: "academic",
     urlGithub: "https://github.com/Faus14/EntornosGraficos_TpFinal",
     link: "/projects/utn-professor-consultations",
     date: {
@@ -202,6 +233,7 @@ export const projectsPost = [
       en: "Todo Gym",
       es: "Todo Gym"
     },
+    category: "academic",
     urlGithub: "https://github.com/Faus14/TodoGYM_Curso_HTML_CSS",
     link: "/projects/todo-gym",
     date: {
