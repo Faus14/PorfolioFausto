@@ -4,31 +4,34 @@
 export const experiences = [
   {
     id: 1,
-    title: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
-    company: "Kainet",
-    duration: { en: "(Aug 2025 - Dec 2025 · 6 mos)", es: "(Ago 2025 - Dic 2025 · 6 meses)" },
+    title: { en: "DevOps Blockchain Engineer", es: "DevOps Blockchain Engineer" },
+    company: "SEED Latam",
+    duration: { en: "(Aug 2025 - Jan 2026 · 6 mos)", es: "(Ago 2025 - Ene 2026 · 6 meses)" },
     startDate: "2025-08-01",
-    endDate: "2025-12-31",
+    endDate: "2026-01-31",
     description: {
-      en: "Full stack development with Laravel and Angular for a production web platform including administrative modules and user management. Implementation of integrations with external services (RENAPER, NOSIS, ARCA and others).",
-      es: "Desarrollo full stack con laravel y angular de plataforma web productiva incluyendo módulos administrativos y gestión de usuarios. Implementación de integraciones con servicios externos (RENAPER, NOSIS, ARCA y otros)."
+      en: "Operation and maintenance of validator nodes in blockchain networks (Ethereum and Aztec testnet). Infrastructure management on VPS servers configured from scratch (hardening, secure access via SSH, VPN, and encrypted tunnels). Developed automations and alert systems using Python bots integrated with Discord and Telegram. Implemented monitoring and observability systems using Prometheus and Grafana.",
+      es: "Operación y mantenimiento de nodos validadores en redes blockchain (Ethereum y Aztec testnet). Gestión de infraestructura sobre servidores VPS configurados desde cero (hardening, acceso seguro mediante SSH, VPN y túneles cifrados). Desarrollé automatizaciones y sistemas de alertas mediante bots en Python integrados con Discord y Telegram. Implementé sistemas de monitoreo y observabilidad utilizando Prometheus y Grafana."
     },
     tools: [
-      "Laravel",
-      "Angular",
-      "PHP",
-      "TypeScript",
-      "Git",
-      "APIs",
-      "MySQL",
-      "PostgreSQL"
+      "Blockchain",
+      "Ethereum",
+      "Aztec",
+      "VPS",
+      "SSH",
+      "VPN",
+      "Python",
+      "Discord API",
+      "Telegram API",
+      "Prometheus",
+      "Grafana"
     ]
   },
   {
     id: 2,
-    title: { en: "DevOps Support Analyst", es: "Analista DevOps Support" },
+    title: { en: "DevOps Support Analyst", es: "DevOps Support Analyst" },
     company: "LB Finanzas",
-    duration: { en: "(Jun 2024 - Aug 2025 · 1 yr 3 mos)", es: "(Jun 2024 - Ago 2025 · 1 año 3 meses)" },
+    duration: { en: "(Jun 2024 - Aug 2025 · 1 yr 3 mos)", es: "(Jun 2024 – Ago 2025 · 1 año 3 meses)" },
     startDate: "2024-06-01",
     endDate: "2025-08-31",
     description: {
@@ -50,7 +53,7 @@ export const experiences = [
     id: 3,
     title: { en: "DevOps Engineer", es: "DevOps Engineer" },
     company: "Chatealo",
-    duration: { en: "(Jul 2023 - Jun 2024 · 1 yr)", es: "(Jul 2023 - Jun 2024 · 1 año)" },
+    duration: { en: "(Jul 2023 - Jun 2024 · 1 yr)", es: "(Jul 2023 – Jun 2024 · 1 año)" },
     startDate: "2023-07-01",
     endDate: "2024-06-30",
     description: {
