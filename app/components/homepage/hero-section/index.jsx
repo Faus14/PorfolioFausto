@@ -1,172 +1,146 @@
-// @flow strict
 "use client";
 
 import { personalData } from "@/utils/data/personal-data";
 import { useTranslation } from "@/hooks/useTranslation";
-import Link from "next/link";
-import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { MdDownload } from "react-icons/md";
-import { RiContactsFill } from "react-icons/ri";
-import { FaArrowDown } from "react-icons/fa";
+import { FiArrowRight, FiArrowUpRight, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
-function HeroSection() {
-  const { t, language } = useTranslation();
+const socialLinks = [
+  { label: "GitHub", href: personalData.github, icon: FiGithub, external: true },
+  { label: "LinkedIn", href: personalData.linkedIn, icon: FiLinkedin, external: true },
+  { label: "Email", href: `mailto:${personalData.email}`, icon: FiMail },
+];
 
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
+// Small YAML-styled card with verified facts only
+const FOCUS = ["infrastructure", "automation", "cloud", "observability"];
+
+function ProfileCard() {
+  const rows = [
+    ["name", `"${personalData.name}"`],
+    ["role", `"${personalData.designation}"`],
+    ["current", `"${personalData.current.role} @ ${personalData.current.company}"`],
+    ["teaching", `"${personalData.teaching}"`],
+    ["location", `"${personalData.address}"`],
+  ];
 
   return (
-    <section 
-      className="relative flex flex-col items-center justify-start sm:justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-4 sm:py-16 lg:py-20 sm:min-h-screen overflow-hidden bg-[#0d1224]"
-      aria-labelledby="hero-heading"
+    <div
+      className="animate-fade-up rounded-2xl border border-line bg-surface/70 shadow-[0_24px_80px_-32px_rgba(22,242,179,0.18)] [animation-delay:250ms]"
+      aria-hidden="true"
     >
-
-      <div className="relative z-10 w-full flex flex-col items-center justify-start sm:justify-center max-w-7xl mx-auto">
-        <div className="max-w-5xl flex flex-col items-center justify-center text-center space-y-6 sm:space-y-12 lg:space-y-16">
-          
-          {/* Main Heading */}
-          <div className="space-y-4 sm:space-y-6">
-            <div className="inline-block">
-              <span className="inline-block bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent font-semibold text-sm sm:text-base lg:text-lg tracking-wider uppercase opacity-90">
-                {language === 'es' ? 'Bienvenido a mi portafolio' : 'Welcome to my portfolio'}
+      <div className="flex items-center justify-between border-b border-line px-4 py-3">
+        <span className="font-mono text-xs text-ink-muted">~/profile.yaml</span>
+        <span className="rounded border border-line px-1.5 py-0.5 font-mono text-[10px] uppercase text-ink-faint">
+          yaml
+        </span>
+      </div>
+      <pre className="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-7 xl:text-[13px]">
+        <code>
+          {rows.map(([key, value], i) => (
+            <div key={key} className="flex">
+              <span className="w-6 shrink-0 select-none text-right text-ink-faint/60">{i + 1}</span>
+              <span className="pl-4">
+                <span className="text-violet-soft">{key}</span>
+                <span className="text-ink-faint">: </span>
+                <span className="text-accent">{value}</span>
               </span>
             </div>
-            
-            <h1 
-              id="hero-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight sm:leading-tight md:leading-tight lg:leading-tight text-white"
-            >
-              {language === 'es' ? 'Hola, soy' : t('greeting')} {' '}
-              <span className="inline-block bg-gradient-to-r from-pink-500 via-pink-400 to-pink-600 bg-clip-text text-transparent animate-gradient-x">
-                {personalData.name}
+          ))}
+          <div className="flex">
+            <span className="w-6 shrink-0 select-none text-right text-ink-faint/60">{rows.length + 1}</span>
+            <span className="pl-4">
+              <span className="text-violet-soft">focus</span>
+              <span className="text-ink-faint">:</span>
+            </span>
+          </div>
+          {FOCUS.map((item, i) => (
+            <div key={item} className="flex">
+              <span className="w-6 shrink-0 select-none text-right text-ink-faint/60">{rows.length + 2 + i}</span>
+              <span className="pl-8">
+                <span className="text-ink-faint">- </span>
+                <span className="text-ink">{item}</span>
               </span>
-              <br className="hidden sm:block" />
-              <span className="block mt-2 sm:mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
-                {language === 'es' 
-                  ? 'Ingeniero en Sistemas' 
-                  : 'Systems Engineer'
-                }
-              </span>
-            </h1>
+            </div>
+          ))}
+        </code>
+      </pre>
+    </div>
+  );
+}
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              <span className="inline-block bg-gradient-to-r from-[#16f2b3] via-[#00d4aa] to-[#16f2b3] bg-clip-text text-transparent font-medium">
-                {language === 'es' 
-                  ? 'Apasionado por la infraestructura de TI y el desarrollo de software'
-                  : 'Passionate about IT infrastructure and software development'
-                }
-              </span>
-            </p>
+function HeroSection() {
+  const { t, l } = useTranslation();
+
+  return (
+    <section className="relative isolate overflow-hidden pb-20 pt-32 sm:pb-24 sm:pt-40 lg:pb-32 lg:pt-44" aria-labelledby="hero-heading">
+      <div className="bg-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute -top-40 left-[-10%] -z-10 h-[520px] w-[720px] rounded-full bg-accent/[0.07] blur-[120px]"
+        aria-hidden="true"
+      />
+
+      <div className="container-page grid items-center gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+        <div>
+          <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] py-1 pl-2 pr-3 text-xs text-ink-muted">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="absolute inset-0 rounded-full bg-accent/40 blur-[3px]" />
+              <span className="relative h-2 w-2 rounded-full bg-accent" />
+            </span>
+            {t("currentlyAt")} {personalData.current.role} {t("at")}{" "}
+            <span className="text-white">{personalData.current.company}</span>
+          </p>
+
+          <h1
+            id="hero-heading"
+            className="animate-fade-up mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-6xl lg:text-7xl"
+          >
+            {personalData.name}
+          </h1>
+
+          <p className="animate-fade-up mt-4 text-lg font-medium tracking-tight text-ink sm:text-xl [animation-delay:120ms]">
+            {personalData.roles[0]}
+            <span className="mx-2 text-accent" aria-hidden="true">·</span>
+            <span className="sr-only"> and </span>
+            {personalData.roles[1]}
+          </p>
+
+          <p className="animate-fade-up mt-6 max-w-xl text-pretty text-base leading-relaxed text-ink-muted sm:text-[17px] [animation-delay:180ms]">
+            {l(personalData.tagline)}
+          </p>
+
+          <div className="animate-fade-up mt-9 flex flex-wrap items-center gap-3 [animation-delay:240ms]">
+            <a href="#contact" className="btn-primary group">
+              {t("getInTouch")}
+              <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+            </a>
+            <a href={personalData.resume} target="_blank" rel="noopener noreferrer" className="btn-secondary group">
+              {t("resume")}
+              <FiArrowUpRight
+                className="text-ink-faint transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
+                aria-hidden="true"
+              />
+            </a>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-6 sm:gap-8 justify-center">
-            <Link
-              href={personalData.github}
-              target='_blank'
-              className="group relative p-3 sm:p-4"
-              aria-label={`Visit ${personalData.name}'s GitHub profile`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-              <div className="relative bg-[#0d1224] p-2 sm:p-3 rounded-full border border-pink-500/30 group-hover:border-pink-500/60 transition-all duration-300 group-hover:scale-110">
-                <BsGithub className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-pink-500 group-hover:text-white transition-colors duration-300" />
-              </div>
-            </Link>
-            
-            <Link
-              href={personalData.linkedIn}
-              target='_blank'
-              className="group relative p-3 sm:p-4"
-              aria-label={`Visit ${personalData.name}'s LinkedIn profile`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-              <div className="relative bg-[#0d1224] p-2 sm:p-3 rounded-full border border-pink-500/30 group-hover:border-pink-500/60 transition-all duration-300 group-hover:scale-110">
-                <BsLinkedin className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-pink-500 group-hover:text-white transition-colors duration-300" />
-              </div>
-            </Link>
-          </div>
+          <ul className="animate-fade-up mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 [animation-delay:300ms]">
+            {socialLinks.map(({ label, href, icon: Icon, external }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="group inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-white"
+                >
+                  <Icon className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" aria-hidden="true" />
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Call-to-Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center w-full max-w-md sm:max-w-none">
-            <Link 
-              href="#contact" 
-              className="group relative w-full sm:w-auto"
-              aria-label="Navigate to contact section"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 rounded-full blur-sm opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <button className="relative w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-[#0d1224] rounded-full border border-transparent text-center text-sm sm:text-base lg:text-lg font-semibold uppercase tracking-wider text-white transition-all duration-300 ease-out flex items-center justify-center gap-2 group-hover:gap-4 group-hover:scale-105 group-hover:shadow-2xl">
-                <span>{language === 'es' ? 'Contáctame' : 'Contact me'}</span>
-                <RiContactsFill className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12" />
-              </button>
-            </Link>
-
-            <Link 
-              href={personalData.resume}
-              target="_blank"
-              className="group w-full sm:w-auto flex items-center justify-center gap-2 group-hover:gap-4 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 text-center text-sm sm:text-base lg:text-lg font-semibold uppercase tracking-wider text-white transition-all duration-300 ease-out hover:shadow-2xl hover:scale-105 hover:from-violet-600 hover:to-pink-500"
-              aria-label="Download resume/CV"
-            >
-              <span>{language === 'es' ? 'Descargar CV' : 'Get Resume'}</span>
-              <MdDownload className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-y-1" />
-            </Link>
-          </div>
-
+        <div className="hidden md:block">
+          <ProfileCard />
         </div>
       </div>
-
-      {/* Custom animations */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% {
-            background-size: 200% 200%;
-            background-position: left center;
-          }
-          50% {
-            background-size: 200% 200%;
-            background-position: right center;
-          }
-        }
-        
-        .animate-fadeInUp {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .animate-gradient-x {
-          animation: gradient-x 3s ease infinite;
-        }
-        
-        .animation-delay-300 {
-          animation-delay: 0.3s;
-        }
-        
-        .animation-delay-600 {
-          animation-delay: 0.6s;
-        }
-        
-        .animation-delay-900 {
-          animation-delay: 0.9s;
-        }
-        
-        .animation-delay-1200 {
-          animation-delay: 1.2s;
-        }
-        
-        .animation-delay-1500 {
-          animation-delay: 1.5s;
-        }
-      `}</style>
     </section>
   );
 }

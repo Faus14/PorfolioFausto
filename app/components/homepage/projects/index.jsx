@@ -1,416 +1,258 @@
-// @flow strict 
-'use client';
+"use client";
 
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { FiArrowUpRight, FiGithub, FiImage, FiMaximize2, FiX } from "react-icons/fi";
 import { projectsPost } from "@/utils/data/projectsPost";
 import { useTranslation } from "@/hooks/useTranslation";
-import Link from "next/link";
-import {
-  FaCode,
-  FaDumbbell,
-  FaTwitter,
-  FaPlane,
-  FaStore,
-  FaRocket,
-  FaMobile,
-  FaDesktop,
-  FaDatabase,
-  FaCloud,
-  FaShieldAlt,
-  FaUniversity,
-  FaCube,
-  FaBriefcase,
-  FaTimes
-} from "react-icons/fa";
-import { FiExternalLink, FiGithub, FiEye, FiFilter, FiMaximize2, FiX } from "react-icons/fi";
-import { useState, useMemo, useEffect } from "react";
+import { formatMonth, yearOf } from "@/utils/format";
+import SectionHeader from "../../helper/section-header";
 
-function Projects() {
-  const { t, language } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState('products');
-  const [visibleItems, setVisibleItems] = useState(6);
-  const [expandedIds, setExpandedIds] = useState(new Set());
-  const [isMounted, setIsMounted] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+const CATEGORY_KEY = {
+  products: "projectsProducts",
+  blockchain: "projectsBlockchain",
+  academic: "projectsAcademic",
+};
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Handle Esc key to close modal
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') setSelectedImage(null);
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
-
-  // Lock scroll when modal is open
-  useEffect(() => {
-    if (selectedImage) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [selectedImage]);
-
-  const categories = [
-    { id: 'products', label: t('projectsProducts'), icon: <FaBriefcase size={16} /> },
-    { id: 'blockchain', label: t('projectsBlockchain'), icon: <FaCube size={16} /> },
-    { id: 'academic', label: t('projectsAcademic'), icon: <FaUniversity size={16} /> },
-  ];
-
-  const getProjectIcon = (id) => {
-    const iconMap = {
-      1: <FaCode size={28} className="text-blue-400" />,
-      2: <FaDumbbell size={28} className="text-orange-400" />,
-      3: <FaTwitter size={28} className="text-cyan-400" />,
-      4: <FaPlane size={28} className="text-green-400" />,
-      5: <FaStore size={28} className="text-purple-400" />,
-      6: <FaRocket size={28} className="text-red-400" />,
-      7: <FaShieldAlt size={28} className="text-blue-500" />,
-      8: <FaMobile size={28} className="text-pink-400" />,
-      9: <FaDesktop size={28} className="text-indigo-400" />,
-      10: <FaDatabase size={28} className="text-yellow-400" />,
-      11: <FaCloud size={28} className="text-teal-400" />
-    };
-    return iconMap[id] || <FaCode size={28} className="text-gray-400" />;
-  };
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === 'all') return projectsPost;
-    return projectsPost.filter(project => project.category === activeCategory);
-  }, [activeCategory]);
-
-  const displayedProjects = useMemo(() => {
-    return filteredProjects.slice(0, visibleItems);
-  }, [filteredProjects, visibleItems]);
-
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId);
-    setVisibleItems(6); // Reset visible items when switching tabs
-    setExpandedIds(new Set()); // Reset expanded state
-  };
-
-  const handleLoadMore = () => {
-    setVisibleItems(prev => Math.min(prev + 3, filteredProjects.length));
-  };
-
-  const toggleExpanded = (id) => {
-    setExpandedIds(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  };
-
-  if (!isMounted) return null;
+function ProjectLinks({ project, t, l, compact = false }) {
+  const base = compact
+    ? "inline-flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+    : "group/link inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-white";
+  const demoText = project.demoLabel === "prototype" ? t("viewPrototype") : t("visitSite");
 
   return (
-    <section
-      id="projects"
-      className="relative z-10 border-t my-12 lg:my-20 border-[#25213b]/30 scroll-mt-24"
-    >
-      {/* Section Header */}
-      <div className="flex justify-center my-8 lg:my-12 px-4">
-        <div className="flex items-center">
-          <span className="w-16 sm:w-24 h-[2px] bg-gradient-to-r from-[#1a1443] to-[#16f2b3]"></span>
-          <span
-            className="bg-gradient-to-r from-[#1a1443] to-[#2d1b69] w-fit text-white p-3 px-6 text-lg sm:text-xl lg:text-2xl rounded-xl font-semibold shadow-lg mx-4"
-          >
-            {t('projectsTitle')}
-          </span>
-          <span className="w-16 sm:w-24 h-[2px] bg-gradient-to-l from-[#1a1443] to-[#16f2b3]"></span>
-        </div>
-      </div>
-
-      {/* Categories Tabs */}
-      <div className="container mx-auto px-4 mb-8 sm:mb-12">
-        <div className="flex justify-center">
-          <div className="flex items-center gap-1 p-1 bg-[#1a1443]/50 border border-[#464c6a]/30 rounded-2xl overflow-x-auto no-scrollbar max-w-full">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap
-                  ${activeCategory === cat.id
-                    ? 'bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] text-[#0d1224] shadow-lg shadow-[#16f2b3]/20'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
-              >
-                {cat.icon}
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Projects Grid */}
-      <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        {/* Hint para móvil */}
-        <div className="md:hidden flex items-center justify-center gap-2 mb-6 text-xs text-gray-400 animate-pulse">
-          <span>{language === 'es' ? '← Desliza para ver más proyectos →' : '← Swipe to see more projects →'}</span>
-        </div>
-
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory md:snap-none scroll-smooth">
-          {displayedProjects.map((post) => {
-            const isExpanded = expandedIds.has(post.id);
-            const title = typeof post.title === 'object' ? post.title[language] : post.title;
-            const excerpt = typeof post.excerpt === 'object' ? post.excerpt[language] : post.excerpt;
-            const date = typeof post.date === 'object' ? post.date[language] : post.date;
-
-            return (
-              <article
-                key={`${post.id}-${activeCategory}`}
-                className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-auto snap-center group relative bg-gradient-to-br from-[#1a1443]/90 to-[#0d1224]/90 rounded-2xl border border-[#464c6a]/30 hover:border-[#16f2b3]/40 transition-all duration-500 hover:shadow-2xl hover:shadow-[#16f2b3]/10 hover:-translate-y-2 overflow-hidden flex flex-col"
-              >
-                {/* Header con fecha y badge de categoría (solo en 'All') */}
-                <div className="flex justify-between items-center p-5 pb-2">
-                  <span className="text-[10px] uppercase tracking-wider text-[#16f2b3] font-bold px-2.5 py-1 bg-[#16f2b3]/10 rounded-lg">
-                    {date}
-                  </span>
-                </div>
-
-                {/* Visual Area */}
-                <div className="relative w-full h-48 sm:h-56 mb-4 px-5">
-                  <div
-                    onClick={() => post.image && setSelectedImage({ src: post.image, title })}
-                    className={`w-full h-full rounded-xl bg-[#0d1224] border border-[#464c6a]/20 group-hover:border-[#16f2b3]/30 transition-all duration-500 flex items-center justify-center overflow-hidden ${post.image ? 'cursor-zoom-in' : ''}`}
-                  >
-                    {post.image ? (
-                      <div className="relative w-full h-full overflow-hidden">
-                        <img
-                          src={post.image}
-                          alt={title}
-                          loading="eager"
-                          className="w-full h-full object-cover object-top group-hover:scale-110 group-hover:brightness-110 transition-all duration-700"
-                        />
-                        {/* Expand Icon Hover */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <div className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <FiMaximize2 className="text-white" size={24} />
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
-                        {getProjectIcon(post.id)}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="px-5 pb-6 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl font-bold mb-3 text-white group-hover:text-[#16f2b3] transition-colors duration-300 line-clamp-2">
-                    {title}
-                  </h3>
-
-                  <div className="mb-4 flex-grow">
-                    <p className={`text-sm text-gray-300 leading-relaxed ${!isExpanded ? 'line-clamp-3' : ''}`}>
-                      {excerpt}
-                    </p>
-                    {excerpt.length > 130 && (
-                      <button
-                        onClick={() => toggleExpanded(post.id)}
-                        className="text-[11px] text-[#16f2b3] hover:text-[#00d4aa] mt-2 font-semibold flex items-center gap-1"
-                      >
-                        {isExpanded
-                          ? (language === "es" ? "[-] Ver menos" : "[-] Show less")
-                          : (language === "es" ? "[+] Leer más" : "[+] Read more")
-                        }
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Technologies */}
-                  {post.technologies && post.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {post.technologies.slice(0, 5).map((tech, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] sm:text-[11px] px-2.5 py-1 bg-white/5 rounded-md text-gray-300 border border-white/10 hover:border-[#16f2b3]/30 transition-colors duration-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Buttons */}
-                  <div className="flex gap-3 mt-auto">
-                    {post.demoUrl && post.demoUrl !== '#' && (
-                      <Link
-                        href={post.demoUrl}
-                        target="_blank"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] hover:from-[#00d4aa] hover:to-[#16f2b3] rounded-xl text-xs sm:text-sm font-bold text-[#0d1224] transition-all duration-300 hover:shadow-lg hover:shadow-[#16f2b3]/20"
-                      >
-                        <FiEye size={16} />
-                        {t('liveDemo')}
-                      </Link>
-                    )}
-                    {post.urlGithub && (
-                      <Link
-                        href={post.urlGithub}
-                        target="_blank"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-[#1a1443] hover:bg-[#2d1b69] border border-[#464c6a]/30 rounded-xl text-xs sm:text-sm font-bold text-white transition-all duration-300 hover:shadow-lg"
-                      >
-                        <FiGithub size={16} />
-                        {t('sourceCode')}
-                      </Link>
-                    )}
-                    {!post.urlGithub && (!post.demoUrl || post.demoUrl === '#') && (
-                      <div
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs sm:text-sm font-bold text-gray-500"
-                      >
-                        <FiFilter size={16} />
-                        {language === 'es' ? 'Próximamente' : 'Coming Soon'}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Decorative bottom bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#16f2b3] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </article>
-            );
-          })}
-        </div>
-
-        {/* Empty State */}
-        {displayedProjects.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="p-6 bg-[#1a1443]/50 rounded-full mb-4 border border-[#464c6a]/30">
-              <FiFilter size={40} className="text-gray-500" />
-            </div>
-            <p className="text-gray-400 text-lg">
-              {language === 'es' ? 'No se encontraron proyectos en esta categoría.' : 'No projects found in this category.'}
-            </p>
-          </div>
-        )}
-
-        {/* Load More Button */}
-        {visibleItems < filteredProjects.length && (
-          <div className="flex justify-center mt-12">
-            <button
-              onClick={handleLoadMore}
-              className="group relative px-8 py-3 bg-[#1a1443] overflow-hidden rounded-full transition-all duration-300 hover:shadow-2xl hover:shadow-[#16f2b3]/20"
-            >
-              <div className="absolute inset-0 w-0 bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] transition-all duration-500 ease-out group-hover:w-full opacity-100" />
-              <span className="relative flex items-center gap-2 font-bold text-sm text-white group-hover:text-[#0d1224] transition-colors duration-300">
-                {language === 'es' ? 'Explorar más proyectos' : 'Explore more projects'}
-                <FiExternalLink className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" size={18} />
-              </span>
-            </button>
-          </div>
-        )}
-
-        {/* Projects Counter */}
-        {filteredProjects.length > 0 && (
-          <div className="flex justify-center mt-10">
-            <div className="px-4 py-1.5 bg-[#1a1443]/30 border border-[#464c6a]/20 rounded-full">
-              <span className="text-[11px] uppercase tracking-widest text-[#16f2b3] font-bold">
-                {language === 'es'
-                  ? `${visibleItems > filteredProjects.length ? filteredProjects.length : visibleItems} / ${filteredProjects.length} Proyectos`
-                  : `${visibleItems > filteredProjects.length ? filteredProjects.length : visibleItems} / ${filteredProjects.length} Projects`
-                }
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Image Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-300"
-          onClick={() => setSelectedImage(null)}
+    <>
+      {project.demoUrl && (
+        <a
+          href={project.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={base}
+          aria-label={compact ? `${demoText}: ${l(project.title)}` : undefined}
+          title={compact ? demoText : undefined}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-[#0d1224]/95 backdrop-blur-xl" />
+          {!compact && demoText}
+          <FiArrowUpRight
+            className={compact ? "h-4 w-4" : "h-4 w-4 transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"}
+            aria-hidden="true"
+          />
+        </a>
+      )}
+      {project.urlGithub && (
+        <a
+          href={project.urlGithub}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={base}
+          aria-label={compact ? `${t("sourceCode")} (GitHub): ${l(project.title)}` : undefined}
+          title={compact ? t("sourceCode") : undefined}
+        >
+          <FiGithub className="h-4 w-4" aria-hidden="true" />
+          {!compact && t("sourceCode")}
+        </a>
+      )}
+    </>
+  );
+}
 
-          {/* Modal Content */}
-          <div
-            className="relative max-w-6xl w-full max-h-full flex flex-col items-center justify-center animate-in zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header info */}
-            <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-20 pointer-events-none">
-              <h3 className="text-white font-bold text-lg sm:text-xl md:text-2xl drop-shadow-lg opacity-0 animate-in fade-in slide-in-from-top-4 duration-500 delay-150 fill-mode-forwards">
-                {selectedImage.title}
-              </h3>
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="p-2 sm:p-3 bg-white/10 hover:bg-[#16f2b3] text-white hover:text-[#0d1224] rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 pointer-events-auto shadow-2xl"
+function FeaturedCard({ project, onPreview, t, l, language }) {
+  const title = l(project.title);
+  return (
+    <article className="card reveal group flex flex-col overflow-hidden transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong">
+      <button
+        type="button"
+        onClick={() => onPreview(project)}
+        className="relative block aspect-[16/9] w-full overflow-hidden border-b border-line bg-canvas text-left"
+        aria-label={`${t("enlargeScreenshot")}: ${title}`}
+      >
+        <Image
+          src={project.image}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
+          className="object-cover object-left-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+        />
+        <span className="absolute inset-0 bg-gradient-to-t from-canvas/60 via-transparent to-transparent" aria-hidden="true" />
+        <span
+          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/15 bg-canvas/70 text-ink opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100"
+          aria-hidden="true"
+        >
+          <FiMaximize2 className="h-3.5 w-3.5" />
+        </span>
+      </button>
+
+      <div className="flex flex-1 flex-col p-6">
+        <p className="font-mono text-xs text-ink-faint">
+          <span className="text-ink-muted">{t(CATEGORY_KEY[project.category])}</span>
+          <span className="mx-2" aria-hidden="true">/</span>
+          {formatMonth(project.date, language)}
+        </p>
+        <h3 className="mt-3 text-xl font-semibold tracking-tight text-white">
+          {title}
+          {project.subtitle && (
+            <span className="font-normal text-ink-muted"> — {l(project.subtitle)}</span>
+          )}
+        </h3>
+        <p className="mt-3 flex-1 text-pretty text-sm leading-relaxed text-ink-muted">{l(project.excerpt)}</p>
+
+        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Stack">
+          {project.technologies.map((tech) => (
+            <li key={l(tech)} className="chip">
+              {l(tech)}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex items-center gap-5 border-t border-line pt-4">
+          <ProjectLinks project={project} t={t} l={l} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function Projects() {
+  const { t, l, language } = useTranslation();
+  const [filter, setFilter] = useState("all");
+  const [preview, setPreview] = useState(null);
+  const dialogRef = useRef(null);
+
+  const featured = useMemo(() => projectsPost.filter((p) => p.featured), []);
+  const archive = useMemo(() => projectsPost.filter((p) => !p.featured), []);
+  const archiveCategories = useMemo(
+    () => ["all", ...new Set(archive.map((p) => p.category))],
+    [archive]
+  );
+  const visibleArchive = filter === "all" ? archive : archive.filter((p) => p.category === filter);
+
+  // Open after the content renders so autoFocus lands on the close button
+  useEffect(() => {
+    if (preview && !dialogRef.current?.open) dialogRef.current?.showModal();
+  }, [preview]);
+
+  const openPreview = (project) => setPreview(project);
+  const closePreview = () => dialogRef.current?.close();
+
+  return (
+    <section id="projects" className="section border-t border-line" aria-labelledby="projects-heading">
+      <div className="container-page">
+        <SectionHeader
+          index="05"
+          eyebrow={t("projectsEyebrow")}
+          title={t("projectsTitle")}
+          description={t("projectsDescription")}
+          id="projects-heading"
+        />
+
+        <div className="grid gap-5 md:grid-cols-2">
+          {featured.map((project) => (
+            <FeaturedCard
+              key={project.id}
+              project={project}
+              onPreview={openPreview}
+              t={t}
+              l={l}
+              language={language}
+            />
+          ))}
+        </div>
+
+        {/* Archive */}
+        <div className="reveal mt-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h3 className="text-xl font-semibold tracking-tight text-white">{t("moreProjects")}</h3>
+            <div role="group" aria-label={t("moreProjects")} className="flex gap-1 rounded-lg border border-line p-1">
+              {archiveCategories.map((cat) => {
+                const count = cat === "all" ? archive.length : archive.filter((p) => p.category === cat).length;
+                const active = filter === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setFilter(cat)}
+                    className={`rounded-md px-3 py-1.5 text-xs transition-colors duration-200 ${
+                      active ? "bg-white/10 text-white" : "text-ink-muted hover:text-white"
+                    }`}
+                  >
+                    {cat === "all" ? t("all") : t(CATEGORY_KEY[cat])}
+                    <span className="ml-1.5 font-mono text-[10px] text-ink-faint">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <ul className="mt-6 divide-y divide-line border-y border-line">
+            {visibleArchive.map((project) => (
+              <li
+                key={project.id}
+                className="group grid grid-cols-[3rem_1fr] gap-x-4 gap-y-3 py-5 transition-colors sm:grid-cols-[4rem_1fr_auto] sm:items-start"
               >
-                <FiX size={24} />
+                <span className="pt-0.5 font-mono text-xs text-ink-faint">{yearOf(project.date)}</span>
+
+                <div className="min-w-0">
+                  <p className="font-medium text-ink transition-colors group-hover:text-white">
+                    {l(project.title)}
+                    {project.subtitle && <span className="font-normal text-ink-muted"> — {l(project.subtitle)}</span>}
+                  </p>
+                  <p className="mt-1 max-w-2xl text-pretty text-sm leading-relaxed text-ink-muted">
+                    {l(project.excerpt)}
+                  </p>
+                  <p className="mt-2 font-mono text-[11px] text-ink-faint">{project.technologies.map(l).join(" · ")}</p>
+                </div>
+
+                <div className="col-start-2 flex items-center gap-2 sm:col-start-auto">
+                  {project.image && (
+                    <button
+                      type="button"
+                      onClick={() => openPreview(project)}
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+                      aria-label={`${t("preview")}: ${l(project.title)}`}
+                      title={t("preview")}
+                    >
+                      <FiImage className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  )}
+                  <ProjectLinks project={project} t={t} l={l} compact />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Screenshot preview */}
+      <dialog
+        ref={dialogRef}
+        onClose={() => setPreview(null)}
+        onClick={(e) => e.target === dialogRef.current && closePreview()}
+        className="m-auto w-[min(1100px,calc(100vw-2rem))] max-w-none rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-canvas/85 backdrop:backdrop-blur-sm open:animate-fade-in"
+        aria-label={preview ? l(preview.title) : t("preview")}
+      >
+        {preview && (
+          <div>
+            <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-3">
+              <p className="truncate text-sm font-medium text-white">{l(preview.title)}</p>
+              <button
+                type="button"
+                onClick={closePreview}
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-line text-ink-muted transition-colors hover:text-white"
+                aria-label={t("closePreview")}
+                autoFocus
+              >
+                <FiX className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
-
-            {/* Main Image */}
-            <div className="relative w-full bg-[#1a1443]/50 rounded-2xl border border-[#464c6a]/30 overflow-hidden shadow-2xl overflow-y-auto no-scrollbar max-h-[85vh]">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="w-full h-auto block"
-              />
+            <div className="max-h-[80vh] overflow-y-auto">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={preview.image} alt={l(preview.title)} className="block h-auto w-full" />
             </div>
-
-            {/* Hint to close */}
-            <p className="mt-4 text-gray-400 text-xs sm:text-sm font-medium opacity-0 animate-in fade-in duration-500 delay-300 fill-mode-forwards">
-              {language === 'es' ? 'Presioná ESC o hacé click fuera para cerrar' : 'Press ESC or click outside to close'}
-            </p>
           </div>
-        </div>
-      )}
-
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        /* Custom scrollbar for mobile horizontal scroll */
-        @media (max-width: 767px) {
-          .overflow-x-auto::-webkit-scrollbar {
-            height: 4px;
-          }
-
-          .overflow-x-auto::-webkit-scrollbar-track {
-            background: rgba(26, 20, 67, 0.3);
-            border-radius: 10px;
-          }
-
-          .overflow-x-auto::-webkit-scrollbar-thumb {
-            background: linear-gradient(to right, #16f2b3, transparent);
-            border-radius: 10px;
-          }
-        }
-      `}</style>
+        )}
+      </dialog>
     </section>
   );
-};
+}
 
 export default Projects;

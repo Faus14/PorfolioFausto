@@ -1,250 +1,175 @@
+// `featured` projects render as large cards; the rest go into the compact archive list.
+// category: "products" | "blockchain" | "academic"
 export const projectsPost = [
   {
-    id: 0,
-    title: {
-      en: "MatchPointGo",
-      es: "MatchPointGo"
-    },
+    id: "matchpointgo",
+    title: { en: "MatchPointGo", es: "MatchPointGo" },
     category: "products",
-    image: "/proyectos/Matchpoint.png",
-    urlGithub: "",
-    link: "/projects/matchpoint-go",
-    date: {
-      en: "March 2026",
-      es: "Marzo 2026"
-    },
+    featured: true,
+    image: "/proyectos/matchpoint.webp",
+    date: "2026-03",
     excerpt: {
-      en: "Real-time sports management SaaS. Find available courts, book in seconds, and play—no calls, no waiting. Manage bookings 24/7 with automated confirmations and easy cancellations from any device.",
-      es: "Plataforma SaaS para gestión de canchas con disponibilidad en tiempo real. Encontrá una cancha libre, reservá en segundos y aparecé a jugar. Sin llamar a nadie, sin esperas. Gestión de turnos 24/7 con confirmación al instante."
+      en: "Court-booking SaaS with real-time availability. Players find a free court and book in seconds; clubs manage bookings 24/7 with instant confirmations.",
+      es: "SaaS de reserva de canchas con disponibilidad en tiempo real. Los jugadores encuentran una cancha libre y reservan en segundos; los clubes gestionan turnos 24/7 con confirmación al instante.",
     },
-    technologies: ["Next.js", "Supabase", "TailwindCSS", "Mercado Pago", "SaaS", "Real-time"],
-    demoUrl: "https://matchpointgo.com"
+    technologies: ["Next.js", "Supabase", "Tailwind CSS", "Mercado Pago", { en: "Real-time", es: "Tiempo real" }],
+    demoUrl: "https://matchpointgo.com",
+    urlGithub: "",
   },
   {
-    id: 1,
-    title: {
-      en: "VetGestiona",
-      es: "VetGestiona"
-    },
+    id: "vetgestiona",
+    title: { en: "VetGestiona", es: "VetGestiona" },
     category: "products",
-    image: "/proyectos/vetgestiona.png",
-    urlGithub: "",
-    link: "/projects/vet-gestiona",
-    date: {
-      en: "January 2026",
-      es: "Enero 2026"
-    },
+    featured: true,
+    image: "/proyectos/vetgestiona.webp",
+    date: "2026-01",
     excerpt: {
-      en: "Complete veterinary clinic management system. Manage patients, schedule appointments, generate invoices, control inventory and automate reminders. All in one simple and professional platform. Used by over 25+ veterinary clinics across Argentina.",
-      es: "Sistema completo de gestión para clínicas veterinarias. Gestiona pacientes, agenda turnos, genera facturas, controla inventario y automatiza recordatorios. Todo en una plataforma simple y profesional. Utilizado por más de 25+ clínicas veterinarias en toda Argentina."
+      en: "Management platform for veterinary clinics: patients, appointments, billing, inventory and automated reminders. Used by 25+ clinics across Argentina.",
+      es: "Plataforma de gestión para clínicas veterinarias: pacientes, turnos, facturación, inventario y recordatorios automáticos. Utilizada por más de 25 clínicas en Argentina.",
     },
-    technologies: ["Web App", "Patient Management", "Billing", "Inventory", "Scheduling"],
-    demoUrl: "https://vetgestiona.com/"
+    technologies: [
+      { en: "Web app", es: "App web" },
+      { en: "Scheduling", es: "Turnos" },
+      { en: "Billing", es: "Facturación" },
+      { en: "Inventory", es: "Inventario" },
+    ],
+    demoUrl: "https://vetgestiona.com/",
+    urlGithub: "",
   },
   {
-    id: 2,
-    title: {
-      en: "Nostromo Guardian - Qubic Token Analytics",
-      es: "Nostromo Guardian - Análisis de Tokens Qubic"
+    id: "buildme",
+    title: { en: "BuildMe", es: "BuildMe" },
+    category: "products",
+    featured: true,
+    image: "/proyectos/mibuildme.webp",
+    date: "2025-11",
+    excerpt: {
+      en: "Turns a CV into a personal portfolio site in minutes using AI, with Google sign-in, custom URLs and a public gallery.",
+      es: "Convierte un CV en un sitio de portfolio personal en minutos usando IA, con login de Google, URLs personalizadas y galería pública.",
     },
+    technologies: ["Next.js", "OpenAI GPT-4o", "Supabase", "Upstash Redis", "AWS S3"],
+    demoUrl: "https://mybuildme.com",
+    urlGithub: "",
+  },
+  {
+    id: "nostromo-guardian",
+    title: { en: "Nostromo Guardian", es: "Nostromo Guardian" },
+    subtitle: { en: "Qubic token analytics", es: "Análisis de tokens Qubic" },
     category: "blockchain",
-    image: "/proyectos/Nostromo.png",
+    featured: true,
+    image: "/proyectos/nostromo.webp",
+    date: "2025-12",
+    excerpt: {
+      en: "Real-time analytics and leaderboards for the Qubic blockchain. Indexes QX trades and holders, computes risk and growth metrics, and sends alerts through webhooks and integrations like Discord, Telegram and Zapier.",
+      es: "Analíticas y rankings en tiempo real para la blockchain Qubic. Indexa operaciones y holders de QX, calcula métricas de riesgo y crecimiento, y envía alertas vía webhooks e integraciones como Discord, Telegram y Zapier.",
+    },
+    technologies: ["Node.js", "TypeScript", "Qubic", "Docker", "GPT-4"],
+    demoUrl: "https://dijon-clear-64681396.figma.site",
+    demoLabel: "prototype",
     urlGithub: "https://github.com/Faus14/NostromoGuardian",
-    link: "/projects/nostromo-guardian",
-    date: {
-      en: "December 2025",
-      es: "Diciembre 2025"
-    },
-    excerpt: {
-      en: "Real-time analytics and leaderboard platform for the Qubic blockchain, tracking top traders, whales, and token metrics to empower communities and gamify on-chain participation. Production-ready with indexes real trades and holders from QX, calculates risk and growth metrics, and provides smart alerts, webhooks, and gamification features. EasyConnect integration enables seamless automation with Make.com, Zapier, n8n, Discord, Telegram and more. Powered by GPT-4 for AI trading insights.",
-      es: "Plataforma de análisis y clasificaciones en tiempo real para el blockchain Qubic, rastreando comerciantes principales, ballenas y métricas de tokens para empoderar comunidades y gamificar la participación en cadena. Listo para producción con indexación de transacciones reales y tenedores de QX, calcula métricas de riesgo y crecimiento, y proporciona alertas inteligentes, webhooks y funciones de gamificación. La integración EasyConnect permite automatización fluida con Make.com, Zapier, n8n, Discord, Telegram y más. Potenciado por GPT-4 para análisis de trading con IA."
-    },
-    technologies: ["Node.js", "TypeScript", "Qubic Blockchain", "GPT-4", "Make.com", "Discord API", "Docker", "Analytics", "Leaderboard"],
-    demoUrl: "https://dijon-clear-64681396.figma.site"
   },
   {
-    id: 4,
-    title: {
-      en: "BuildMe",
-      es: "BuildMe"
-    },
-    category: "products",
-    image: "/proyectos/mibuildme.png",
-    urlGithub: "",
-    link: "/projects/buildme",
-    date: {
-      en: "November 2025",
-      es: "Noviembre 2025"
-    },
-    excerpt: {
-      en: "Create your professional portfolio in minutes. Upload your CV and let AI generate your personal website with Google Auth, custom URLs, and public gallery.",
-      es: "Crea tu portafolio profesional en minutos. Sube tu CV y deja que la IA genere tu sitio web personal con autenticación de Google, URLs personalizadas y galería pública."
-    },
-    technologies: ["Next.js", "OpenAI GPT-4o", "Supabase", "Upstash Redis", "AWS S3", "TailwindCSS", "Netlify"],
-    demoUrl: "https://mybuildme.com"
-  },
-  {
-    id: 5,
-    title: {
-      en: "Roxium DAO Ops - IPFS Service",
-      es: "Roxium DAO Ops - Servicio IPFS"
-    },
+    id: "faro-bot",
+    title: { en: "Faro Bot", es: "Faro Bot" },
+    subtitle: { en: "Ethereum validator monitoring", es: "Monitoreo de validadores Ethereum" },
     category: "blockchain",
-    image: "/proyectos/RoxDao.png",
-    urlGithub: "https://github.com/Faus14/roxium-dao-ops-IPFS",
-    link: "/projects/roxium-ipfs",
-    date: {
-      en: "November 2025",
-      es: "Noviembre 2025"
-    },
+    date: "2025-10",
     excerpt: {
-      en: "Node/TypeScript service for uploading files to IPFS using Helia and registering events on Arkiv. Acts as a decentralized blob store for DAO operations. Supports PDF and image uploads with IPFS CID generation, Storacha pinning integration for stable public URLs, and on-chain event recording.",
-      es: "Servicio Node/TypeScript para subir archivos a IPFS usando Helia y registrar eventos en Arkiv. Actúa como almacenamiento de blobs descentralizado para operaciones DAO. Soporta carga de PDFs e imágenes con generación de CID IPFS, integración de fijación Storacha para URLs públicas estables y registro de eventos en cadena."
+      en: "Telegram bot that monitors Ethereum validator nodes and sends automatic alerts. Supports Geth, Nethermind, Besu, Lighthouse, Prysm, Teku and Nimbus.",
+      es: "Bot de Telegram que monitorea nodos validadores de Ethereum y envía alertas automáticas. Soporta Geth, Nethermind, Besu, Lighthouse, Prysm, Teku y Nimbus.",
     },
-    technologies: ["Node.js", "TypeScript", "IPFS", "Helia", "Arkiv", "Storacha", "Blockchain"],
-    demoUrl: "https://upbeat-port-70496397.figma.site/dashboard"
-  },
-  {
-    id: 6,
-    title: {
-      en: "Faro Bot - Ethereum Validator Monitoring",
-      es: "Faro Bot - Monitoreo de Validadores Ethereum"
-    },
-    category: "blockchain",
+    technologies: ["Python", "Telegram Bot API", "Docker", "Ethereum"],
     urlGithub: "https://github.com/Faus14/faro-bot",
-    link: "/projects/faro-bot",
-    date: {
-      en: "October 2025",
-      es: "Octubre 2025"
-    },
-    excerpt: {
-      en: "Comprehensive Telegram bot for monitoring Ethereum validator nodes with automatic alerts and support for multiple clients (Geth, Nethermind, Besu, Lighthouse, Prysm, Teku, Nimbus).",
-      es: "Bot de Telegram completo para monitorear nodos validadores de Ethereum, con alertas automáticas y soporte para múltiples clientes (Geth, Nethermind, Besu, Lighthouse, Prysm, Teku, Nimbus)."
-    },
-    technologies: ["Python ", "Telegram Bot API", "Docker", "Ethereum", "Blockchain"],
-    demoUrl: "#"
   },
   {
-    id: 7,
-    title: {
-      en: "Supermarket-CRM",
-      es: "CRM-Supermercado"
-    },
-    category: "academic",
-    image: "/proyectos/Super.png",
-    urlGithub: "https://github.com/BrunoMollo/super",
-    link: "/projects/supermarket-crm",
-    date: {
-      en: "February 2025",
-      es: "Febrero 2025"
-    },
+    id: "roxium-ipfs",
+    title: { en: "Roxium DAO Ops", es: "Roxium DAO Ops" },
+    subtitle: { en: "IPFS service", es: "Servicio IPFS" },
+    category: "blockchain",
+    image: "/proyectos/roxdao.webp",
+    date: "2025-11",
     excerpt: {
-      en: "CRM system with Svelte and TypeScript for supermarkets with loyalty program management and AFIP invoicing integration.",
-      es: "Sistema CRM con Svelte y TypeScript para supermercados con gestión de programas de fidelidad e integración de facturación AFIP."
+      en: "Node/TypeScript service that uploads files to IPFS with Helia, pins them through Storacha and records events on Arkiv — a decentralized blob store for DAO operations.",
+      es: "Servicio Node/TypeScript que sube archivos a IPFS con Helia, los fija mediante Storacha y registra eventos en Arkiv: un almacenamiento descentralizado para operaciones de una DAO.",
+    },
+    technologies: ["Node.js", "TypeScript", "IPFS", "Helia", "Arkiv"],
+    demoUrl: "https://upbeat-port-70496397.figma.site/dashboard",
+    demoLabel: "prototype",
+    urlGithub: "https://github.com/Faus14/roxium-dao-ops-IPFS",
+  },
+  {
+    id: "supermarket-crm",
+    title: { en: "Supermarket CRM", es: "CRM Supermercado" },
+    category: "academic",
+    image: "/proyectos/super.webp",
+    date: "2025-02",
+    excerpt: {
+      en: "CRM for supermarkets with loyalty-program management and AFIP invoicing integration.",
+      es: "CRM para supermercados con gestión de programas de fidelización e integración con facturación de AFIP.",
     },
     technologies: ["Svelte", "TypeScript", "Node.js", "Express"],
-    demoUrl: "#"
+    urlGithub: "https://github.com/BrunoMollo/super",
   },
   {
-    id: 8,
-    title: {
-      en: "Crypto Dashboard",
-      es: "Dashboard Crypto"
-    },
+    id: "crypto-dashboard",
+    title: { en: "Crypto Dashboard", es: "Dashboard Crypto" },
     category: "academic",
-    image: "/proyectos/cripto.png",
+    image: "/proyectos/cripto.webp",
+    date: "2024-12",
+    excerpt: {
+      en: "Angular dashboard to track a crypto portfolio and convert holdings to Argentine pesos.",
+      es: "Dashboard en Angular para seguir un portfolio crypto y convertir sus valores a pesos argentinos.",
+    },
+    technologies: ["Angular", "TypeScript", "Node.js", "PostgreSQL"],
     urlGithub: "https://github.com/Faus14/DashboardCrypto",
-    link: "/projects/crypto-dashboard",
-    date: {
-      en: "December 2024",
-      es: "Diciembre 2024"
-    },
-    excerpt: {
-      en: "Dashboard built with Angular to track crypto portfolio performance and convert digital asset values to Argentine pesos.",
-      es: "Dashboard construido con Angular para rastrear el rendimiento del portafolio crypto y convertir valores de activos digitales a pesos argentinos."
-    },
-    technologies: ["Angular", "TypeScript", "Node.js", "Postgres", "REST API"],
-    demoUrl: "#"
   },
   {
-    id: 9,
-    title: {
-      en: "Flight Management",
-      es: "Gestión de Vuelos"
-    },
+    id: "flight-management",
+    title: { en: "Flight Management", es: "Gestión de Vuelos" },
     category: "academic",
-    urlGithub: "https://github.com/Faus14/Trabajo-Practico-Java",
-    link: "/projects/flight-management",
-    date: {
-      en: "December 2023",
-      es: "Diciembre 2023"
-    },
+    date: "2023-12",
     excerpt: {
-      en: "Java enterprise app for managing flight schedules, bookings, crew assignments, and maintenance operations for a regional airline.",
-      es: "Aplicación empresarial en Java para gestionar horarios de vuelos, reservas, asignaciones de tripulación y operaciones de mantenimiento para una aerolínea regional."
+      en: "Java application to manage flight schedules, bookings, crew assignments and maintenance for a regional airline.",
+      es: "Aplicación en Java para gestionar horarios de vuelo, reservas, tripulaciones y mantenimiento de una aerolínea regional.",
     },
     technologies: ["Java", "MySQL", "Docker"],
-    demoUrl: "#"
+    urlGithub: "https://github.com/Faus14/Trabajo-Practico-Java",
   },
   {
-    id: 10,
-    title: {
-      en: "Twitter Clone",
-      es: "Clon de Twitter"
-    },
+    id: "twitter-clone",
+    title: { en: "Twitter Clone", es: "Clon de Twitter" },
     category: "academic",
-    image: "/proyectos/twitter.png",
-    urlGithub: "https://github.com/Faus14/ProyectoFinal_Curso_Python",
-    link: "/projects/twitter-clone",
-    date: {
-      en: "August 2022",
-      es: "Agosto 2022"
-    },
+    image: "/proyectos/twitter.webp",
+    date: "2022-08",
     excerpt: {
-      en: "Social media app built with Python and Django replicating Twitter's core features including posting, following, and real-time notifications.",
-      es: "Aplicación de redes sociales construida con Python y Django que replica las características principales de Twitter incluyendo publicaciones, seguimiento y notificaciones en tiempo real."
+      en: "Django social network replicating Twitter's core features: posts, follows and notifications.",
+      es: "Red social en Django que replica las funciones principales de Twitter: publicaciones, seguidores y notificaciones.",
     },
     technologies: ["Python", "Django", "PostgreSQL", "JavaScript"],
-    demoUrl: "#"
+    urlGithub: "https://github.com/Faus14/ProyectoFinal_Curso_Python",
   },
   {
-    id: 11,
-    title: {
-      en: "UTN Professor Consultations",
-      es: "Consultas de Profesores UTN"
-    },
+    id: "utn-consultations",
+    title: { en: "UTN Professor Consultations", es: "Consultas de Profesores UTN" },
     category: "academic",
+    date: "2022-03",
+    excerpt: {
+      en: "PHP web app to schedule consultations between students and professors.",
+      es: "Aplicación web en PHP para coordinar consultas entre estudiantes y profesores.",
+    },
+    technologies: ["PHP", "MySQL", "Bootstrap"],
     urlGithub: "https://github.com/Faus14/EntornosGraficos_TpFinal",
-    link: "/projects/utn-professor-consultations",
-    date: {
-      en: "March 2022",
-      es: "Marzo 2022"
-    },
-    excerpt: {
-      en: "Web app in PHP for managing faculty consultations with an intuitive interface for scheduling appointments between students and professors.",
-      es: "Aplicación web en PHP para gestionar consultas facultativas con una interfaz intuitiva para programar citas entre estudiantes y profesores."
-    },
-    technologies: ["PHP", "MySQL", "HTML", "CSS", "Bootstrap"],
-    demoUrl: "#"
   },
   {
-    id: 12,
-    title: {
-      en: "Todo Gym",
-      es: "Todo Gym"
-    },
+    id: "todo-gym",
+    title: { en: "Todo Gym", es: "Todo Gym" },
     category: "academic",
-    urlGithub: "https://github.com/Faus14/TodoGYM_Curso_HTML_CSS",
-    link: "/projects/todo-gym",
-    date: {
-      en: "December 2021",
-      es: "Diciembre 2021"
-    },
+    date: "2021-12",
     excerpt: {
-      en: "Responsive website with HTML and CSS providing information about gym services, workout plans, and nutrition advice for fitness enthusiasts.",
-      es: "Sitio web responsive con HTML y CSS que proporciona información sobre servicios de gimnasio, planes de entrenamiento y consejos nutricionales para entusiastas del fitness."
+      en: "Responsive website for a gym: services, workout plans and nutrition advice.",
+      es: "Sitio web responsive para un gimnasio: servicios, planes de entrenamiento y consejos de nutrición.",
     },
-    technologies: ["HTML5", "CSS3", "JavaScript"],
-    demoUrl: "#"
-  }
+    technologies: ["HTML", "CSS", "JavaScript"],
+    urlGithub: "https://github.com/Faus14/TodoGYM_Curso_HTML_CSS",
+  },
 ];

@@ -4,103 +4,165 @@ export const translations = {
     about: "About",
     experience: "Experience",
     skills: "Skills",
-    projects: "Projects",
     education: "Education",
-    blog: "Blog",
+    projects: "Projects",
     contact: "Contact",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    switchLanguage: "Cambiar a español",
 
-    // Hero Section
-    greeting: "Hello, I'm",
-    role: "Full Stack Developer",
-    heroDescription: "I love to work with new technologies and build amazing applications",
+    // Hero
+    currentlyAt: "Currently",
+    at: "at",
+    getInTouch: "Get in touch",
+    resume: "Resume",
 
-    // About Section
-    aboutTitle: "Who I am?",
+    // Sections
+    aboutEyebrow: "About",
+    aboutTitle: "Infrastructure first, with a software background.",
+    focusAreas: "Focus areas",
 
-    // Contact Section
-    contactTitle: "CONTACT",
-    lookingForDeveloper: "Looking for a developer for your project?",
-    scheduleConsultation: "Schedule a free 30-minute consultation to discuss job opportunities, freelance projects, or professional collaborations.",
-    scheduleButton: "Schedule Consultation",
+    experienceEyebrow: "Experience",
+    experienceTitle: "Where I've worked",
+    present: "Present",
+    current: "Current",
 
-    // Education Section
-    educationTitle: "My Education",
+    skillsEyebrow: "Stack",
+    skillsTitle: "Tools I work with",
+    skillsDescription: "Grouped by area, with a focus on infrastructure, automation and observability.",
+    workingKnowledge: "Working knowledge",
 
-    // Experience Section
-    experienceTitle: "Experiences",
+    educationEyebrow: "Education & Teaching",
+    educationTitle: "Engineering background",
+    courses: "Courses",
+    hours: "h",
 
-    // Skills Section
-    skillsTitle: "Skills",
+    projectsEyebrow: "Projects",
+    projectsTitle: "Selected work",
+    projectsDescription: "Products, blockchain services and academic projects I've built.",
+    moreProjects: "More projects",
+    all: "All",
+    projectsProducts: "Products",
+    projectsBlockchain: "Blockchain",
+    projectsAcademic: "Academic",
+    visitSite: "Visit site",
+    viewPrototype: "Prototype",
+    sourceCode: "Code",
+    preview: "Preview",
+    closePreview: "Close preview",
+    enlargeScreenshot: "Enlarge screenshot",
 
-    // Projects Section
-    projectsTitle: "Projects",
+    contactEyebrow: "Contact",
+    contactTitle: "Let's talk",
+    contactDescription: "Open to job opportunities, projects and professional collaborations. Email is the fastest way to reach me.",
+    copy: "Copy",
+    copied: "Copied",
+    scheduleCall: "Schedule a 30-min call",
+    location: "Location",
+
+    // Form
+    formTitle: "Send a message",
+    formName: "Name",
+    formEmail: "Email",
+    formMessage: "Message",
+    formNamePlaceholder: "Your name",
+    formMessagePlaceholder: "What would you like to talk about?",
+    formSend: "Send message",
+    formSending: "Sending…",
+    formSuccess: "Thanks — your message was sent. I'll get back to you soon.",
+    formError: "Your message couldn't be sent. Please try again or email me directly.",
+    formRequired: "Please fill in all fields.",
+    formInvalidEmail: "Please enter a valid email address.",
 
     // Footer
-    builtWith: "Built with",
-    madeWith: "Made with ❤️ by",
+    footerNote: "Designed and built by Fausto Saludas.",
+    navigation: "Navigation",
+    elsewhere: "Elsewhere",
+    backToTop: "Back to top",
 
-    // Common
-    present: "Present",
-    hours: "Hours",
-    readMore: "Read More",
-    viewProject: "View Project",
-    sourceCode: "Source Code",
-    liveDemo: "Live Demo",
-    projectsAll: "All",
-    projectsProducts: "Products & SaaS",
-    projectsBlockchain: "Blockchain & Hackathons",
-    projectsAcademic: "Academic"
+    // 404
+    notFoundTitle: "Page not found",
+    notFoundText: "The page you're looking for doesn't exist or has moved.",
+    goHome: "Back to home",
   },
   es: {
-    // Navigation
-    about: "Acerca de",
+    about: "Sobre mí",
     experience: "Experiencia",
-    skills: "Habilidades",
+    skills: "Skills",
+    education: "Formación",
     projects: "Proyectos",
-    education: "Educación",
-    blog: "Blog",
     contact: "Contacto",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    switchLanguage: "Switch to English",
 
-    // Hero Section
-    greeting: "Hola, soy",
-    role: "Desarrollador Full Stack",
-    heroDescription: "Me encanta trabajar con nuevas tecnologías y construir aplicaciones increíbles",
+    currentlyAt: "Actualmente",
+    at: "en",
+    getInTouch: "Contactame",
+    resume: "CV",
 
-    // About Section
-    aboutTitle: "¿Quién soy?",
+    aboutEyebrow: "Sobre mí",
+    aboutTitle: "Infraestructura primero, con base en desarrollo de software.",
+    focusAreas: "Áreas de foco",
 
-    // Contact Section
-    contactTitle: "CONTACTO",
-    lookingForDeveloper: "¿Buscas un desarrollador para tu proyecto?",
-    scheduleConsultation: "Agenda una consulta gratuita de 30 minutos para discutir oportunidades laborales, proyectos freelance o colaboraciones profesionales.",
-    scheduleButton: "Agendar Consulta",
-
-    // Education Section
-    educationTitle: "Mi Educación",
-
-    // Experience Section
-    experienceTitle: "Experiencias",
-
-    // Skills Section
-    skillsTitle: "Habilidades",
-
-    // Projects Section
-    projectsTitle: "Proyectos",
-
-    // Footer
-    builtWith: "Construido con",
-    madeWith: "Hecho con ❤️ por",
-
-    // Common
+    experienceEyebrow: "Experiencia",
+    experienceTitle: "Dónde trabajé",
     present: "Presente",
-    hours: "Horas",
-    readMore: "Leer Más",
-    viewProject: "Ver Proyecto",
-    sourceCode: "Código Fuente",
-    liveDemo: "Demo en Vivo",
-    projectsAll: "Todos",
-    projectsProducts: "Productos & SaaS",
-    projectsBlockchain: "Blockchain & Hackatones",
-    projectsAcademic: "Académicos"
-  }
+    current: "Actual",
+
+    skillsEyebrow: "Stack",
+    skillsTitle: "Herramientas con las que trabajo",
+    skillsDescription: "Agrupadas por área, con foco en infraestructura, automatización y observabilidad.",
+    workingKnowledge: "Conocimiento práctico",
+
+    educationEyebrow: "Formación y Docencia",
+    educationTitle: "Formación en ingeniería",
+    courses: "Cursos",
+    hours: "h",
+
+    projectsEyebrow: "Proyectos",
+    projectsTitle: "Trabajos destacados",
+    projectsDescription: "Productos, servicios blockchain y proyectos académicos que desarrollé.",
+    moreProjects: "Más proyectos",
+    all: "Todos",
+    projectsProducts: "Productos",
+    projectsBlockchain: "Blockchain",
+    projectsAcademic: "Académicos",
+    visitSite: "Ver sitio",
+    viewPrototype: "Prototipo",
+    sourceCode: "Código",
+    preview: "Vista previa",
+    closePreview: "Cerrar vista previa",
+    enlargeScreenshot: "Ampliar captura",
+
+    contactEyebrow: "Contacto",
+    contactTitle: "Hablemos",
+    contactDescription: "Abierto a oportunidades laborales, proyectos y colaboraciones profesionales. El email es la forma más rápida de contactarme.",
+    copy: "Copiar",
+    copied: "Copiado",
+    scheduleCall: "Agendar una llamada de 30 min",
+    location: "Ubicación",
+
+    formTitle: "Enviar un mensaje",
+    formName: "Nombre",
+    formEmail: "Email",
+    formMessage: "Mensaje",
+    formNamePlaceholder: "Tu nombre",
+    formMessagePlaceholder: "¿Sobre qué te gustaría hablar?",
+    formSend: "Enviar mensaje",
+    formSending: "Enviando…",
+    formSuccess: "Gracias, tu mensaje fue enviado. Te respondo a la brevedad.",
+    formError: "No se pudo enviar el mensaje. Probá de nuevo o escribime directamente por email.",
+    formRequired: "Completá todos los campos.",
+    formInvalidEmail: "Ingresá un email válido.",
+
+    footerNote: "Diseñado y desarrollado por Fausto Saludas.",
+    navigation: "Navegación",
+    elsewhere: "En otros sitios",
+    backToTop: "Volver arriba",
+
+    notFoundTitle: "Página no encontrada",
+    notFoundText: "La página que buscás no existe o fue movida.",
+    goHome: "Volver al inicio",
+  },
 };

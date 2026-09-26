@@ -1,8 +1,39 @@
-// @flow strict
 "use client";
-import { useTranslation } from "@/hooks/useTranslation";
+
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
+import { personalData } from "@/utils/data/personal-data";
+
+const SECTIONS = ["about", "experience", "skills", "education", "projects", "contact"];
+
+function LanguageSwitch({ className = "" }) {
+  const { language, changeLanguage } = useLanguage();
+  const { t } = useTranslation();
+
+  return (
+    <div
+      role="group"
+      aria-label={t("switchLanguage")}
+      className={`inline-flex items-center rounded-lg border border-line p-0.5 font-mono text-[11px] ${className}`}
+    >
+      {["en", "es"].map((lang) => (
+        <button
+          key={lang}
+          type="button"
+          onClick={() => changeLanguage(lang)}
+          aria-pressed={language === lang}
+          className={`rounded-md px-2 py-1 uppercase transition-colors duration-200 ${
+            language === lang ? "bg-white/10 text-white" : "text-ink-faint hover:text-ink"
+          }`}
+        >
+          {lang}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function Navbar() {
   const { t } = useTranslation();
@@ -10,264 +41,171 @@ function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  const HEADER_OFFSET = 80; // compensar altura del navbar
-
-  // Handle scroll effect + detectar sección activa (incluye contact)
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setIsScrolled(y > 50);
-
-      const sections = ["about", "experience", "skills", "education", "blog", "contact"];
-      const pos = y + HEADER_OFFSET + 10; // un poco más abajo del header fijo
-      let current = "";
-
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
-        if (pos >= top && pos < bottom) {
-          current = id;
-          break;
-        }
-      }
-
-      // Fallback: si estoy al fondo, marcar "contact" si existe
-      const atBottom =
-        window.innerHeight + y >= (document.documentElement.scrollHeight - 2);
-
-      if (atBottom && document.getElementById("contact")) {
-        current = "contact";
-      }
-
-      if (current) setActiveSection(current);
-    };
-
-    handleScroll(); // set inicial por si aterrizamos con hash
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menu when clicking outside
+  // Highlight the section crossing the upper part of the viewport
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isMenuOpen && !event.target.closest("nav")) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isMenuOpen]);
+    const elements = SECTIONS.map((id) => document.getElementById(id)).filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-30% 0px -65% 0px" }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    if (!isMenuOpen) return;
+    const onKey = (e) => e.key === "Escape" && setIsMenuOpen(false);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
   }, [isMenuOpen]);
 
-  const toggleMenu = () => setIsMenuOpen((v) => !v);
-  const closeMenu = () => setIsMenuOpen(false);
+  const navItems = SECTIONS.filter((id) => id !== "contact").map((id) => ({
+    id,
+    href: `/#${id}`,
+    label: t(id),
+  }));
 
-  const normalizeId = (href) => {
-    // acepta "/#contact", "#contact" o "contact"
-    return href.replace(/^\/?#/, "");
-  };
-
-  const handleSmoothScroll = (e, href) => {
-    e.preventDefault();
-    const targetId = normalizeId(href);
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      const offsetTop = targetElement.offsetTop - HEADER_OFFSET;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
-    }
-    closeMenu();
-  };
-
-  const navItems = [
-    { href: "/#about", label: t("about"), id: "about" },
-    { href: "/#experience", label: t("experience"), id: "experience" },
-    { href: "/#skills", label: t("skills"), id: "skills" },
-    { href: "/#education", label: t("education"), id: "education" },
-    { href: "/#blog", label: t("projects"), id: "blog" },
-  ];
+  const solid = isScrolled || isMenuOpen;
 
   return (
-    <>
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0d1224] shadow-lg border-b border-[#464c6a]/30"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4 lg:py-6">
-            {/* Mobile menu button - Left side on mobile, hidden on desktop */}
-            <div className="lg:hidden z-50 order-1">
-              <button
-                onClick={toggleMenu}
-                className={`relative p-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#16f2b3]/50 ${
-                  isMenuOpen
-                    ? "text-[#16f2b3] bg-[#16f2b3]/10"
-                    : "text-white hover:text-[#16f2b3] hover:bg-white/5"
-                }`}
-                aria-label="Toggle mobile menu"
-                aria-expanded={isMenuOpen}
-              >
-                <div className="w-6 h-6 relative">
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      isMenuOpen ? "rotate-45 top-3" : "top-1"
-                    }`}
-                  />
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 top-3 ${
-                      isMenuOpen ? "opacity-0" : "opacity-100"
-                    }`}
-                  />
-                  <span
-                    className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      isMenuOpen ? "-rotate-45 top-3" : "top-5"
-                    }`}
-                  />
-                </div>
-              </button>
-            </div>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
+        isMenuOpen
+          ? "border-b border-line bg-canvas"
+          : solid
+            ? "border-b border-line bg-canvas/80 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70"
+            : "border-b border-transparent"
+      }`}
+    >
+      <nav className="container-page flex h-16 items-center justify-between" aria-label="Main">
+        <Link
+          href="/"
+          onClick={() => setIsMenuOpen(false)}
+          className="group flex items-center gap-2.5"
+        >
+          <span aria-hidden="true" className="grid h-8 w-8 place-items-center rounded-lg border border-accent-line bg-accent-soft font-mono text-xs font-medium text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-canvas">
+            FS
+          </span>
+          <span className="text-[15px] font-semibold tracking-tight text-white">Fausto Saludas</span>
+        </Link>
 
-            {/* Logo - Center on mobile, LEFT on desktop */}
-            <div className="flex flex-shrink-0 items-center z-50 order-2 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:order-1">
-              <Link href="/" className="group relative" aria-label="Navigate to home page">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#16f2b3] via-[#00d4aa] to-[#16f2b3] bg-clip-text text-transparent bg-size-200 animate-gradient-x group-hover:animate-pulse transition-all duration-300">
-                  Fausto Saludas
-                </span>
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] group-hover:w-full transition-all duration-300" />
-              </Link>
-            </div>
-
-            {/* Spacer for mobile to balance layout */}
-            <div className="lg:hidden w-10 order-3"></div>
-
-            {/* Desktop Navigation - RIGHT side */}
-            <div className="hidden lg:flex lg:order-2">
-              <ul className="flex items-center space-x-2">
-                {navItems.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.href}
-                      onClick={(e) => handleSmoothScroll(e, item.href)}
-                      className={`group relative px-4 py-2 rounded-lg transition-all duration-300 ${
-                        activeSection === item.id
-                          ? "text-[#16f2b3] bg-[#16f2b3]/10"
-                          : "text-white hover:text-[#16f2b3]"
+        {/* Desktop */}
+        <div className="hidden items-center gap-1 lg:flex">
+          <ul className="flex items-center">
+            {navItems.map((item) => {
+              const active = activeSection === item.id;
+              return (
+                <li key={item.id}>
+                  <a
+                    href={item.href}
+                    aria-current={active ? "true" : undefined}
+                    className={`relative rounded-md px-3 py-2 text-sm transition-colors duration-200 ${
+                      active ? "text-white" : "text-ink-muted hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      aria-hidden="true"
+                      className={`absolute inset-x-3 -bottom-px h-px bg-accent transition-opacity duration-300 ${
+                        active ? "opacity-100" : "opacity-0"
                       }`}
-                      aria-label={`Navigate to ${item.label} section`}
-                    >
-                      <span className="relative z-10 text-sm font-medium tracking-wider uppercase">
-                        {item.label}
-                      </span>
-                      <div
-                        className={`absolute inset-0 rounded-lg bg-gradient-to-r from-[#16f2b3]/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                          activeSection === item.id ? "opacity-100" : ""
-                        }`}
-                      />
-                      <div
-                        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#16f2b3] to-pink-500 group-hover:w-full transition-all duration-300 ${
-                          activeSection === item.id ? "w-full" : ""
-                        }`}
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+                    />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <span className="mx-3 h-5 w-px bg-line" aria-hidden="true" />
+          <LanguageSwitch />
+          <a href="/#contact" className="btn-secondary ml-2 py-1.5">
+            {t("contact")}
+          </a>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        <div
-          className={`lg:hidden fixed inset-0 z-40 transition-all duration-300 ${
-            isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          {/* Overlay */}
-          <div
-            className={`absolute inset-0 bg-[#0d1224]/30 backdrop-blur-sm transition-opacity duration-300 ${
-              isMenuOpen ? "opacity-100" : "opacity-0"
-            }`}
-            onClick={closeMenu}
-          />
-          {/* Menu Content - Slides from LEFT */}
-          <div
-            className={`absolute top-0 left-0 h-full w-full max-w-sm bg-[#0d1224] border-r border-[#464c6a]/30 shadow-2xl transform transition-transform duration-300 ${
-              isMenuOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
+        {/* Mobile toggle */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitch />
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+            className="grid h-9 w-9 place-items-center rounded-lg border border-line text-ink transition-colors hover:bg-white/5"
           >
-            <div className="flex flex-col h-full pt-24 pb-8 px-6">
-              <ul className="flex-1 space-y-2">
-                {navItems.map((item, index) => (
-                  <li key={item.id} className="opacity-0 animate-slideInRight" style={{ animationDelay: `${index * 100}ms` }}>
-                    <Link
-                      href={item.href}
-                      onClick={(e) => handleSmoothScroll(e, item.href)}
-                      className={`group flex items-center px-4 py-4 rounded-xl transition-all duration-300 ${
-                        activeSection === item.id
-                          ? "text-[#16f2b3] bg-gradient-to-r from-[#16f2b3]/20 to-pink-500/20 border-l-4 border-[#16f2b3]"
-                          : "text-white hover:text-[#16f2b3] hover:bg-white/5 hover:border-l-4 hover:border-[#16f2b3]/50"
-                      }`}
-                    >
-                      <span className="text-lg font-medium tracking-wider uppercase">
-                        {item.label}
-                      </span>
-                      <div className="ml-auto transform transition-transform duration-300 group-hover:translate-x-1">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Contact button in mobile menu */}
-              <div className="mt-8 pt-6 border-t border-[#464c6a]/30">
-                <Link
-                  href="/#contact"
-                  onClick={(e) => handleSmoothScroll(e, "/#contact")}
-                  className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#16f2b3] to-pink-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105"
-                >
-                  Contact Me
-                </Link>
-              </div>
-            </div>
-          </div>
+            <span className="relative block h-3 w-4" aria-hidden="true">
+              <span
+                className={`absolute left-0 block h-px w-4 bg-current transition-transform duration-300 ${
+                  isMenuOpen ? "top-1.5 rotate-45" : "top-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1.5 block h-px w-4 bg-current transition-opacity duration-200 ${
+                  isMenuOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 block h-px w-4 bg-current transition-transform duration-300 ${
+                  isMenuOpen ? "top-1.5 -rotate-45" : "top-3"
+                }`}
+              />
+            </span>
+          </button>
         </div>
       </nav>
 
-      {/* Spacer to prevent content from going under fixed navbar */}
-      <div className="h-20 lg:h-24" />
-
-      {/* Custom styles */}
-      <style jsx>{`
-        @keyframes gradient-x {
-          0%, 100% {
-            background-size: 200% 200%;
-            background-position: left center;
-          }
-          50% {
-            background-size: 200% 200%;
-            background-position: right center;
-          }
-        }
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-gradient-x { animation: gradient-x 3s ease infinite; }
-        .animate-slideInRight { animation: slideInRight 0.5s ease-out forwards; }
-        .bg-size-200 { background-size: 200% 200%; }
-      `}</style>
-    </>
+      {/* Mobile menu */}
+      <div
+        id="mobile-menu"
+        className={`h-[calc(100svh-4rem)] overflow-y-auto border-line bg-canvas transition-[max-height,opacity] duration-300 ease-out lg:hidden ${
+          isMenuOpen ? "max-h-[100svh] border-t opacity-100" : "pointer-events-none max-h-0 opacity-0"
+        }`}
+        inert={!isMenuOpen}
+      >
+        <ul className="container-page flex flex-col py-3">
+          {SECTIONS.map((id, i) => (
+            <li key={id}>
+              <a
+                href={`/#${id}`}
+                onClick={() => setIsMenuOpen(false)}
+                className={`flex items-center justify-between border-b border-line py-4 text-lg transition-colors ${
+                  activeSection === id ? "text-white" : "text-ink-muted"
+                }`}
+              >
+                <span>{t(id)}</span>
+                <span className="font-mono text-xs text-ink-faint">0{i + 1}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="container-page flex items-center gap-6 pb-8 pt-4 text-sm text-ink-muted">
+          <a href={personalData.github} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            GitHub
+          </a>
+          <a href={personalData.linkedIn} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            LinkedIn
+          </a>
+          <a href={`mailto:${personalData.email}`} className="hover:text-white">
+            Email
+          </a>
+        </div>
+      </div>
+    </header>
   );
 }
 

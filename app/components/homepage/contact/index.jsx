@@ -1,150 +1,132 @@
-// @flow strict
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  FiArrowUpRight,
+  FiCalendar,
+  FiCheck,
+  FiCopy,
+  FiGithub,
+  FiLinkedin,
+  FiMapPin,
+  FiPhone,
+} from "react-icons/fi";
 import { personalData } from "@/utils/data/personal-data";
-import Link from "next/link";
-import { BiLogoLinkedin } from "react-icons/bi";
-import { CiLocationOn } from "react-icons/ci";
-import { IoLogoGithub, IoMdCall } from "react-icons/io";
-import { MdAlternateEmail } from "react-icons/md";
-import { BsCalendar2Event } from "react-icons/bs";
 import { useTranslation } from "@/hooks/useTranslation";
-import dynamic from "next/dynamic";
+import SectionHeader from "../../helper/section-header";
 import ContactForm from "./contact-form";
-
-const GlowCard = dynamic(() => import("../../helper/glow-card"), { ssr: false });
 
 export default function ContactSection() {
   const { t } = useTranslation();
-  const [isClient, setIsClient] = useState(false);
-  const [copied, setCopied] = useState(null); // "email" | "phone" | null
+  const [copied, setCopied] = useState(false);
+  const timer = useRef(null);
 
-  useEffect(() => setIsClient(true), []);
+  useEffect(() => () => clearTimeout(timer.current), []);
 
-  const copy = async (text, key) => {
+  const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(key);
-      setTimeout(() => setCopied(null), 1200);
+      await navigator.clipboard.writeText(personalData.email);
+      setCopied(true);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(false), 1600);
     } catch {
-      // noop
+      // clipboard unavailable: the mailto link still works
     }
   };
 
+  const links = [
+    { label: t("scheduleCall"), href: personalData.calendly, icon: FiCalendar },
+    { label: "LinkedIn", href: personalData.linkedIn, icon: FiLinkedin },
+    { label: "GitHub", href: personalData.github, icon: FiGithub },
+  ];
+
   return (
-    <section id="contact" className="relative z-50 border-t my-10 md:my-16 lg:my-24 border-[#25213b] text-white">
+    <section id="contact" className="section border-t border-line" aria-labelledby="contact-heading">
+      <div className="container-page">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              index="06"
+              eyebrow={t("contactEyebrow")}
+              title={t("contactTitle")}
+              description={t("contactDescription")}
+              id="contact-heading"
+            />
 
-      {/* Título flotante lateral en desktop */}
-      <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
-        <span className="bg-gradient-to-r from-[#1a1443] to-[#2a1f5f] w-fit text-white rotate-90 py-2 px-5 text-lg rounded-lg border border-violet-500/20 shadow-lg">
-          {t("contactTitle")}
-        </span>
-        <span className="h-36 w-[2px] bg-gradient-to-b from-[#1a1443] to-[#2a1f5f]" />
-      </div>
-
-      {/* Grid principal */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Columna izquierda: Formulario */}
-        <GlowCard identifier="contact-form" className="rounded-2xl">
-          <div className="p-4 sm:p-6 md:p-8">
-            <ContactForm />
-          </div>
-        </GlowCard>
-
-        {/* Columna derecha: Info + CTA + Social */}
-        <div className="w-full">
-          <div className="space-y-6 md:space-y-8">
-            {/* Tarjeta: Datos de contacto */}
-            <GlowCard identifier="contact-info" className="rounded-2xl">
-              <div className="p-5 sm:p-6">
-                <h3 className="text-base sm:text-lg font-semibold text-violet-200 mb-4">
-                  {t("contactTitle")}
-                </h3>
-
-                <div className="space-y-4 sm:space-y-5">
-                  {/* Email */}
-                  <div className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition-all duration-300">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="p-2 rounded-lg bg-white/10 group-hover:bg-violet-500/20 transition-colors">
-                        <MdAlternateEmail size={20} className="text-violet-300" />
-                      </span>
-                      <Link
-                        href={`mailto:${personalData.email}`}
-                        className="truncate text-sm sm:text-base hover:underline"
-                      >
-                        {personalData.email}
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Teléfono */}
-                  <div className="group flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition-all duration-300">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="p-2 rounded-lg bg-white/10 group-hover:bg-violet-500/20 transition-colors">
-                        <IoMdCall size={20} className="text-emerald-300" />
-                      </span>
-                      <Link href={`tel:${personalData.phone}`} className="truncate text-sm sm:text-base hover:underline">
-                        {personalData.phone}
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Dirección */}
-                  <div className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition-all duration-300">
-                    <span className="p-2 rounded-lg bg-white/10 group-hover:bg-violet-500/20 transition-colors">
-                      <CiLocationOn size={22} className="text-cyan-300" />
-                    </span>
-                    <p className="text-sm sm:text-base text-white/90">{personalData.address}</p>
-                  </div>
-                </div>
-              </div>
-            </GlowCard>
-
-            {/* Tarjeta: Agendar reunión */}
-            <GlowCard identifier="contact-cta" className="rounded-2xl">
-              <div className="p-5 sm:p-6">
-                <div className="flex items-start sm:items-center gap-3 mb-3">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-violet-600/20 to-blue-600/20 border border-violet-500/20">
-                    <BsCalendar2Event className="text-[#16f2b3]" size={22} />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold">
-                    {t("lookingForDeveloper")}
-                  </h3>
-                </div>
-                <p className="text-sm md:text-base text-white/80 mb-5">
-                  {t("scheduleConsultation")}
-                </p>
-
-                <Link
-                  target="_blank"
-                  href="https://calendly.com/fausaludas14/30min"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-[#16f2b3] to-[#00d4aa] hover:from-[#00d4aa] hover:to-[#16f2b3] text-gray-900 font-semibold py-2.5 md:py-3 px-5 md:px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#16f2b3]/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16f2b3]/50"
+            <div className="reveal -mt-4 space-y-8">
+              {/* Email */}
+              <div className="flex items-center gap-2">
+                <a
+                  href={`mailto:${personalData.email}`}
+                  className="link-underline min-w-0 truncate text-lg font-medium text-white sm:text-xl"
                 >
-                  <BsCalendar2Event size={18} />
-                  <span>{t("scheduleButton")}</span>
-                </Link>
+                  {personalData.email}
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-line px-2 text-xs text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+                  aria-label={copied ? t("copied") : `${t("copy")} email`}
+                >
+                  {copied ? (
+                    <FiCheck className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                  ) : (
+                    <FiCopy className="h-3.5 w-3.5" aria-hidden="true" />
+                  )}
+                  <span aria-live="polite">{copied ? t("copied") : t("copy")}</span>
+                </button>
               </div>
-            </GlowCard>
 
-            {/* Social */}
-            <div className="flex items-center gap-5 sm:gap-6">
-              <Link target="_blank" href={personalData.github} rel="noopener noreferrer" aria-label="GitHub">
-                <div className="p-3 rounded-full bg-white/10 hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-900">
-                  <IoLogoGithub size={28} className="text-white group-hover:text-gray-900" />
+              <ul className="divide-y divide-line border-y border-line">
+                {links.map(({ label, href, icon: Icon }) => (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between py-4 text-sm text-ink-muted transition-colors hover:text-white"
+                    >
+                      <span className="flex items-center gap-3">
+                        <Icon className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" aria-hidden="true" />
+                        {label}
+                      </span>
+                      <FiArrowUpRight
+                        className="h-4 w-4 text-ink-faint transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <dl className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <dt className="flex items-center gap-2 font-mono text-xs text-ink-faint">
+                    <FiMapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                    {t("location")}
+                  </dt>
+                  <dd className="mt-1 text-ink">{personalData.address}</dd>
                 </div>
-              </Link>
-              <Link target="_blank" href={personalData.linkedIn} rel="noopener noreferrer" aria-label="LinkedIn">
-                <div className="p-3 rounded-full bg-white/10 hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-900">
-                  <BiLogoLinkedin size={28} className="text-white group-hover:text-gray-900" />
+                <div>
+                  <dt className="flex items-center gap-2 font-mono text-xs text-ink-faint">
+                    <FiPhone className="h-3.5 w-3.5" aria-hidden="true" />
+                    Tel
+                  </dt>
+                  <dd className="mt-1">
+                    <a href={`tel:${personalData.phone.replace(/\s/g, "")}`} className="text-ink transition-colors hover:text-white">
+                      {personalData.phone}
+                    </a>
+                  </dd>
                 </div>
-              </Link>
+              </dl>
             </div>
+          </div>
+
+          <div className="reveal lg:col-span-7">
+            <ContactForm />
           </div>
         </div>
       </div>
-
-      </section>
+    </section>
   );
 }

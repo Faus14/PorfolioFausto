@@ -1,33 +1,57 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './utils/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "1rem",
-          sm: "2rem",
-          lg: "3rem",
-          xl: "4rem",
-          "2xl": "4rem",
-          "3xl": "5rem",
+      colors: {
+        // Base: same navy the portfolio has always used
+        canvas: '#0d1224',
+        surface: {
+          DEFAULT: '#111830',
+          raised: '#161e3a',
+        },
+        line: {
+          DEFAULT: 'rgb(255 255 255 / 0.08)',
+          strong: 'rgb(255 255 255 / 0.14)',
+        },
+        ink: {
+          DEFAULT: '#e8ebf4',
+          muted: '#a1a9c3',
+          faint: '#7d86a5',
+        },
+        // Signature mint accent
+        accent: {
+          DEFAULT: '#16f2b3',
+          soft: 'rgb(22 242 179 / 0.12)',
+          line: 'rgb(22 242 179 / 0.35)',
+        },
+        violet: {
+          soft: '#a78bfa',
         },
       },
-
-      extend: {
-        screens: {
-          "4k": "1980px",
+      fontFamily: {
+        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      maxWidth: {
+        content: '72rem',
+      },
+      keyframes: {
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(12px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'fade-in': 'fade-in 0.2s ease-out both',
       },
     },
   },

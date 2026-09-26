@@ -1,77 +1,95 @@
-// @flow strict
-// @/utils/data/experience.js
-
+// Ordered newest first. `end: null` means current role.
 export const experiences = [
   {
-    id: 1,
-    title: { en: "DevOps Blockchain Engineer", es: "DevOps Blockchain Engineer" },
+    id: "adhoc",
+    title: "DevOps Engineer",
+    company: "Adhoc",
+    start: "2026-04",
+    end: null,
+    summary: {
+      en: "Working on cloud infrastructure, automation, observability and DevOps operations.",
+      es: "Trabajo en infraestructura cloud, automatización, observabilidad y operaciones DevOps.",
+    },
+  },
+  {
+    id: "seed-latam",
+    title: "DevOps Blockchain Engineer",
     company: "SEED Latam",
-    duration: { en: "(Aug 2025 - Jan 2026 · 6 mos)", es: "(Ago 2025 - Ene 2026 · 6 meses)" },
-    startDate: "2025-08-01",
-    endDate: "2026-01-31",
-    description: {
-      en: "Operation and maintenance of validator nodes in blockchain networks (Ethereum and Aztec testnet). Infrastructure management on VPS servers configured from scratch (hardening, secure access via SSH, VPN, and encrypted tunnels). Developed automations and alert systems using Python bots integrated with Discord and Telegram. Implemented monitoring and observability systems using Prometheus and Grafana.",
-      es: "Operación y mantenimiento de nodos validadores en redes blockchain (Ethereum y Aztec testnet). Gestión de infraestructura sobre servidores VPS configurados desde cero (hardening, acceso seguro mediante SSH, VPN y túneles cifrados). Desarrollé automatizaciones y sistemas de alertas mediante bots en Python integrados con Discord y Telegram. Implementé sistemas de monitoreo y observabilidad utilizando Prometheus y Grafana."
+    start: "2025-08",
+    end: "2026-01",
+    duration: { en: "6 mos", es: "6 meses" },
+    summary: {
+      en: "Operated blockchain validator nodes on self-managed Linux servers.",
+      es: "Operación de nodos validadores blockchain sobre servidores Linux autogestionados.",
     },
-    tools: [
-      "Blockchain",
-      "Ethereum",
-      "Aztec",
-      "VPS",
-      "SSH",
-      "VPN",
-      "Python",
-      "Discord API",
-      "Telegram API",
-      "Prometheus",
-      "Grafana"
-    ]
+    highlights: {
+      en: [
+        "Ran and maintained validator nodes on Ethereum and the Aztec testnet.",
+        "Set up VPS servers from scratch: hardening, SSH access, VPN and encrypted tunnels.",
+        "Implemented monitoring and observability with Prometheus and Grafana.",
+        "Built Python bots for alerting and automation, integrated with Discord and Telegram.",
+      ],
+      es: [
+        "Operé y mantuve nodos validadores en Ethereum y en la testnet de Aztec.",
+        "Configuré servidores VPS desde cero: hardening, acceso por SSH, VPN y túneles cifrados.",
+        "Implementé monitoreo y observabilidad con Prometheus y Grafana.",
+        "Desarrollé bots en Python para alertas y automatización, integrados con Discord y Telegram.",
+      ],
+    },
+    tools: ["Linux", "VPS", "SSH", "VPN", "Ethereum", "Aztec", "Python", "Prometheus", "Grafana"],
   },
   {
-    id: 2,
-    title: { en: "DevOps Support Analyst", es: "DevOps Support Analyst" },
+    id: "lb-finanzas",
+    title: "DevOps Support Analyst",
     company: "LB Finanzas",
-    duration: { en: "(Jun 2024 - Aug 2025 · 1 yr 3 mos)", es: "(Jun 2024 – Ago 2025 · 1 año 3 meses)" },
-    startDate: "2024-06-01",
-    endDate: "2025-08-31",
-    description: {
-      en: "Implementation of observability and operational automation for business teams. Development of internal backoffice tools in JavaScript. Implementation of dashboards with Grafana and Metabase used by business teams. System integrations (Jira, Intercom and others) automating operational flows. Reorganization and standardization of Jira workflows at the organizational level.",
-      es: "Implementación de observabilidad y automatización operativa para equipos de negocio. Desarrollo de herramientas internas de backoffice en JavaScript. Implementación de dashboards con Grafana y Metabase utilizados por equipos de negocio. Integración de sistemas (Jira, Intercom y otros) automatizando flujos operativos. Reorganización y estandarización de workflows en Jira a nivel organizacional."
+    start: "2024-06",
+    end: "2025-08",
+    duration: { en: "1 yr 3 mos", es: "1 año 3 meses" },
+    summary: {
+      en: "Observability and operational automation for business teams.",
+      es: "Observabilidad y automatización operativa para equipos de negocio.",
     },
-    tools: [
-      "JavaScript",
-      "Grafana",
-      "Metabase",
-      "Jira",
-      "Intercom",
-      "Automation",
-      "Workflows",
-      "Observability"
-    ]
+    highlights: {
+      en: [
+        "Built Grafana and Metabase dashboards used by business teams.",
+        "Developed internal back-office tools in JavaScript.",
+        "Integrated systems such as Jira and Intercom to automate operational workflows.",
+        "Reorganized and standardized Jira workflows across the organization.",
+      ],
+      es: [
+        "Implementé dashboards en Grafana y Metabase utilizados por equipos de negocio.",
+        "Desarrollé herramientas internas de backoffice en JavaScript.",
+        "Integré sistemas como Jira e Intercom para automatizar flujos operativos.",
+        "Reorganicé y estandaricé los workflows de Jira a nivel organizacional.",
+      ],
+    },
+    tools: ["JavaScript", "Grafana", "Metabase", "Jira", "Intercom"],
   },
   {
-    id: 3,
-    title: { en: "DevOps Engineer", es: "DevOps Engineer" },
+    id: "chatealo",
+    title: "DevOps Engineer",
     company: "Chatealo",
-    duration: { en: "(Jul 2023 - Jun 2024 · 1 yr)", es: "(Jul 2023 – Jun 2024 · 1 año)" },
-    startDate: "2023-07-01",
-    endDate: "2024-06-30",
-    description: {
-      en: "Modernization and standardization of production infrastructure towards containers and cloud architecture. Migration of multiple production services from traditional servers in Hetzner to Docker and Kubernetes based architecture. Design and implementation of CI/CD pipelines automating deployment processes. Managed cloud infrastructure in AWS using Terraform, enabling greater scalability. Administration of production databases, backups and monitoring. Implemented monitoring with Grafana, Prometheus and Loki.",
-      es: "Modernización y estandarización de infraestructura productiva hacia contenedores y arquitectura cloud. Migración de múltiples servicios productivos desde servidores tradicionales en Hetzner hacia arquitectura basada en Docker y Kubernetes. Diseño e implementación de pipelines CI/CD automatizando procesos de despliegue. Gestioné infraestructura cloud en AWS utilizando Terraform, permitiendo una mayor escalabilidad. Administración de bases de datos productivas, backups y monitoreo. Implementé monitoreo con Grafana, Prometheus y Loki."
+    start: "2023-07",
+    end: "2024-06",
+    duration: { en: "1 yr", es: "1 año" },
+    summary: {
+      en: "Modernized production infrastructure toward containers and the cloud.",
+      es: "Modernización de la infraestructura productiva hacia contenedores y cloud.",
     },
-    tools: [
-      "AWS",
-      "Terraform",
-      "Docker",
-      "Kubernetes",
-      "CI/CD",
-      "Hetzner",
-      "Grafana",
-      "Prometheus",
-      "Loki",
-      "Linux",
-      "Databases"
-    ]
-  }
+    highlights: {
+      en: [
+        "Migrated production services from traditional Hetzner servers to a Docker-based setup.",
+        "Managed AWS infrastructure as code with Terraform.",
+        "Designed and implemented CI/CD pipelines to automate deployments.",
+        "Administered production databases and backups, with monitoring on Grafana, Prometheus and Loki.",
+      ],
+      es: [
+        "Migré servicios productivos desde servidores tradicionales en Hetzner a una arquitectura basada en Docker.",
+        "Gestioné infraestructura en AWS como código con Terraform.",
+        "Diseñé e implementé pipelines de CI/CD para automatizar despliegues.",
+        "Administré bases de datos productivas y backups, con monitoreo en Grafana, Prometheus y Loki.",
+      ],
+    },
+    tools: ["AWS", "Terraform", "Docker", "CI/CD", "Hetzner", "Linux", "Grafana", "Prometheus", "Loki"],
+  },
 ];
