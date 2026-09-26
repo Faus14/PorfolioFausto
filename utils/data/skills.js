@@ -1,4 +1,3 @@
-// `level: "familiar"` marks working knowledge (rendered with a dashed chip).
 export const skillGroups = [
   {
     id: "infra",
@@ -15,7 +14,7 @@ export const skillGroups = [
       { name: "Terraform", icon: "terraform" },
       { name: "Pulumi", icon: "pulumi" },
       { name: "Ansible", icon: "ansible" },
-      { name: "Kubernetes", icon: "kubernetes", level: "familiar" },
+      { name: "Kubernetes", icon: "kubernetes" },
     ],
   },
   {

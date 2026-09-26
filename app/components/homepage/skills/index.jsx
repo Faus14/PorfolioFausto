@@ -60,18 +60,10 @@ const LAYOUT = {
   networking: "lg:col-span-2",
 };
 
-function SkillChip({ item, familiarLabel }) {
+function SkillChip({ item }) {
   const Icon = ICONS[item.icon];
-  const familiar = item.level === "familiar";
   return (
-    <li
-      className={`group/chip inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors duration-200 ${
-        familiar
-          ? "border-dashed border-line-strong text-ink-muted hover:text-ink"
-          : "border-line bg-white/[0.02] text-ink hover:border-line-strong hover:bg-white/[0.05]"
-      }`}
-      title={familiar ? familiarLabel : undefined}
-    >
+    <li className="group/chip inline-flex items-center gap-2 rounded-lg border border-line bg-white/[0.02] px-3 py-2 text-sm text-ink transition-colors duration-200 hover:border-line-strong hover:bg-white/[0.05]">
       {Icon && (
         <Icon
           className="h-3.5 w-3.5 shrink-0 text-ink-faint transition-colors duration-200 group-hover/chip:text-accent"
@@ -114,17 +106,13 @@ export default function Skills() {
               </div>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <SkillChip key={item.name} item={item} familiarLabel={t("workingKnowledge")} />
+                  <SkillChip key={item.name} item={item} />
                 ))}
               </ul>
             </article>
           ))}
         </div>
 
-        <p className="reveal mt-6 flex items-center gap-2 text-xs text-ink-faint">
-          <span className="inline-block h-3 w-5 rounded border border-dashed border-line-strong" aria-hidden="true" />
-          {t("workingKnowledge")}
-        </p>
       </div>
     </section>
   );

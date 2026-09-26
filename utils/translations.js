@@ -28,7 +28,6 @@ export const translations = {
     skillsEyebrow: "Stack",
     skillsTitle: "Tools I work with",
     skillsDescription: "Grouped by area, with a focus on infrastructure, automation and observability.",
-    workingKnowledge: "Working knowledge",
 
     educationEyebrow: "Education & Teaching",
     educationTitle: "Engineering background",
@@ -109,7 +108,6 @@ export const translations = {
     skillsEyebrow: "Stack",
     skillsTitle: "Herramientas con las que trabajo",
     skillsDescription: "Agrupadas por área, con foco en infraestructura, automatización y observabilidad.",
-    workingKnowledge: "Conocimiento práctico",
 
     educationEyebrow: "Formación y Docencia",
     educationTitle: "Formación en ingeniería",
