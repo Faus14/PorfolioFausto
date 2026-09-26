@@ -80,18 +80,9 @@ function HeroSection() {
 
       <div className="container-page grid items-center gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
         <div>
-          <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] py-1 pl-2 pr-3 text-xs text-ink-muted">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="absolute inset-0 rounded-full bg-accent/40 blur-[3px]" />
-              <span className="relative h-2 w-2 rounded-full bg-accent" />
-            </span>
-            {t("currentlyAt")} {personalData.current.role} {t("at")}{" "}
-            <span className="text-white">{personalData.current.company}</span>
-          </p>
-
           <h1
             id="hero-heading"
-            className="animate-fade-up mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-6xl lg:text-7xl"
+            className="animate-fade-up text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-6xl lg:text-7xl"
           >
             {personalData.name}
           </h1>

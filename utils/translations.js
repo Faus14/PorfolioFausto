@@ -12,14 +12,12 @@ export const translations = {
     switchLanguage: "Cambiar a español",
 
     // Hero
-    currentlyAt: "Currently",
-    at: "at",
     getInTouch: "Get in touch",
     resume: "Resume",
 
     // Sections
     aboutEyebrow: "About",
-    aboutTitle: "Infrastructure first, with a software background.",
+    aboutTitle: "DevOps Engineer",
     focusAreas: "Focus areas",
 
     experienceEyebrow: "Experience",
@@ -96,13 +94,11 @@ export const translations = {
     closeMenu: "Cerrar menú",
     switchLanguage: "Switch to English",
 
-    currentlyAt: "Actualmente",
-    at: "en",
     getInTouch: "Contactame",
     resume: "CV",
 
     aboutEyebrow: "Sobre mí",
-    aboutTitle: "Infraestructura primero, con base en desarrollo de software.",
+    aboutTitle: "DevOps Engineer",
     focusAreas: "Áreas de foco",
 
     experienceEyebrow: "Experiencia",

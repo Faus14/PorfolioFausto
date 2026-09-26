@@ -12,6 +12,17 @@ export const experiences = [
     },
   },
   {
+    id: "utn-teaching",
+    title: { en: "University Professor", es: "Profesor universitario" },
+    company: "UTN San Nicolás",
+    start: "2026",
+    end: null,
+    summary: {
+      en: "Teaching at the Universidad Tecnológica Nacional, San Nicolás Regional Faculty.",
+      es: "Docente en la Universidad Tecnológica Nacional, Facultad Regional San Nicolás.",
+    },
+  },
+  {
     id: "seed-latam",
     title: "DevOps Blockchain Engineer",
     company: "SEED Latam",

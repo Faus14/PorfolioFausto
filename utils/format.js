@@ -5,8 +5,10 @@ const MONTHS = {
 };
 
 // "2026-04" -> "Apr 2026"
+// "2026" (year only) -> "2026"
 export function formatMonth(yearMonth, language = "en") {
   const [year, month] = yearMonth.split("-").map(Number);
+  if (!month) return String(year);
   return `${MONTHS[language]?.[month - 1] ?? MONTHS.en[month - 1]} ${year}`;
 }
 

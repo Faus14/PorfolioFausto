@@ -61,7 +61,7 @@ export default function Experience() {
                   </p>
 
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <h3 className="text-lg font-semibold tracking-tight text-white">{exp.title}</h3>
+                    <h3 className="text-lg font-semibold tracking-tight text-white">{l(exp.title)}</h3>
                     <span className="hidden text-ink-faint sm:inline" aria-hidden="true">·</span>
                     <span className="w-full text-base font-medium tracking-tight text-ink-muted sm:w-auto sm:text-lg">
                       <span className="sr-only">— </span>
