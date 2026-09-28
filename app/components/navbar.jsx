@@ -24,7 +24,7 @@ function LanguageSwitch({ className = "" }) {
           type="button"
           onClick={() => changeLanguage(lang)}
           aria-pressed={language === lang}
-          className={`rounded-md px-2 py-1 uppercase transition-colors duration-200 ${
+          className={`min-h-[32px] min-w-[34px] rounded-md px-2 py-1 uppercase transition-colors duration-200 ${
             language === lang ? "bg-white/10 text-white" : "text-ink-faint hover:text-ink"
           }`}
         >

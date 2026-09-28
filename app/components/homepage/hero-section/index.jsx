@@ -82,16 +82,16 @@ function HeroSection() {
         <div>
           <h1
             id="hero-heading"
-            className="animate-fade-up text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-6xl lg:text-7xl"
+            className="animate-fade-up text-[clamp(2.25rem,11vw,2.75rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-6xl lg:text-7xl"
           >
             {personalData.name}
           </h1>
 
           <p className="animate-fade-up mt-4 text-lg font-medium tracking-tight text-ink sm:text-xl [animation-delay:120ms]">
-            {personalData.roles[0]}
+            <span className="whitespace-nowrap">{personalData.roles[0]}</span>
             <span className="mx-2 text-accent" aria-hidden="true">·</span>
             <span className="sr-only"> and </span>
-            {personalData.roles[1]}
+            <span className="whitespace-nowrap">{personalData.roles[1]}</span>
           </p>
 
           <p className="animate-fade-up mt-6 max-w-xl text-pretty text-base leading-relaxed text-ink-muted sm:text-[17px] [animation-delay:180ms]">
@@ -112,13 +112,13 @@ function HeroSection() {
             </a>
           </div>
 
-          <ul className="animate-fade-up mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 [animation-delay:300ms]">
+          <ul className="animate-fade-up mt-6 flex flex-wrap items-center gap-x-6 gap-y-1 [animation-delay:300ms]">
             {socialLinks.map(({ label, href, icon: Icon, external }) => (
               <li key={label}>
                 <a
                   href={href}
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-white"
+                  className="group inline-flex items-center gap-2 py-2.5 text-sm text-ink-muted transition-colors hover:text-white"
                 >
                   <Icon className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" aria-hidden="true" />
                   {label}

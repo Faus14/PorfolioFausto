@@ -16,8 +16,8 @@ const CATEGORY_KEY = {
 
 function ProjectLinks({ project, t, l, compact = false }) {
   const base = compact
-    ? "inline-flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
-    : "group/link inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-white";
+    ? "inline-flex h-9 w-9 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+    : "group/link inline-flex items-center gap-1.5 py-2.5 text-sm text-ink-muted transition-colors hover:text-white";
   const demoText = project.demoLabel === "prototype" ? t("viewPrototype") : t("visitSite");
 
   return (
@@ -103,7 +103,7 @@ function FeaturedCard({ project, onPreview, t, l, language }) {
           ))}
         </ul>
 
-        <div className="mt-6 flex items-center gap-5 border-t border-line pt-4">
+        <div className="mt-6 flex items-center gap-5 border-t border-line pt-1.5 -mb-2.5">
           <ProjectLinks project={project} t={t} l={l} />
         </div>
       </div>
@@ -171,7 +171,7 @@ function Projects() {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setFilter(cat)}
-                    className={`rounded-md px-3 py-1.5 text-xs transition-colors duration-200 ${
+                    className={`rounded-md px-3 py-2 text-xs transition-colors duration-200 ${
                       active ? "bg-white/10 text-white" : "text-ink-muted hover:text-white"
                     }`}
                   >
@@ -207,7 +207,7 @@ function Projects() {
                     <button
                       type="button"
                       onClick={() => openPreview(project)}
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-white"
                       aria-label={`${t("preview")}: ${l(project.title)}`}
                       title={t("preview")}
                     >

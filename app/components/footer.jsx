@@ -33,10 +33,10 @@ function Footer() {
 
         <nav aria-label={t("navigation")} className="lg:col-span-3">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-ink-faint">{t("navigation")}</p>
-          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm sm:grid-cols-1">
+          <ul className="mt-3 grid grid-cols-2 gap-x-4 text-sm sm:grid-cols-1">
             {SECTIONS.map((id) => (
               <li key={id}>
-                <a href={`/#${id}`} className="text-ink-muted transition-colors hover:text-white">
+                <a href={`/#${id}`} className="inline-block py-2 text-ink-muted transition-colors hover:text-white">
                   {t(id)}
                 </a>
               </li>
@@ -46,13 +46,13 @@ function Footer() {
 
         <div className="lg:col-span-3">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-ink-faint">{t("elsewhere")}</p>
-          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm sm:grid-cols-1">
+          <ul className="mt-3 grid grid-cols-2 gap-x-4 text-sm sm:grid-cols-1">
             {external.map(({ label, href, internal }) => (
               <li key={label}>
                 <a
                   href={href}
                   {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-                  className="group inline-flex items-center gap-1 text-ink-muted transition-colors hover:text-white"
+                  className="group inline-flex items-center gap-1 py-2 text-ink-muted transition-colors hover:text-white"
                 >
                   {label}
                   {!internal && (

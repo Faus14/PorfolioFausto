@@ -68,7 +68,7 @@ export default function Experience() {
                       {exp.company}
                     </span>
                     {isCurrent && (
-                      <span className="ml-1 rounded-full border border-accent-line bg-accent-soft px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
+                      <span className="ml-1 rounded-full border border-accent-line bg-accent-soft px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
                         {t("current")}
                       </span>
                     )}

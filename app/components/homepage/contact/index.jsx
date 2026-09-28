@@ -58,14 +58,14 @@ export default function ContactSection() {
               <div className="flex items-center gap-2">
                 <a
                   href={`mailto:${personalData.email}`}
-                  className="link-underline min-w-0 truncate text-lg font-medium text-white sm:text-xl"
+                  className="link-underline min-w-0 truncate py-1.5 text-lg font-medium text-white sm:text-xl"
                 >
                   {personalData.email}
                 </a>
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-line px-2 text-xs text-ink-muted transition-colors hover:border-line-strong hover:text-white"
+                  className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border border-line px-2 text-xs text-ink-muted transition-colors hover:border-line-strong hover:text-white"
                   aria-label={copied ? t("copied") : `${t("copy")} email`}
                 >
                   {copied ? (
@@ -112,8 +112,8 @@ export default function ContactSection() {
                     <FiPhone className="h-3.5 w-3.5" aria-hidden="true" />
                     Tel
                   </dt>
-                  <dd className="mt-1">
-                    <a href={`tel:${personalData.phone.replace(/\s/g, "")}`} className="text-ink transition-colors hover:text-white">
+                  <dd className="-mt-1">
+                    <a href={`tel:${personalData.phone.replace(/\s/g, "")}`} className="inline-block py-2 text-ink transition-colors hover:text-white">
                       {personalData.phone}
                     </a>
                   </dd>
